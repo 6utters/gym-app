@@ -42,6 +42,8 @@
 # server
 
 # compiled output
+/server/.idea
+
 /server/dist
 /server/node_modules
 
@@ -62,7 +64,6 @@
 /server/.nyc_output
 
 # IDEs and editors
-/server/.idea
 /server/.project
 /server/.classpath
 /server/.c9/
