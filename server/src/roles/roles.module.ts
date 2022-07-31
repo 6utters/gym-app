@@ -6,8 +6,6 @@ import { Role } from './entities/role.entity'
 import { User } from '../users/entities/user.entity'
 import { AuthModule } from '../auth/auth.module'
 
-//TODO: Check if User is necessary here
-
 @Module({
 	imports: [
 		TypeOrmModule.forFeature([Role, User]),
