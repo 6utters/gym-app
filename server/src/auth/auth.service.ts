@@ -51,7 +51,8 @@ export class AuthService {
 	public async login(dto: LoginDto) {
 		const user = await this.usersRepository.findOne({
 			where: { email: dto.email },
-			select: ['id', 'email', 'password', 'userName'],
+			select: ['id', 'email', 'password', 'userName', 'roles'],
+			relations: { roles: true },
 		})
 		if (!user) {
 			throw new HttpException(

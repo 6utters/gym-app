@@ -13,7 +13,7 @@ import { RolesModule } from '../roles/roles.module'
 	imports: [
 		TypeOrmModule.forFeature([User, Tokens]),
 		forwardRef(() => UsersModule),
-		RolesModule,
+		forwardRef(() => RolesModule),
 	],
 	controllers: [AuthController],
 	providers: [AuthService, TokensService, JwtService],

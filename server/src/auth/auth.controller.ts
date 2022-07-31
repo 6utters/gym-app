@@ -1,4 +1,13 @@
-import { Body, Controller, Get, Post, Req, Res, UsePipes } from '@nestjs/common'
+import {
+	Body,
+	Controller,
+	Get,
+	HttpCode,
+	Post,
+	Req,
+	Res,
+	UsePipes,
+} from '@nestjs/common'
 import { AuthService } from './auth.service'
 import { CreateUserDto } from '../users/dto/create-user.dto'
 import { LoginDto } from './dto/login.dto'
@@ -12,6 +21,7 @@ export class AuthController {
 		private readonly tokensService: TokensService,
 	) {}
 
+	@HttpCode(200)
 	@Post('register')
 	@UsePipes(ValidationPipe)
 	async register(@Body() userDto: CreateUserDto, @Res() response) {
@@ -23,6 +33,7 @@ export class AuthController {
 		return response.json(userData)
 	}
 
+	@HttpCode(200)
 	@Post('login')
 	async login(@Body() userDto: LoginDto, @Res() response) {
 		const userData = await this.authService.login(userDto)
@@ -33,6 +44,7 @@ export class AuthController {
 		return response.json(userData)
 	}
 
+	@HttpCode(200)
 	@Post('logout')
 	async logout(@Req() request, @Res() response) {
 		const { refreshToken } = request.cookies

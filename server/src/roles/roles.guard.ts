@@ -3,7 +3,7 @@ import { Observable } from 'rxjs'
 import { AuthService } from '../auth/auth.service'
 import { Reflector } from '@nestjs/core'
 import { TokensService } from '../auth/tokens.service'
-import { ROLES_KEY } from './dto/roles-auth.decorator'
+import { ROLES_KEY } from './roles-auth.decorator'
 import { validateToken } from '../utils/guard/guard.helper'
 
 @Injectable()
