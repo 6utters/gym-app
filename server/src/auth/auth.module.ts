@@ -8,12 +8,14 @@ import { TokensService } from './tokens.service'
 import { JwtService } from '@nestjs/jwt'
 import { Tokens } from './entities/tokens.entity'
 import { RolesModule } from '../roles/roles.module'
+import { UsersInfoModule } from '../users-info/users-info.module'
 
 @Module({
 	imports: [
 		TypeOrmModule.forFeature([User, Tokens]),
 		forwardRef(() => UsersModule),
 		forwardRef(() => RolesModule),
+		UsersInfoModule,
 	],
 	controllers: [AuthController],
 	providers: [AuthService, TokensService, JwtService],

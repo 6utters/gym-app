@@ -9,6 +9,7 @@ import { UserDto } from './dto/user.dto'
 import { TokensService } from './tokens.service'
 import { LoginDto } from './dto/login.dto'
 import { RolesService } from '../roles/roles.service'
+import { UsersInfoService } from '../users-info/users-info.service'
 
 @Injectable()
 export class AuthService {
@@ -17,6 +18,7 @@ export class AuthService {
 		private usersService: UsersService,
 		private tokensService: TokensService,
 		private rolesService: RolesService,
+		private usersInfoService: UsersInfoService,
 	) {}
 
 	public async register(dto: CreateUserDto) {
@@ -41,8 +43,9 @@ export class AuthService {
 			...dto,
 			password: hashedPassword,
 		})
-		const role = await this.rolesService.getRoleByValue('ADMIN')
+		const role = await this.rolesService.getRoleByValue('USER')
 		user.roles = [role]
+		user.user_info = await this.usersInfoService.create()
 		const userWithRoles = await this.usersRepository.save(user)
 
 		return await this.getCredentials(userWithRoles)

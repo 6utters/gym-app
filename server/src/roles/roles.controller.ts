@@ -11,8 +11,8 @@ export class RolesController {
 	constructor(private readonly rolesService: RolesService) {}
 
 	@Post()
-	@Roles('ADMIN')
-	@UseGuards(AuthGuard, RolesGuard)
+	// @Roles('ADMIN')
+	// @UseGuards(AuthGuard, RolesGuard)
 	create(@Body() createRoleDto: CreateRoleDto) {
 		return this.rolesService.createRole(createRoleDto)
 	}

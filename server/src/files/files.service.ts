@@ -6,21 +6,15 @@ import { ensureDir, writeFile } from 'fs-extra'
 @Injectable()
 export class FilesService {
 	public async saveMedia(
-		files: Express.Multer.File[],
+		file: Express.Multer.File,
 		folder = 'default',
-	): Promise<IMediaFileResponse[]> {
+	): Promise<IMediaFileResponse> {
 		const uploadFolder = `${path}/uploads/${folder}`
 		await ensureDir(uploadFolder)
 
-		return await Promise.all(
-			files.map(async file => {
-				await writeFile(`${uploadFolder}/${file.originalname}`, file.buffer)
-
-				return {
-					url: `/uploads/${folder}/${file.originalname}`,
-					name: file.originalname,
-				}
-			}),
-		)
+		await writeFile(`${uploadFolder}/${file.originalname}`, file.buffer)
+		return {
+			url: `/uploads/${folder}/${file.originalname}`,
+		}
 	}
 }

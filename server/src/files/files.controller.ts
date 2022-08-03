@@ -17,8 +17,6 @@ import { FileInterceptor } from '@nestjs/platform-express'
 export class FilesController {
 	constructor(private readonly filesService: FilesService) {}
 
-	//TODO: allow the controller to take an array of files
-
 	@Post()
 	@HttpCode(200)
 	@Roles('ADMIN')
@@ -28,6 +26,6 @@ export class FilesController {
 		@UploadedFile() file: Express.Multer.File,
 		@Query('folder') folder?: string,
 	) {
-		return this.filesService.saveMedia([file], folder)
+		return this.filesService.saveMedia(file, folder)
 	}
 }
