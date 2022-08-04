@@ -8,10 +8,19 @@ import { Warning } from './entities/warning.entity'
 import { Instruction } from './entities/instruction.entity'
 import { FilesModule } from '../files/files.module'
 import { GroupsModule } from '../groups/groups.module'
+import { Objective } from '../objectives/entities/objective.entity'
+import { Program } from '../programs/entities/program.entity'
 
 @Module({
 	imports: [
-		TypeOrmModule.forFeature([Exercise, Warning, Instruction, Group]),
+		TypeOrmModule.forFeature([
+			Exercise,
+			Warning,
+			Instruction,
+			Group,
+			Objective,
+			Program,
+		]),
 		FilesModule,
 		GroupsModule,
 	],

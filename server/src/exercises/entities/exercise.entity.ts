@@ -3,6 +3,8 @@ import { Base } from '../../utils/db/base'
 import { Group } from '../../groups/entities/group.entity'
 import { Warning } from './warning.entity'
 import { Instruction } from './instruction.entity'
+import { Objective } from '../../objectives/entities/objective.entity'
+import { Program } from '../../programs/entities/program.entity'
 
 @Entity('exercises')
 export class Exercise extends Base {
@@ -15,6 +17,9 @@ export class Exercise extends Base {
 	@Column({ type: 'text' })
 	description: string
 
+	@OneToMany(() => Program, program => program.exercises)
+	programs: Program[]
+
 	@OneToMany(() => Instruction, instruction => instruction.exercise, {
 		onDelete: 'CASCADE',
 	})
@@ -26,6 +31,9 @@ export class Exercise extends Base {
 	})
 	@JoinColumn()
 	warnings: Warning[]
+
+	@OneToMany(() => Objective, objective => objective.exerciseId)
+	objectives: Objective[]
 
 	@Column({ name: 'video_path' })
 	videoPath: string

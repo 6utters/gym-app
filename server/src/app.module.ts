@@ -9,6 +9,8 @@ import { FilesModule } from './files/files.module';
 import { UsersInfoModule } from './users-info/users-info.module';
 import { ExercisesModule } from './exercises/exercises.module';
 import { GroupsModule } from './groups/groups.module';
+import { ObjectivesModule } from './objectives/objectives.module';
+import { ProgramsModule } from './programs/programs.module';
 
 @Module({
 	imports: [
@@ -25,6 +27,8 @@ import { GroupsModule } from './groups/groups.module';
 		UsersInfoModule,
 		ExercisesModule,
 		GroupsModule,
+		ObjectivesModule,
+		ProgramsModule,
 	],
 })
 export class AppModule {}

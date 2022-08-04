@@ -1,6 +1,5 @@
-import { Injectable } from '@nestjs/common'
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common'
 import { CreateExerciseDto } from './dto/create-exercise.dto'
-import { UpdateExerciseDto } from './dto/update-exercise.dto'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
 import { Exercise } from './entities/exercise.entity'
@@ -42,13 +41,11 @@ export class ExercisesService {
 				return await this.warningsRepository.save({ warning })
 			}),
 		)
-
 		exercise.instructions = await Promise.all(
 			dto.instructions.map(async instruction => {
 				return await this.instructionsRepository.save({ instruction })
 			}),
 		)
-
 		return await this.exercisesRepository.save(exercise)
 	}
 
@@ -59,12 +56,17 @@ export class ExercisesService {
 	}
 
 	async findOne(id: number) {
-		return await this.exercisesRepository.findOneBy({ id })
+		try {
+			return await this.exercisesRepository.findOneByOrFail({ id })
+		} catch (e) {
+			throw new HttpException(
+				'No such exercise has been found',
+				HttpStatus.NOT_FOUND,
+			)
+		}
 	}
 
-	update(id: number, updateExerciseDto: UpdateExerciseDto) {
-		return `This action updates a #${id} exercise`
-	}
+	update() {}
 
 	async remove(id: number) {
 		return await this.exercisesRepository.delete(id)
