@@ -26,7 +26,7 @@ export class ProgramsService {
 
 	findAll() {
 		return this.programsRepository.find({
-			relations: { userId: true, exercises: true },
+			relations: { userId: true, exercises: true, objectives: true },
 		})
 	}
 

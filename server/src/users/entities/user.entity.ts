@@ -3,6 +3,7 @@ import {
 	Entity,
 	JoinTable,
 	ManyToMany,
+	ManyToOne,
 	OneToMany,
 	OneToOne,
 } from 'typeorm'
@@ -11,6 +12,7 @@ import { Role } from '../../roles/entities/role.entity'
 import { User_info } from '../../users-info/entities/users-info.entity'
 import { Objective } from '../../objectives/entities/objective.entity'
 import { Program } from '../../programs/entities/program.entity'
+import { Statistics } from '../../statistics/entities/statistic.entity'
 
 @Entity('users')
 export class User extends Base {
@@ -29,10 +31,13 @@ export class User extends Base {
 	@OneToOne(() => User_info, user_info => user_info.userId)
 	user_info: User_info
 
+	@ManyToOne(() => Statistics, statistics => statistics.user)
+	statistics: Statistics[]
+
 	@ManyToMany(() => Role, role => role.users)
 	@JoinTable({ name: 'users_roles' })
 	roles: Role[]
 
-	@OneToMany(() => Objective, objective => objective.userId)
+	@OneToMany(() => Objective, objective => objective.user)
 	objectives: Objective[]
 }

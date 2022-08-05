@@ -51,7 +51,12 @@ export class ExercisesService {
 
 	async findAll() {
 		return await this.exercisesRepository.find({
-			relations: { group: true, warnings: true, instructions: true },
+			relations: {
+				group: true,
+				warnings: true,
+				instructions: true,
+				objectives: true,
+			},
 		})
 	}
 

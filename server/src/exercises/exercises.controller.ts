@@ -54,7 +54,7 @@ export class ExercisesController {
 		@Param('id') id: string,
 		@Body() updateExerciseDto: UpdateExerciseDto,
 	) {
-		return this.exercisesService.update(+id, updateExerciseDto)
+		return this.exercisesService.update()
 	}
 
 	@Delete(':id')

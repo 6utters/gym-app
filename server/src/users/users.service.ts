@@ -19,8 +19,8 @@ export class UsersService {
 			relations: {
 				roles: true,
 				user_info: true,
-				objectives: true,
-				programs: { exercises: true },
+				objectives: { program: true },
+				programs: true,
 			},
 		})
 	}

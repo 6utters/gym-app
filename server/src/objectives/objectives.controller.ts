@@ -6,6 +6,7 @@ import {
 	Param,
 	Patch,
 	Post,
+	Query,
 } from '@nestjs/common'
 import { ObjectivesService } from './objectives.service'
 import { CreateObjectiveDto } from './dto/create-objective.dto'
@@ -25,9 +26,13 @@ export class ObjectivesController {
 		return this.objectivesService.findAll()
 	}
 
-	@Get(':id')
-	findOne(@Param('id') id: string) {
-		return this.objectivesService.findOne(+id)
+	@Get('search')
+	findOne(
+		@Query('userId') userId: string,
+		@Query('progId') progId: string,
+		@Query('exerId') exerId: string,
+	) {
+		return this.objectivesService.findOne(+userId, +progId, +exerId)
 	}
 
 	@Patch(':id')
@@ -35,7 +40,7 @@ export class ObjectivesController {
 		@Param('id') id: string,
 		@Body() updateObjectiveDto: UpdateObjectiveDto,
 	) {
-		return this.objectivesService.update(+id, updateObjectiveDto)
+		return this.objectivesService.update()
 	}
 
 	@Delete(':id')

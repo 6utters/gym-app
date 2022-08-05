@@ -1,34 +1,42 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { ProgramsService } from './programs.service';
-import { CreateProgramDto } from './dto/create-program.dto';
-import { UpdateProgramDto } from './dto/update-program.dto';
+import {
+	Body,
+	Controller,
+	Delete,
+	Get,
+	Param,
+	Patch,
+	Post,
+} from '@nestjs/common'
+import { ProgramsService } from './programs.service'
+import { CreateProgramDto } from './dto/create-program.dto'
+import { UpdateProgramDto } from './dto/update-program.dto'
 
 @Controller('programs')
 export class ProgramsController {
-  constructor(private readonly programsService: ProgramsService) {}
+	constructor(private readonly programsService: ProgramsService) {}
 
-  @Post()
-  create(@Body() createProgramDto: CreateProgramDto) {
-    return this.programsService.create(createProgramDto);
-  }
+	@Post()
+	create(@Body() createProgramDto: CreateProgramDto) {
+		return this.programsService.create(createProgramDto)
+	}
 
-  @Get()
-  findAll() {
-    return this.programsService.findAll();
-  }
+	@Get()
+	findAll() {
+		return this.programsService.findAll()
+	}
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.programsService.findOne(+id);
-  }
+	@Get(':id')
+	findOne(@Param('id') id: string) {
+		return this.programsService.findOne(+id)
+	}
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateProgramDto: UpdateProgramDto) {
-    return this.programsService.update(+id, updateProgramDto);
-  }
+	@Patch(':id')
+	update(@Param('id') id: string, @Body() updateProgramDto: UpdateProgramDto) {
+		return this.programsService.update()
+	}
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.programsService.remove(+id);
-  }
+	@Delete(':id')
+	remove(@Param('id') id: string) {
+		return this.programsService.remove(+id)
+	}
 }

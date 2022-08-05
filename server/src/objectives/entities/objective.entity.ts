@@ -2,6 +2,7 @@ import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm'
 import { Base } from '../../utils/db/base'
 import { User } from '../../users/entities/user.entity'
 import { Exercise } from '../../exercises/entities/exercise.entity'
+import { Program } from '../../programs/entities/program.entity'
 
 @Entity('objectives')
 export class Objective extends Base {
@@ -16,9 +17,13 @@ export class Objective extends Base {
 
 	@ManyToOne(() => User, user => user.objectives)
 	@JoinColumn({ name: 'user_id' })
-	userId: number
+	user: User
 
 	@ManyToOne(() => Exercise, exercise => exercise.objectives)
 	@JoinColumn({ name: 'exercise_id' })
-	exerciseId: number
+	exercise: Exercise
+
+	@ManyToOne(() => Program, program => program.objectives)
+	@JoinColumn({ name: 'program_id', referencedColumnName: 'id' })
+	program: Program
 }

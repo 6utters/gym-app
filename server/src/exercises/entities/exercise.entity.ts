@@ -5,6 +5,7 @@ import { Warning } from './warning.entity'
 import { Instruction } from './instruction.entity'
 import { Objective } from '../../objectives/entities/objective.entity'
 import { Program } from '../../programs/entities/program.entity'
+import { Statistics } from '../../statistics/entities/statistic.entity'
 
 @Entity('exercises')
 export class Exercise extends Base {
@@ -32,8 +33,11 @@ export class Exercise extends Base {
 	@JoinColumn()
 	warnings: Warning[]
 
-	@OneToMany(() => Objective, objective => objective.exerciseId)
+	@OneToMany(() => Objective, objective => objective.exercise)
 	objectives: Objective[]
+
+	@ManyToOne(() => Statistics, statistics => statistics.exercise)
+	statistics: Statistics[]
 
 	@Column({ name: 'video_path' })
 	videoPath: string

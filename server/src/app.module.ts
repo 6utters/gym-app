@@ -11,6 +11,7 @@ import { ExercisesModule } from './exercises/exercises.module';
 import { GroupsModule } from './groups/groups.module';
 import { ObjectivesModule } from './objectives/objectives.module';
 import { ProgramsModule } from './programs/programs.module';
+import { StatisticsModule } from './statistics/statistics.module';
 
 @Module({
 	imports: [
@@ -29,6 +30,7 @@ import { ProgramsModule } from './programs/programs.module';
 		GroupsModule,
 		ObjectivesModule,
 		ProgramsModule,
+		StatisticsModule,
 	],
 })
 export class AppModule {}
