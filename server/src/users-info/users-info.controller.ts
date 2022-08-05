@@ -1,6 +1,8 @@
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common'
+import { Body, Controller, Get, Patch, Post, UseGuards } from '@nestjs/common'
 import { UsersInfoService } from './users-info.service'
 import { UpdateUsersInfoDto } from './dto/update-users-info.dto'
+import { CurrentUser } from '../users/users.decorator'
+import { AuthGuard } from '../auth/auth.guard'
 
 @Controller('users-info')
 export class UsersInfoController {
@@ -16,16 +18,17 @@ export class UsersInfoController {
 		return this.usersInfoService.findAll()
 	}
 
-	@Get(':id')
-	findOne(@Param('id') id: string) {
+	@Get('search')
+	@UseGuards(AuthGuard)
+	findOne(@CurrentUser('id') id: string) {
 		return this.usersInfoService.findOne(+id)
 	}
 
-	@Patch(':id')
+	@Patch('update')
 	update(
-		@Param('id') id: number,
+		@CurrentUser('id') id: string,
 		@Body() updateUsersInfoDto: UpdateUsersInfoDto,
 	) {
-		return this.usersInfoService.update(id, updateUsersInfoDto)
+		return this.usersInfoService.update(+id, updateUsersInfoDto)
 	}
 }

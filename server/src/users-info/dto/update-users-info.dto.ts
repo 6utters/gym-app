@@ -1,5 +1,3 @@
-//TODO: take id from authorized user
-
 export class UpdateUsersInfoDto {
 	readonly height: number
 

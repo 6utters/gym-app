@@ -24,7 +24,7 @@ export class GroupsService {
 	}
 
 	async findAll() {
-		return await this.groupsRepository.find()
+		return await this.groupsRepository.find({ relations: { exercises: true } })
 	}
 
 	async findByName(name: string) {
@@ -35,8 +35,9 @@ export class GroupsService {
 		return await this.groupsRepository.findOne({ where: { id } })
 	}
 
-	update(id: number, updateGroupDto: UpdateGroupDto) {
-		return `This action updates a #${id} group`
+	async update(id: number, dto: UpdateGroupDto) {
+		const group = await this.groupsRepository.findOneOrFail({ where: { id } })
+		return await this.groupsRepository.save({ ...group, ...dto })
 	}
 
 	async remove(id: number) {

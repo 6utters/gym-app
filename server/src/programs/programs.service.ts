@@ -46,7 +46,10 @@ export class ProgramsService {
 
 	//TODO: update program
 
-	update() {}
+	async update(programId, dto) {
+		const program = await this.findOne(programId)
+		return await this.programsRepository.save({ ...program, ...dto })
+	}
 
 	async remove(id: number) {
 		return await this.programsRepository.delete(id)

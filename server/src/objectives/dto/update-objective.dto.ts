@@ -1,4 +1,5 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { CreateObjectiveDto } from './create-objective.dto';
-
-export class UpdateObjectiveDto extends PartialType(CreateObjectiveDto) {}
+export class UpdateObjectiveDto {
+	readonly targetSets: number
+	readonly targetReps: number
+	readonly timeout: number
+}

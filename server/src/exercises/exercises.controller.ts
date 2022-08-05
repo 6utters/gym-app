@@ -49,12 +49,9 @@ export class ExercisesController {
 		return this.exercisesService.findOne(+id)
 	}
 
-	@Patch(':id')
-	update(
-		@Param('id') id: string,
-		@Body() updateExerciseDto: UpdateExerciseDto,
-	) {
-		return this.exercisesService.update()
+	@Patch('update')
+	update(@Body() updateExerciseDto: UpdateExerciseDto) {
+		return this.exercisesService.update(updateExerciseDto)
 	}
 
 	@Delete(':id')

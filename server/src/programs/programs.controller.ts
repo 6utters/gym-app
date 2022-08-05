@@ -39,7 +39,7 @@ export class ProgramsController {
 
 	@Patch(':id')
 	update(@Param('id') id: string, @Body() updateProgramDto: UpdateProgramDto) {
-		return this.programsService.update()
+		return this.programsService.update(+id, updateProgramDto)
 	}
 
 	@Delete(':id')

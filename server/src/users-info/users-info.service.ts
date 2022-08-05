@@ -24,19 +24,16 @@ export class UsersInfoService {
 		return await this.usersInfoRepository.find()
 	}
 
-	findOne(id: number) {
-		return `This action returns a #${id} usersInfo`
+	async findOne(id: number) {
+		return await this.usersInfoRepository.findOneOrFail({
+			where: { userId: { id } },
+		})
 	}
 
 	async update(userId: number, dto: UpdateUsersInfoDto) {
 		const info = await this.usersInfoRepository.findOne({
 			where: { userId: { id: userId } },
 		})
-
 		return await this.usersInfoRepository.save({ ...info, ...dto })
-	}
-
-	remove(id: number) {
-		return `This action removes a #${id} usersInfo`
 	}
 }

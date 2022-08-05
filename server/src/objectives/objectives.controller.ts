@@ -34,20 +34,29 @@ export class ObjectivesController {
 	}
 
 	@Get('search')
+	@UseGuards(AuthGuard)
 	findOne(
-		@Query('userId') userId: string,
+		@CurrentUser('id') id: string,
 		@Query('progId') progId: string,
 		@Query('exerId') exerId: string,
 	) {
-		return this.objectivesService.findOne(+userId, +progId, +exerId)
+		return this.objectivesService.findOne(+id, +progId, +exerId)
 	}
 
-	@Patch(':id')
+	@Patch('update')
+	@UseGuards(AuthGuard)
 	update(
-		@Param('id') id: string,
 		@Body() updateObjectiveDto: UpdateObjectiveDto,
+		@CurrentUser('id') id: string,
+		@Query('progId') progId: string,
+		@Query('exerId') exerId: string,
 	) {
-		return this.objectivesService.update()
+		return this.objectivesService.update(
+			+id,
+			+progId,
+			+exerId,
+			updateObjectiveDto,
+		)
 	}
 
 	@Delete(':id')

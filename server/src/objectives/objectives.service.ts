@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common'
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common'
 import { CreateObjectiveDto } from './dto/create-objective.dto'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
@@ -10,16 +10,23 @@ export class ObjectivesService {
 		@InjectRepository(Objective)
 		private readonly objectivesRepository: Repository<Objective>,
 	) {}
-	async create(dto: CreateObjectiveDto, userid: number) {
-		//Todo: to find more appropriate way to handle this
-		return await this.objectivesRepository.save({
-			targetReps: dto.targetSets,
-			targetSets: dto.targetSets,
-			program: { id: dto.programId },
-			user: { id: userid },
-			exercise: { id: dto.exerciseId },
-			timeout: dto.timeout,
-		})
+	async create(dto: CreateObjectiveDto, userId: number) {
+		const objective = await this.findOne(userId, dto.programId, dto.exerciseId)
+		if (!objective) {
+			//Todo: to find more appropriate way to handle this
+			return await this.objectivesRepository.save({
+				targetReps: dto.targetSets,
+				targetSets: dto.targetSets,
+				program: { id: dto.programId },
+				user: { id: userId },
+				exercise: { id: dto.exerciseId },
+				timeout: dto.timeout,
+			})
+		}
+		throw new HttpException(
+			'The objective has already been set',
+			HttpStatus.BAD_REQUEST,
+		)
 	}
 
 	async findAll() {
@@ -29,7 +36,7 @@ export class ObjectivesService {
 	}
 
 	async findOne(userId, programId, exerciseId) {
-		return await this.objectivesRepository.findOne({
+		return await this.objectivesRepository.findOneOrFail({
 			where: {
 				user: { id: userId },
 				program: { id: programId },
@@ -38,7 +45,10 @@ export class ObjectivesService {
 		})
 	}
 
-	update() {}
+	async update(id, progId, exerId, dto) {
+		const objective = await this.findOne(id, progId, exerId)
+		return await this.objectivesRepository.save({ ...objective, ...dto })
+	}
 
 	async remove(id: number) {
 		return await this.objectivesRepository.delete(id)

@@ -25,13 +25,17 @@ export class StatisticsService {
 		})
 	}
 
-	findOne(id: number) {
-		return `This action returns a #${id} statistic`
+	async findOne(userId, programId, exerciseId) {
+		return await this.statisticsRepository.findOneOrFail({
+			where: {
+				user: { id: userId },
+				program: { id: programId },
+				exercise: { id: exerciseId },
+			},
+		})
 	}
 
-	update() {}
-
-	remove(id: number) {
-		return `This action removes a #${id} statistic`
+	async remove(id: number) {
+		return await this.statisticsRepository.delete(id)
 	}
 }

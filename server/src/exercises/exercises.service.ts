@@ -7,6 +7,7 @@ import { Warning } from './entities/warning.entity'
 import { Instruction } from './entities/instruction.entity'
 import { FilesService } from '../files/files.service'
 import { GroupsService } from '../groups/groups.service'
+import { UpdateExerciseDto } from './dto/update-exercise.dto'
 
 @Injectable()
 export class ExercisesService {
@@ -71,7 +72,12 @@ export class ExercisesService {
 		}
 	}
 
-	update() {}
+	async update(dto: UpdateExerciseDto) {
+		const exercise = await this.exercisesRepository.findOneOrFail({
+			where: { name: dto.name },
+		})
+		return await this.exercisesRepository.save({ ...exercise, ...dto })
+	}
 
 	async remove(id: number) {
 		return await this.exercisesRepository.delete(id)

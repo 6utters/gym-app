@@ -4,8 +4,8 @@ import {
 	Delete,
 	Get,
 	Param,
-	Patch,
 	Post,
+	Query,
 	UseGuards,
 } from '@nestjs/common'
 import { StatisticsService } from './statistics.service'
@@ -31,14 +31,14 @@ export class StatisticsController {
 		return this.statisticsService.findAll()
 	}
 
-	@Get(':id')
-	findOne(@Param('id') id: number) {
-		return this.statisticsService.findOne(+id)
-	}
-
-	@Patch(':id')
-	update() {
-		return this.statisticsService.update()
+	@Get('search')
+	@UseGuards(AuthGuard)
+	findOne(
+		@CurrentUser('id') id: string,
+		@Query('progId') progId: string,
+		@Query('exerId') exerId: string,
+	) {
+		return this.statisticsService.findOne(+id, +progId, +exerId)
 	}
 
 	@Delete(':id')
