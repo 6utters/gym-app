@@ -10,13 +10,13 @@ export class ObjectivesService {
 		@InjectRepository(Objective)
 		private readonly objectivesRepository: Repository<Objective>,
 	) {}
-	async create(dto: CreateObjectiveDto) {
+	async create(dto: CreateObjectiveDto, userid: number) {
 		//Todo: to find more appropriate way to handle this
 		return await this.objectivesRepository.save({
 			targetReps: dto.targetSets,
 			targetSets: dto.targetSets,
 			program: { id: dto.programId },
-			user: { id: dto.userId },
+			user: { id: userid },
 			exercise: { id: dto.exerciseId },
 			timeout: dto.timeout,
 		})

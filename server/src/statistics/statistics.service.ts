@@ -10,10 +10,10 @@ export class StatisticsService {
 		@InjectRepository(Statistics)
 		private readonly statisticsRepository: Repository<Statistics>,
 	) {}
-	async create(dto: CreateStatisticDto) {
+	async create(dto: CreateStatisticDto, userId: number) {
 		return await this.statisticsRepository.save({
 			repetitions: dto.repetitions,
-			user: { id: dto.userId },
+			user: { id: userId },
 			program: { id: dto.programId },
 			exercise: { id: dto.exerciseId },
 		})

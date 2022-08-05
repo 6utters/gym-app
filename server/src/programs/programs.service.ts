@@ -13,10 +13,10 @@ export class ProgramsService {
 		@InjectRepository(Exercise)
 		private readonly exercisesRepository: Repository<Exercise>,
 	) {}
-	async create(dto: CreateProgramDto) {
+	async create(dto: CreateProgramDto, userId: number) {
 		const program = await this.programsRepository.create({
 			name: dto.name,
-			userId: dto.userId,
+			userId,
 		})
 		program.exercises = await this.exercisesRepository.find({
 			where: { id: In(dto.exerciseIds) },

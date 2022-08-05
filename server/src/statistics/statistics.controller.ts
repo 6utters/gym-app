@@ -6,17 +6,24 @@ import {
 	Param,
 	Patch,
 	Post,
+	UseGuards,
 } from '@nestjs/common'
 import { StatisticsService } from './statistics.service'
 import { CreateStatisticDto } from './dto/create-statistic.dto'
+import { CurrentUser } from '../users/users.decorator'
+import { AuthGuard } from '../auth/auth.guard'
 
 @Controller('statistics')
 export class StatisticsController {
 	constructor(private readonly statisticsService: StatisticsService) {}
 
 	@Post()
-	create(@Body() createStatisticDto: CreateStatisticDto) {
-		return this.statisticsService.create(createStatisticDto)
+	@UseGuards(AuthGuard)
+	create(
+		@CurrentUser('id') id: string,
+		@Body() createStatisticDto: CreateStatisticDto,
+	) {
+		return this.statisticsService.create(createStatisticDto, +id)
 	}
 
 	@Get()
@@ -25,7 +32,7 @@ export class StatisticsController {
 	}
 
 	@Get(':id')
-	findOne(@Param('id') id: string) {
+	findOne(@Param('id') id: number) {
 		return this.statisticsService.findOne(+id)
 	}
 

@@ -7,18 +7,25 @@ import {
 	Patch,
 	Post,
 	Query,
+	UseGuards,
 } from '@nestjs/common'
 import { ObjectivesService } from './objectives.service'
 import { CreateObjectiveDto } from './dto/create-objective.dto'
 import { UpdateObjectiveDto } from './dto/update-objective.dto'
+import { AuthGuard } from '../auth/auth.guard'
+import { CurrentUser } from '../users/users.decorator'
 
 @Controller('objectives')
 export class ObjectivesController {
 	constructor(private readonly objectivesService: ObjectivesService) {}
 
 	@Post()
-	create(@Body() createObjectiveDto: CreateObjectiveDto) {
-		return this.objectivesService.create(createObjectiveDto)
+	@UseGuards(AuthGuard)
+	create(
+		@CurrentUser('id') id: string,
+		@Body() createObjectiveDto: CreateObjectiveDto,
+	) {
+		return this.objectivesService.create(createObjectiveDto, +id)
 	}
 
 	@Get()
