@@ -19,7 +19,7 @@
       "@/components/*": ["components/*"],
       "@/ui/*": ["components/ui/* "],
       "@/pages/*": ["components/pages/*"],
-
+      "@/types/*": ["components/types/*"],
       "@/hooks/*": ["hooks/*"],
       "@/providers/*": ["providers/*"],
       "@/services/*": ["services/*"],
