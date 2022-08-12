@@ -12,7 +12,7 @@ function MyApp({ Component, pageProps }: TypeAuthProps) {
 	return (
 		<Provider store={store}>
 			<AuthProvider Component={Component}>
-				<Component {...pageProps} />)
+				<Component {...pageProps} />
 			</AuthProvider>
 		</Provider>
 	)

@@ -1,0 +1,23 @@
+$bar-height: 3.5em;
+
+.layout {
+	@apply relative;
+
+	> header,
+	> nav {
+		@apply fixed left-0 right-0 bg-white;
+		height: $bar-height;
+	}
+	> header {
+		@apply top-0 border-b-2;
+	}
+	> nav {
+		@apply bottom-0 border-t-2;
+	}
+
+	&__main {
+		@apply min-h-screen;
+		margin-top: $bar-height;
+		background: #f0f0f1;
+	}
+}
