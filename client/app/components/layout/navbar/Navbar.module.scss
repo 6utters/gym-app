@@ -1,20 +1,27 @@
 .navbar {
 	@apply relative;
-	ul {
-		@apply h-full flex-center-between mx-auto;
-		width: 60%;
+	&__panel {
+		@apply h-full bg-white rounded-xl shadow;
+		ul {
+			@apply h-full flex-center-between mx-auto;
+			width: 60%;
 
-		a {
-			@apply flex flex-col items-center transition;
-			color: #626d7a;
-			font-size: 1.7em;
-			> p {
-				@apply font-medium;
-				font-size: 0.43em;
+			a {
+				@apply flex flex-col items-center transition;
+				color: #757575;
+				font-size: 1.7em;
+				> p {
+					@apply font-medium;
+					font-size: 0.43em;
+				}
+
+				&:hover {
+					color: #2962ff;
+				}
 			}
 
-			&:hover {
-				color: #0d47a1;
+			.active {
+				color: #2962ff;
 			}
 		}
 	}

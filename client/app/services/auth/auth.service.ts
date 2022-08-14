@@ -33,7 +33,7 @@ export const AuthService = {
 	async logout() {
 		removeTokensFromStorage()
 		localStorage.removeItem('user')
-		return await axiosClassic.post('/auth/logout')
+		return await axiosClassic.post(`/${AUTH}/logout`)
 	},
 
 	async check() {

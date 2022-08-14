@@ -1,13 +1,10 @@
-import { NextPageAuth } from '../app/types/auth.types'
 import Home from '@/pages/home/Home'
-import Layout from '@/components/layout/Layout'
+import { NextPageAuth } from '../app/types/auth.types'
 
 const HomePage: NextPageAuth = () => {
-	return (
-		<Layout>
-			<Home />
-		</Layout>
-	)
+	return <Home />
 }
+
+HomePage.isNotForUser = true
 
 export default HomePage

@@ -44,11 +44,24 @@ module.exports = {
 						opacity: 1,
 						transform: 'scale(1)'
 					}
+				},
+				lift: {
+					'0%': {
+						transform: 'translateY(0)'
+					},
+					'50%': {
+						transform: 'translateY(-0.5rem)'
+					},
+
+					'100%': {
+						transform: 'translateY(0)'
+					}
 				}
 			},
 			animation: {
 				fade: 'fade .5s ease-in-out',
-				scaleIn: 'scaleIn .35s ease-in-out'
+				scaleIn: 'scaleIn .35s ease-in-out',
+				lift: 'lift .5s ease-in-out'
 			}
 		}
 	},

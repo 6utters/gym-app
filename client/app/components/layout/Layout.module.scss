@@ -1,23 +1,28 @@
-$bar-height: 3.5em;
+$nav-height: 4.25em;
+$header-height: 3.5em;
 
 .layout {
 	@apply relative;
 
 	> header,
 	> nav {
-		@apply fixed left-0 right-0 bg-white;
-		height: $bar-height;
+		@apply fixed left-0 right-0;
 	}
 	> header {
-		@apply top-0 border-b-2;
+		@apply top-0 bg-white shadow;
+		height: $header-height;
 	}
 	> nav {
-		@apply bottom-0 border-t-2;
+		@apply bottom-0;
+		height: $nav-height;
+		padding: 0 1em 1em 1em;
+		background: #f0f0f1;
 	}
 
 	&__main {
 		@apply min-h-screen;
-		margin-top: $bar-height;
+		padding: 0 1em;
+		margin-top: $header-height;
 		background: #f0f0f1;
 	}
 }

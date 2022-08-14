@@ -1,5 +1,5 @@
 import {
-	IoAddSharp,
+	IoAddCircleOutline,
 	IoBarbellSharp,
 	IoPersonCircleOutline
 } from 'react-icons/io5'
@@ -17,8 +17,8 @@ export const navbarLinks: INavbarLink[] = [
 	{
 		id: 2,
 		title: 'Create',
-		href: '/workouts/cr',
-		icon: IoAddSharp
+		href: '/workouts/pr-cr',
+		icon: IoAddCircleOutline
 	},
 	{ id: 3, title: 'Profile', href: '/profile', icon: IoPersonCircleOutline }
 ]
