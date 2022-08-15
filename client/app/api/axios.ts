@@ -4,7 +4,7 @@ import Cookies from 'js-cookie'
 import { AuthService } from '@/services/auth/auth.service'
 import { removeTokensFromStorage } from '@/services/auth/auth.helper'
 
-export const API_URL = `${process.env.REACT_APP_SERVER_URL}/api`
+export const API_URL = `${process.env.APP_SERVER_URL}/api`
 
 export const axiosClassic = axios.create({
 	baseURL: API_URL,

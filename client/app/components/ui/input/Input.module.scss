@@ -1,0 +1,25 @@
+.common {
+	@apply relative border-b border-gray-500 transition-colors focus-within:border-x-blue-900;
+
+	label {
+		@apply block;
+
+		span {
+			@apply text-sm uppercase text-gray-500;
+		}
+	}
+}
+
+.input {
+	@apply text-left;
+
+	input {
+		@apply outline-border-none focus:ring-0 bg-transparent w-full m-0 px-0;
+	}
+}
+
+//TODO: change red color
+
+.error {
+	@apply absolute -bottom-6 left-0 text-sm w-full text-red-900;
+}

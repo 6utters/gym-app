@@ -10,4 +10,6 @@ const ProfilePage: NextPageAuth = () => {
 	)
 }
 
+ProfilePage.isOnlyUser = true
+
 export default ProfilePage

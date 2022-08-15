@@ -12,18 +12,22 @@ const AuthProvider: FC<PropsWithChildren<TypeComponentAuthFields>> = ({
 	children,
 	Component: { isOnlyUser, isOnlyAdmin, isNotForUser }
 }) => {
-	const { user } = useAuth()
+	const { user, isLoading } = useAuth()
 	const { logout, checkAuth } = useActions()
 	const { pathname } = useRouter()
 
 	useEffect(() => {
 		const accessToken = Cookies.get('accessToken')
-		if (accessToken) checkAuth()
+		if (accessToken) {
+			checkAuth()
+		}
 	}, [])
 
 	useEffect(() => {
-		const refreshToken = Cookies.get('refreshToken')
-		if (!refreshToken && user) logout()
+		const accessToken = Cookies.get('accessToken')
+		if (!accessToken && user && !isLoading) {
+			logout()
+		}
 	}, [pathname])
 
 	return !isOnlyUser && !isOnlyAdmin && !isNotForUser ? (

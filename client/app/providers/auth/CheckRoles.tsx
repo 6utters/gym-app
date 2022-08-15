@@ -3,11 +3,13 @@ import { TypeComponentAuthFields } from '../../types/auth.types'
 import { useRouter } from 'next/router'
 import { useAuth } from '@/hooks/useAuth'
 
+//TODO: solve error Abort fetching component for route:
+
 const CheckRoles: FC<PropsWithChildren<TypeComponentAuthFields>> = ({
 	children,
 	Component: { isOnlyUser, isOnlyAdmin, isNotForUser }
 }) => {
-	const { user } = useAuth()
+	const { user, isLoading } = useAuth()
 	const router = useRouter()
 
 	const Children = () => <>{children}</>
@@ -15,13 +17,18 @@ const CheckRoles: FC<PropsWithChildren<TypeComponentAuthFields>> = ({
 	const isAdmin = user?.roles.some(role => role.value === 'ADMIN')
 	if (isAdmin) return <Children />
 
+	if (isLoading) {
+		return null
+	}
+
 	if (isOnlyAdmin) {
 		router.pathname !== '/404' && router.replace('404')
 		return null
 	}
 
-	if (user && isNotForUser) {
-		router.pathname === '/' && router.replace('/workouts')
+	if (!isLoading && user && isNotForUser) {
+		router.pathname !== '/workouts' &&
+			router.replace('/workouts', '/workouts', { shallow: true })
 		return null
 	}
 

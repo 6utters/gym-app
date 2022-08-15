@@ -45,7 +45,7 @@ export const authSlice = createSlice({
 		[logout.pending.type]: state => {
 			state.isLoading = true
 		},
-		[logout.fulfilled.type]: state => {
+		[logout.fulfilled.type]: (state, action: PayloadAction) => {
 			state.isLoading = false
 			state.user = null
 			state.error = ''

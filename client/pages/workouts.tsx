@@ -10,4 +10,6 @@ const WorkoutsPage: NextPageAuth = () => {
 	)
 }
 
+WorkoutsPage.isOnlyUser = true
+
 export default WorkoutsPage

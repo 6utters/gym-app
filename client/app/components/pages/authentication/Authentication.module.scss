@@ -1,0 +1,8 @@
+.wrapper {
+	@apply h-screen overflow-hidden flex flex-col justify-end;
+
+	.content {
+		@apply p-2 flex flex-col justify-between;
+		height: 93%;
+	}
+}
