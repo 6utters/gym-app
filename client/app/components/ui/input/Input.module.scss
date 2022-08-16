@@ -1,11 +1,12 @@
 .common {
-	@apply relative border-b border-gray-500 transition-colors focus-within:border-x-blue-900;
+	@apply relative border-b border-gray-500 transition-colors focus-within:border-gray-700;
 
 	label {
-		@apply block;
+		@apply block transition-all;
 
 		span {
 			@apply text-sm uppercase text-gray-500;
+			transform: translateY(1.5em);
 		}
 	}
 }

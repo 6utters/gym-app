@@ -2,6 +2,7 @@ import { FC } from 'react'
 import { UseFormRegister } from 'react-hook-form'
 import Input from '@/components/ui/input/Input'
 import { validEmail } from '@/utils/regex.utils'
+import { useRouter } from 'next/router'
 
 interface IAuthFields {
 	register: UseFormRegister<any>
@@ -9,8 +10,19 @@ interface IAuthFields {
 }
 
 const AuthFields: FC<IAuthFields> = ({ register, formState: { errors } }) => {
+	const { pathname } = useRouter()
 	return (
 		<>
+			{pathname === '/auth/register' && (
+				<Input
+					{...register('userName', {
+						required: 'User Name is required'
+					})}
+					placeholder={'User Name'}
+					error={errors.userName}
+					style={{ margin: '1.5em 0' }}
+				/>
+			)}
 			<Input
 				{...register('email', {
 					required: 'Email is required',
@@ -21,6 +33,7 @@ const AuthFields: FC<IAuthFields> = ({ register, formState: { errors } }) => {
 				})}
 				placeholder={'E-mail'}
 				error={errors.email}
+				style={{ margin: '1.5em 0' }}
 			/>
 			<Input
 				{...register('password', {
@@ -32,14 +45,8 @@ const AuthFields: FC<IAuthFields> = ({ register, formState: { errors } }) => {
 				})}
 				placeholder={'Password'}
 				error={errors.password}
+				style={{ margin: '1.5em 0' }}
 			/>
-			{/*<Input*/}
-			{/*	{...register('userName', {*/}
-			{/*		required: 'User Name is required'*/}
-			{/*	})}*/}
-			{/*	placeholder={'User Name'}*/}
-			{/*	error={errors.userName}*/}
-			{/*/>*/}
 		</>
 	)
 }
