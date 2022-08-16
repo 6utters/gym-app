@@ -4,7 +4,7 @@ import ProgramCreation from '@/pages/programCreation/ProgramCreation'
 
 const ProgramCreationPage: NextPageAuth = () => {
 	return (
-		<Layout>
+		<Layout title={'Create Workout'}>
 			<ProgramCreation />
 		</Layout>
 	)

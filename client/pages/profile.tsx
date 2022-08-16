@@ -4,7 +4,7 @@ import Profile from '@/pages/profile/Profile'
 
 const ProfilePage: NextPageAuth = () => {
 	return (
-		<Layout>
+		<Layout title={'Profile'}>
 			<Profile />
 		</Layout>
 	)
