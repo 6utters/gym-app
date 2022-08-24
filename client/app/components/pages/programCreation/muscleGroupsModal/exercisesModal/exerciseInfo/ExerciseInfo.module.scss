@@ -1,0 +1,18 @@
+.content {
+	@apply w-full h-full;
+	z-index: 10;
+
+	.header {
+		@apply relative h-[2.5em] w-full text-2lg flex items-center justify-center;
+
+		.cross {
+			@apply absolute right-4;
+			top: 34%;
+		}
+	}
+	.main {
+		.video {
+		}
+		@apply w-full h-[6em];
+	}
+}

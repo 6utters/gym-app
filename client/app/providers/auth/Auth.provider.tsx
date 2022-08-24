@@ -12,19 +12,21 @@ const AuthProvider: FC<PropsWithChildren<TypeComponentAuthFields>> = ({
 	children,
 	Component: { isOnlyUser, isOnlyAdmin, isNotForUser }
 }) => {
-	const { user, isLoading } = useAuth()
+	const { isLoading } = useAuth()
 	const { logout, checkAuth } = useActions()
 	const { pathname } = useRouter()
 
 	useEffect(() => {
-		const accessToken = Cookies.get('accessToken')
-		if (accessToken) {
+		try {
 			checkAuth()
+		} catch (e) {
+			logout()
 		}
 	}, [])
 
 	useEffect(() => {
 		const accessToken = Cookies.get('accessToken')
+		const user = localStorage.getItem('user')
 		if (!accessToken && user && !isLoading) {
 			logout()
 		}

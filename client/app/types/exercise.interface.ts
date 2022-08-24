@@ -5,6 +5,7 @@ import { IInstruction } from './instruction.interface'
 import { IGroup } from './group.interface'
 
 export interface IExercise {
+	id: number
 	name: string
 	thumbnailPath: string
 	videoPath: string

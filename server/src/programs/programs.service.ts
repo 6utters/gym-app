@@ -4,6 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm'
 import { In, Repository } from 'typeorm'
 import { Program } from './entities/program.entity'
 import { Exercise } from '../exercises/entities/exercise.entity'
+import { FilesService } from '../files/files.service'
 
 @Injectable()
 export class ProgramsService {
@@ -12,11 +13,19 @@ export class ProgramsService {
 		private readonly programsRepository: Repository<Program>,
 		@InjectRepository(Exercise)
 		private readonly exercisesRepository: Repository<Exercise>,
+		private readonly filesService: FilesService,
 	) {}
-	async create(dto: CreateProgramDto, userId: number) {
+	async create(
+		dto: CreateProgramDto,
+		userId: number,
+		file: Express.Multer.File,
+		folder = 'default',
+	) {
+		const thumbnail = await this.filesService.saveMedia(file, folder)
 		const program = await this.programsRepository.create({
 			name: dto.name,
 			userId,
+			image_path: thumbnail.url,
 		})
 		program.exercises = await this.exercisesRepository.find({
 			where: { id: In(dto.exerciseIds) },
@@ -27,6 +36,13 @@ export class ProgramsService {
 	findAll() {
 		return this.programsRepository.find({
 			relations: { userId: true, exercises: true, objectives: true },
+		})
+	}
+
+	findAllFromUser(id: number) {
+		return this.programsRepository.find({
+			where: { userId: id },
+			relations: { exercises: true },
 		})
 	}
 

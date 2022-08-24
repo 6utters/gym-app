@@ -50,6 +50,13 @@ export class ExercisesService {
 		return await this.exercisesRepository.save(exercise)
 	}
 
+	async findByGroup(groupId: number) {
+		return await this.exercisesRepository.find({
+			where: { group: { id: groupId } },
+			relations: { warnings: true, instructions: true },
+		})
+	}
+
 	async findAll() {
 		return await this.exercisesRepository.find({
 			relations: {
@@ -63,7 +70,10 @@ export class ExercisesService {
 
 	async findOne(id: number) {
 		try {
-			return await this.exercisesRepository.findOneByOrFail({ id })
+			return await this.exercisesRepository.findOneOrFail({
+				where: { id },
+				relations: { warnings: true, instructions: true },
+			})
 		} catch (e) {
 			throw new HttpException(
 				'No such exercise has been found',

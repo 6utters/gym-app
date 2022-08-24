@@ -7,7 +7,6 @@ import {
 	Param,
 	Patch,
 	Post,
-	Query,
 	UploadedFile,
 	UseInterceptors,
 } from '@nestjs/common'
@@ -26,9 +25,8 @@ export class GroupsController {
 	create(
 		@Body() createGroupDto: CreateGroupDto,
 		@UploadedFile() thumbnail: Express.Multer.File,
-		@Query('folder') folder?: string,
 	) {
-		return this.groupsService.create(createGroupDto, thumbnail, folder)
+		return this.groupsService.create(createGroupDto, thumbnail)
 	}
 
 	@Get()

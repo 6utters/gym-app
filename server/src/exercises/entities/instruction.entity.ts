@@ -7,6 +7,8 @@ export class Instruction extends Base {
 	@Column({ type: 'text' })
 	instruction: string
 
-	@ManyToOne(() => Exercise, exercise => exercise.instructions)
+	@ManyToOne(() => Exercise, exercise => exercise.instructions, {
+		onDelete: 'CASCADE',
+	})
 	exercise: Exercise
 }

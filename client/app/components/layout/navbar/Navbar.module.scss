@@ -1,13 +1,13 @@
 .navbar {
-	@apply relative;
 	&__panel {
-		@apply h-full bg-white rounded-xl shadow;
+		@apply h-full bg-white rounded-xl shadow flex justify-center;
 		ul {
 			@apply h-full flex-center-between mx-auto;
 			width: 60%;
 
 			a {
 				@apply flex flex-col items-center transition;
+				width: 20%;
 				color: #757575;
 				font-size: 1.7em;
 				> p {

@@ -17,17 +17,26 @@ export class Program extends Base {
 	@Column()
 	name: string
 
+	@Column({ name: 'image_path' })
+	image_path: string
+
 	@ManyToOne(() => User, user => user.programs)
 	@JoinColumn({ name: 'user_id' })
 	userId: number
 
-	@ManyToMany(() => Exercise, exercise => exercise.programs)
+	@ManyToMany(() => Exercise, exercise => exercise.programs, {
+		onDelete: 'CASCADE',
+	})
 	@JoinTable({ name: 'programs_exercises' })
 	exercises: Exercise[]
 
-	@ManyToOne(() => Statistics, statistics => statistics.program)
+	@ManyToOne(() => Statistics, statistics => statistics.program, {
+		onDelete: 'CASCADE',
+	})
 	statistics: Statistics[]
 
-	@ManyToOne(() => Objective, objective => objective.program)
+	@ManyToOne(() => Objective, objective => objective.program, {
+		onDelete: 'CASCADE',
+	})
 	objectives: Objective[]
 }

@@ -3,10 +3,11 @@ $header-height: 3.5em;
 
 .layout {
 	@apply relative;
+	min-height: 100vh;
 
 	> header,
 	> nav {
-		@apply fixed left-0 right-0;
+		@apply fixed left-0 right-0 z-1;
 	}
 	> header {
 		@apply top-0 bg-white shadow;
@@ -20,9 +21,9 @@ $header-height: 3.5em;
 	}
 
 	&__main {
-		@apply min-h-screen;
-		padding: 0 1em;
-		margin-top: $header-height;
+		@apply px-[1em];
+		min-height: 90vh;
+		padding-top: $header-height;
 		background: #f0f0f1;
 	}
 }

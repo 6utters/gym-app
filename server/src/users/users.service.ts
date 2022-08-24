@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common'
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common'
 import { CreateUserDto } from './dto/create-user.dto'
 import { InjectRepository } from '@nestjs/typeorm'
 import { User } from './entities/user.entity'
@@ -29,10 +29,27 @@ export class UsersService {
 		return this.usersRepository.findOneBy({ email })
 	}
 
-	findById(id: number) {
-		return this.usersRepository.findOne({
-			where: { id },
-			relations: { roles: true },
+	findByName(userName: string) {
+		return this.usersRepository.findOneOrFail({
+			where: { userName },
+			relations: { roles: true, objectives: true, user_info: true },
 		})
+	}
+
+	findById(id: number) {
+		try {
+			return this.usersRepository.findOneOrFail({
+				where: { id },
+				relations: {
+					roles: true,
+					user_info: true,
+				},
+			})
+		} catch (e) {
+			throw new HttpException(
+				"User with that Id doesn't exist",
+				HttpStatus.NOT_FOUND,
+			)
+		}
 	}
 }

@@ -39,14 +39,19 @@ export class ExercisesController {
 		)
 	}
 
+	@Get(':id')
+	findByMuscleGroup(@Param('id') id: number) {
+		return this.exercisesService.findByGroup(id)
+	}
+
 	@Get()
 	findAll() {
 		return this.exercisesService.findAll()
 	}
 
-	@Get(':id')
-	findOne(@Param('id') id: string) {
-		return this.exercisesService.findOne(+id)
+	@Get('ex/:id')
+	findOne(@Param('id') id: number) {
+		return this.exercisesService.findOne(id)
 	}
 
 	@Patch('update')

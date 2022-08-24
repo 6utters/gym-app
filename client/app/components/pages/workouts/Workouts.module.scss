@@ -1,0 +1,32 @@
+.container {
+	@apply relative pt-2;
+
+	.card {
+		@apply h-[6em] rounded-xl my-1 shadow border border-white flex items-end p-2 overflow-hidden;
+		//background: #d2dde0;
+		//background-image: url('https://img.freepik.com/free-photo/beautiful-woman-leggings-bright-sweatshirt-is-smiling-posing-with-purple-mat-fitball_197531-16648.jpg?w=1060&t=st=1660731458~exp=1660732058~hmac=e41ec82485bcd38b96b0a2f9d2983dbd47f944242c0547be9bf0960a087bdf3c');
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: 45% 20%;
+
+		> h2 {
+			@apply text-white text-shadow;
+		}
+	}
+
+	.wrapper {
+		@apply w-full flex items-center justify-center px-[4em];
+		height: 80vh;
+
+		.content {
+			@apply text-white text-center flex-col rounded-xl items-center p-2 shadow;
+			background: #b2bbc0;
+			h3 {
+				@apply text-lg mb-3;
+			}
+			p {
+				@apply text-sm font-light;
+			}
+		}
+	}
+}

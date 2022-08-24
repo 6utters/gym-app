@@ -23,11 +23,13 @@ export const authSlice = createSlice({
 			state.isLoading = false
 			state.user = action.payload.user
 			state.error = ''
+			state.accessToken = action.payload.accessToken
 		},
 		[register.rejected.type]: (state, action: PayloadAction<string>) => {
 			state.isLoading = false
 			state.user = null
 			state.error = action.payload
+			state.accessToken = ''
 		},
 		[login.pending.type]: state => {
 			state.isLoading = true
@@ -36,11 +38,13 @@ export const authSlice = createSlice({
 			state.isLoading = false
 			state.user = action.payload.user
 			state.error = ''
+			state.accessToken = action.payload.accessToken
 		},
 		[login.rejected.type]: (state, action: PayloadAction<string>) => {
 			state.isLoading = false
 			state.user = null
 			state.error = action.payload
+			state.accessToken = ''
 		},
 		[logout.pending.type]: state => {
 			state.isLoading = true
@@ -49,6 +53,7 @@ export const authSlice = createSlice({
 			state.isLoading = false
 			state.user = null
 			state.error = ''
+			state.accessToken = ''
 		},
 		[logout.rejected.type]: (state, action: PayloadAction<string>) => {
 			state.isLoading = false
@@ -61,11 +66,13 @@ export const authSlice = createSlice({
 			state.isLoading = false
 			state.user = action.payload.user
 			state.error = ''
+			state.accessToken = action.payload.accessToken
 		},
 		[checkAuth.rejected.type]: (state, action: PayloadAction<string>) => {
 			state.isLoading = false
 			state.user = null
 			state.error = action.payload
+			state.accessToken = ''
 		}
 	}
 })

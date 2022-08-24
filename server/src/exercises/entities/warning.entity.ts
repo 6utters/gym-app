@@ -7,6 +7,8 @@ export class Warning extends Base {
 	@Column({ type: 'text' })
 	warning: string
 
-	@ManyToOne(() => Exercise, exercise => exercise.warnings)
+	@ManyToOne(() => Exercise, exercise => exercise.warnings, {
+		onDelete: 'CASCADE',
+	})
 	exercise: Exercise
 }
