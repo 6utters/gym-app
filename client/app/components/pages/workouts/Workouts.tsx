@@ -2,21 +2,22 @@ import { FC } from 'react'
 import styles from './Workouts.module.scss'
 import { workoutsApi } from '@/store/api/workouts.api'
 
-const image =
-	'https://img.freepik.com/free-photo/beautiful-woman-leggings-bright-sweatshirt-is-smiling-posing-with-purple-mat-fitball_197531-16648.jpg?w=1060&t=st=1660731458~exp=1660732058~hmac=e41ec82485bcd38b96b0a2f9d2983dbd47f944242c0547be9bf0960a087bdf3c'
-
 const Workouts: FC = () => {
 	const { data: workouts } = workoutsApi.useGetWorkoutsQuery()
 	return (
 		<div className={styles.container}>
+			{workouts && <h1>Select a workout</h1>}
 			{workouts?.length ? (
 				workouts.map(workout => (
 					<>
-						<h1>Select a workout</h1>
 						<div
 							className={styles.card}
 							key={workout.id}
-							style={{ backgroundImage: `url(${image})` }}
+							style={{
+								backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.4)), url(${
+									process.env.APP_SERVER_URL + workout.image_path
+								})`
+							}}
 						>
 							<h2>{workout.name}</h2>
 						</div>

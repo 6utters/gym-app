@@ -1,9 +1,18 @@
 import { FC } from 'react'
-import styles from '@/pages/programCreation/muscleGroupsModal/exercisesModal/ExercisesModal.module.scss'
-import { IoArrowForwardOutline, IoWarning } from 'react-icons/io5'
+import styles from './ExerciseInfo.module.scss'
+import {
+	IoAddCircleOutline,
+	IoArrowForwardOutline,
+	IoWarning
+} from 'react-icons/io5'
 import { exercisesApi } from '@/store/api/exercises.api'
-import Image from 'next/image'
 import { filterText } from '@/utils/string/filterText'
+import { programSlice } from '@/store/program/program.slice'
+import { useDispatch } from 'react-redux'
+import { useTypedSelector } from '@/hooks/useTypedSelector'
+import cn from 'classnames'
+
+//TODO: video design
 
 interface IExerciseInfoProps {
 	setShowExerciseInfo: (show: boolean) => void
@@ -14,8 +23,19 @@ const ExerciseInfo: FC<IExerciseInfoProps> = ({
 	setShowExerciseInfo,
 	exerciseId
 }) => {
+	const { exerciseIds } = useTypedSelector(state => state.program)
+	const dispatch = useDispatch()
+	const { addExercise } = programSlice.actions
 	const { data: exerciseInfo } =
 		exercisesApi.useGetExerciseByIdQuery(exerciseId)
+
+	const addExerciseToProgram = (id: number) => {
+		dispatch(addExercise(id))
+		setShowExerciseInfo(false)
+	}
+
+	const disabled = exerciseIds.some(id => id === exerciseId)
+
 	return (
 		<div className={styles.content}>
 			{exerciseInfo && (
@@ -29,18 +49,28 @@ const ExerciseInfo: FC<IExerciseInfoProps> = ({
 								? filterText(exerciseInfo.name, 24)
 								: exerciseInfo.name}
 						</h1>
+						<button
+							disabled={disabled}
+							type={'button'}
+							onClick={() => addExerciseToProgram(exerciseInfo.id)}
+							className={cn({
+								[styles.disabled]: disabled
+							})}
+						>
+							<IoAddCircleOutline className={styles.add} />
+						</button>
 					</div>
 					<div className={styles.main}>
-						<div className={styles.video}>
-							{exerciseInfo && (
-								<Image
-									src={process.env.APP_SERVER_URL + exerciseInfo.videoPath}
-									alt="exercise_gif"
-									layout="fill"
-									objectFit="cover"
-								/>
-							)}
-						</div>
+						{/*<div className={styles.video}>*/}
+						{/*	{exerciseInfo && (*/}
+						{/*		<Image*/}
+						{/*			src={process.env.APP_SERVER_URL + exerciseInfo.videoPath}*/}
+						{/*			alt="exercise_gif"*/}
+						{/*			layout="fill"*/}
+						{/*			objectFit="cover"*/}
+						{/*		/>*/}
+						{/*	)}*/}
+						{/*</div>*/}
 						<div className={styles.main__info}>
 							<h1>{exerciseInfo.name}</h1>
 							<p>{exerciseInfo.description}</p>

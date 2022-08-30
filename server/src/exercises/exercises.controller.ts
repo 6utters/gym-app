@@ -7,6 +7,7 @@ import {
 	Param,
 	Patch,
 	Post,
+	Query,
 	UploadedFiles,
 	UseInterceptors,
 } from '@nestjs/common'
@@ -45,9 +46,14 @@ export class ExercisesController {
 	}
 
 	@Get()
-	findAll() {
-		return this.exercisesService.findAll()
+	findByIds(@Query('ids') ids: number[]) {
+		return this.exercisesService.findByIds(ids)
 	}
+
+	// @Get()
+	// findAll() {
+	// 	return this.exercisesService.findAll()
+	// }
 
 	@Get('ex/:id')
 	findOne(@Param('id') id: number) {

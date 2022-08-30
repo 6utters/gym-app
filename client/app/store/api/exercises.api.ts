@@ -9,6 +9,15 @@ export const exercisesApi = api.injectEndpoints({
 		}),
 		getExerciseById: builder.query<IExercise, number>({
 			query: exerciseId => `/exercises/ex/${exerciseId}`
+		}),
+		getAll: builder.query<IExercise[], number[]>({
+			query: ids => {
+				const query = ids.map(id => `ids=${id}&`).join('')
+				return {
+					url: `/exercises?${query}`
+				}
+			},
+			providesTags: () => [{ type: 'ProgramExercises' }]
 		})
 	})
 })

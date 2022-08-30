@@ -7,7 +7,6 @@ import {
 	Param,
 	Patch,
 	Post,
-	Query,
 	UploadedFile,
 	UseGuards,
 	UseInterceptors,
@@ -31,9 +30,8 @@ export class ProgramsController {
 		@CurrentUser('id') id: string,
 		@Body() createProgramDto: CreateProgramDto,
 		@UploadedFile() image: Express.Multer.File,
-		@Query('folder') folder?: string,
 	) {
-		return this.programsService.create(createProgramDto, +id, image, folder)
+		return this.programsService.create(createProgramDto, +id, image)
 	}
 
 	@Get()

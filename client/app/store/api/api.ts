@@ -5,7 +5,7 @@ import { IUser } from '../../types/user.interface'
 
 export const api = createApi({
 	reducerPath: 'api',
-	tagTypes: ['Program', 'MuscleGroup', 'Exercise', 'User'],
+	tagTypes: ['Program', 'MuscleGroup', 'Exercise', 'User', 'ProgramExercises'],
 	baseQuery: fetchBaseQuery({
 		baseUrl: API_URL,
 		prepareHeaders: (headers, { getState }) => {

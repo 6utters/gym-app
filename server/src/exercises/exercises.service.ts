@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common'
 import { CreateExerciseDto } from './dto/create-exercise.dto'
 import { InjectRepository } from '@nestjs/typeorm'
-import { Repository } from 'typeorm'
+import { In, Repository } from 'typeorm'
 import { Exercise } from './entities/exercise.entity'
 import { Warning } from './entities/warning.entity'
 import { Instruction } from './entities/instruction.entity'
@@ -55,6 +55,20 @@ export class ExercisesService {
 			where: { group: { id: groupId } },
 			relations: { warnings: true, instructions: true },
 		})
+	}
+
+	async findByIds(ids: number[]) {
+		if (ids) {
+			return await this.exercisesRepository.find({
+				where: { id: In(ids) },
+				relations: {
+					group: true,
+					warnings: true,
+					instructions: true,
+					objectives: true,
+				},
+			})
+		}
 	}
 
 	async findAll() {

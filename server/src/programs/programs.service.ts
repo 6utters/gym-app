@@ -19,16 +19,16 @@ export class ProgramsService {
 		dto: CreateProgramDto,
 		userId: number,
 		file: Express.Multer.File,
-		folder = 'default',
 	) {
-		const thumbnail = await this.filesService.saveMedia(file, folder)
+		const thumbnail = await this.filesService.saveMedia(file, 'program')
 		const program = await this.programsRepository.create({
 			name: dto.name,
 			userId,
 			image_path: thumbnail.url,
 		})
+		const exerciseArray = JSON.parse(dto.exerciseIds)
 		program.exercises = await this.exercisesRepository.find({
-			where: { id: In(dto.exerciseIds) },
+			where: { id: In(exerciseArray) },
 		})
 		return await this.programsRepository.save(program)
 	}
