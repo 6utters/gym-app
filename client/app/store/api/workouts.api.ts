@@ -14,6 +14,13 @@ export const workoutsApi = api.injectEndpoints({
 				body
 			}),
 			invalidatesTags: () => [{ type: 'Program' }]
+		}),
+		deleteWorkout: builder.mutation<void, number>({
+			query: id => ({
+				url: `programs/${id}`,
+				method: 'DELETE'
+			}),
+			invalidatesTags: () => [{ type: 'Program' }]
 		})
 	})
 })

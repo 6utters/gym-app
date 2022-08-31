@@ -18,7 +18,10 @@ import { useRouter } from 'next/router'
 
 const ProgramCreation: FC = () => {
 	const router = useRouter()
-	const ids = localStorage.getItem('ex_ids')
+	const ids =
+		typeof window !== 'undefined' && localStorage.getItem('ex_ids')
+			? JSON.parse(localStorage.getItem('ex_ids') || '')
+			: []
 	const {
 		register,
 		handleSubmit,
