@@ -13,12 +13,8 @@ export class GroupsService {
 		private readonly groupsRepository: Repository<Group>,
 		private filesService: FilesService,
 	) {}
-	async create(
-		dto: CreateGroupDto,
-		file: Express.Multer.File,
-		folder = 'default',
-	) {
-		const thumbnail = await this.filesService.saveMedia(file, folder)
+	async create(dto: CreateGroupDto, file: Express.Multer.File) {
+		const thumbnail = await this.filesService.saveMedia(file, 'muscle-groups')
 		const groupDto = { ...dto, thumbnailPath: thumbnail.url }
 		return this.groupsRepository.save(groupDto)
 	}

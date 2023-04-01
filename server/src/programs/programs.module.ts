@@ -5,9 +5,14 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 import { Exercise } from '../exercises/entities/exercise.entity'
 import { Program } from './entities/program.entity'
 import { AuthModule } from '../auth/auth.module'
+import { FilesModule } from '../files/files.module'
 
 @Module({
-	imports: [TypeOrmModule.forFeature([Program, Exercise]), AuthModule],
+	imports: [
+		TypeOrmModule.forFeature([Program, Exercise]),
+		AuthModule,
+		FilesModule,
+	],
 	controllers: [ProgramsController],
 	providers: [ProgramsService],
 })

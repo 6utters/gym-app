@@ -1,0 +1,25 @@
+.wrapper {
+	@apply absolute bottom-0 left-0 right-0 w-full bg-white z-3 rounded-t-xl overflow-y-hidden;
+	height: 95vh;
+
+	.exercises_enter {
+		transform: translateX(100%);
+	}
+
+	.exercises_enter_active {
+		transform: translateX(0);
+		display: block;
+		transition: transform 250ms;
+	}
+
+	.exercises_exit {
+		transform: translateX(0);
+		display: block;
+	}
+
+	.exercises_exit_active {
+		transform: translateX(100%);
+		display: block;
+		transition: transform 250ms;
+	}
+}

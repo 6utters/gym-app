@@ -1,0 +1,16 @@
+.card {
+	@apply flex justify-start rounded items-end mb-2 h-[6.5rem];
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+
+	h2 {
+		@apply text-white text-lg font-semibold text-shadow my-2 mx-4;
+	}
+
+	&:hover {
+		-webkit-filter: brightness(0.8);
+		filter: brightness(0.8);
+		cursor: pointer;
+	}
+}

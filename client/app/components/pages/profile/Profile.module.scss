@@ -1,0 +1,25 @@
+.wrapper {
+	@apply relative;
+	.profile {
+		@apply flex-center-between h-[3.25em] text-gray-700;
+
+		.user {
+			@apply flex items-center;
+
+			&__icon {
+				@apply text-[1.5em];
+			}
+
+			p {
+				@apply mx-2;
+			}
+		}
+		.exit {
+			@apply text-[1.5em] cursor-pointer;
+
+			&:hover {
+				@apply text-black;
+			}
+		}
+	}
+}
