@@ -1,5 +1,5 @@
-import Layout from '@/components/layout/Layout'
-import { NextPageAuth } from '../../app/types/auth.types'
+import Layout from '@/shared/ui/layout/Layout'
+import { NextPageAuth } from '../../src/types/auth.types'
 import ProgramCreation from '@/pages/programCreation/ProgramCreation'
 
 const ProgramCreationPage: NextPageAuth = () => {

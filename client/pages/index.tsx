@@ -1,5 +1,5 @@
 import Home from '@/pages/home/Home'
-import { NextPageAuth } from '../app/types/auth.types'
+import { NextPageAuth } from '../src/types/auth.types'
 
 const HomePage: NextPageAuth = () => {
 	return <Home />

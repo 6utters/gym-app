@@ -1,7 +1,7 @@
-import { NextPageAuth } from '../app/types/auth.types'
-import Layout from '@/components/layout/Layout'
+import { NextPageAuth } from '../src/types/auth.types'
+import Layout from '@/shared/ui/layout/Layout'
 import Workouts from '@/pages/workouts/Workouts'
-import Meta from '@/utils/meta/Meta'
+import Meta from '@/shared/lib/utils/meta/Meta'
 
 const WorkoutsPage: NextPageAuth = () => {
 	return (
