@@ -1,0 +1,43 @@
+.container {
+	@apply relative pt-2;
+
+	h1 {
+		@apply text-[1em] uppercase font-medium text-gray-600 block;
+	}
+
+	.card {
+		@apply relative h-[6em] rounded-xl my-1 shadow border border-white flex items-end p-2 overflow-hidden;
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: 45% 20%;
+
+		> h2 {
+			@apply text-white text-shadow;
+		}
+
+		> .icon {
+			@apply absolute top-1 right-1 text-lg text-gray-200 cursor-pointer z-2;
+			transition: color 300ms;
+
+			&:hover {
+				@apply text-blue-600;
+			}
+		}
+	}
+
+	.wrapper {
+		@apply w-full flex items-center justify-center px-[4em];
+		height: 80vh;
+
+		.content {
+			@apply text-white text-center flex-col rounded-xl items-center p-2 shadow;
+			background: #b2bbc0;
+			h3 {
+				@apply text-lg mb-3;
+			}
+			p {
+				@apply text-sm font-light;
+			}
+		}
+	}
+}

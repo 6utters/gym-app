@@ -25,7 +25,7 @@ export class User extends Base {
 	@Column({ unique: true })
 	userName: string
 
-	@OneToMany(() => Program, program => program.userId)
+	@OneToMany(() => Program, program => program.userId, { onDelete: 'CASCADE' })
 	programs: Program[]
 
 	@OneToOne(() => User_info, user_info => user_info.userId)

@@ -1,0 +1,108 @@
+.content {
+	@apply w-full h-full;
+
+	.main {
+		@apply h-full px-6 overflow-y-scroll pb-16;
+
+		.video {
+			@apply relative;
+			height: 35%;
+			img {
+				@apply rounded;
+			}
+		}
+
+		.instructions {
+			@apply flex flex-col;
+			> h3 {
+				@apply text-gray-600  text-lg font-semibold;
+			}
+
+			&__card {
+				@apply flex w-full bg-gray-200 rounded-xl my-2 p-2;
+				h4 {
+					@apply m-2 font-semibold;
+					width: 15%;
+				}
+
+				> p {
+					@apply text-sm text-gray-700;
+				}
+			}
+		}
+
+		.warnings {
+			> h3 {
+				@apply flex items-center text-red-600 text-lg font-semibold uppercase my-2;
+			}
+
+			ul {
+				li {
+					@apply mb-2 bg-red-100 rounded-xl p-2 shadow;
+
+					p {
+						@apply text-gray-600 text-sm;
+					}
+				}
+			}
+		}
+
+		&__info {
+			> h1 {
+				@apply text-lg font-medium text-black my-2;
+			}
+
+			> p {
+				@apply text-gray-500 mb-3;
+			}
+		}
+	}
+
+	.header {
+		@apply relative h-[2.5em] w-full text-2lg flex items-center justify-center;
+
+		.add,
+		.cross {
+			@apply absolute text-gray-500;
+			top: 34%;
+
+			&:hover {
+				@apply text-blue-700;
+			}
+		}
+
+		.disabled {
+			display: none;
+		}
+
+		.cross {
+			@apply right-4;
+		}
+
+		.add {
+			@apply left-4;
+		}
+	}
+
+	.exercises {
+		@apply w-full overflow-y-scroll;
+		height: 90%;
+
+		&__card {
+			@apply flex justify-start rounded items-end mb-2 h-[6.5rem];
+			background-repeat: no-repeat;
+			background-position: center;
+			background-size: cover;
+
+			h2 {
+				@apply text-white text-lg font-semibold text-shadow my-2 mx-4;
+			}
+
+			&:hover {
+				-webkit-filter: brightness(0.8);
+				filter: brightness(0.8);
+				cursor: pointer;
+			}
+		}
+	}
+}

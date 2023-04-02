@@ -7,6 +7,7 @@ import {
 	Param,
 	Patch,
 	Post,
+	Query,
 	UploadedFiles,
 	UseInterceptors,
 } from '@nestjs/common'
@@ -39,14 +40,24 @@ export class ExercisesController {
 		)
 	}
 
-	@Get()
-	findAll() {
-		return this.exercisesService.findAll()
+	@Get(':id')
+	findByMuscleGroup(@Param('id') id: number) {
+		return this.exercisesService.findByGroup(id)
 	}
 
-	@Get(':id')
-	findOne(@Param('id') id: string) {
-		return this.exercisesService.findOne(+id)
+	@Get()
+	findByIds(@Query('ids') ids: number[]) {
+		return this.exercisesService.findByIds(ids)
+	}
+
+	// @Get()
+	// findAll() {
+	// 	return this.exercisesService.findAll()
+	// }
+
+	@Get('ex/:id')
+	findOne(@Param('id') id: number) {
+		return this.exercisesService.findOne(id)
 	}
 
 	@Patch('update')
