@@ -1,7 +1,7 @@
-import { api } from '@/app/store/api/api'
 import { IExercise } from '../../../types/exercise.interface'
+import { $rtkApi } from '@/shared/api'
 
-export const exercisesApi = api.injectEndpoints({
+export const exercisesApi = $rtkApi.injectEndpoints({
 	endpoints: builder => ({
 		getExercisesByMuscleGroup: builder.query<IExercise[], number>({
 			query: groupId => `/exercises/${groupId}`,

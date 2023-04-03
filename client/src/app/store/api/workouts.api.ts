@@ -1,7 +1,7 @@
-import { api } from '@/app/store/api/api'
 import { IProgram } from '../../../types/program.interface'
+import { $rtkApi } from '@/shared/api'
 
-export const workoutsApi = api.injectEndpoints({
+export const workoutsApi = $rtkApi.injectEndpoints({
 	endpoints: builder => ({
 		getWorkouts: builder.query<IProgram[], void>({
 			query: () => 'programs/from/user',

@@ -1,4 +1,4 @@
-import { axiosClassic } from '../../../shared/api/axios'
+import { axiosClassic } from '../../../shared/api/axiosApi'
 import {
 	removeTokensFromStorage,
 	saveToStorage

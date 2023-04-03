@@ -6,17 +6,18 @@ import { removeTokensFromStorage } from '@/features/services/auth/auth.helper'
 
 export const API_URL = `${process.env.APP_SERVER_URL}/api`
 
-export const axiosClassic = axios.create({
+export const $apiClassic = axios.create({
 	baseURL: API_URL,
 	headers: getContentType()
 })
 
-export const instance = axios.create({
+export const $api = axios.create({
 	baseURL: API_URL,
-	headers: getContentType()
+	headers: getContentType(),
+	withCredentials: true
 })
 
-instance.interceptors.request.use(config => {
+$api.interceptors.request.use(config => {
 	const accessToken = Cookies.get('accessToken')
 	if (config.headers && accessToken) {
 		config.headers.Authorization = `Bearer ${accessToken}`
@@ -24,7 +25,7 @@ instance.interceptors.request.use(config => {
 	return config
 })
 
-instance.interceptors.request.use(
+$api.interceptors.request.use(
 	config => config,
 	async error => {
 		const originalRequest = error.config
@@ -39,7 +40,7 @@ instance.interceptors.request.use(
 			originalRequest._isRetry = true
 			try {
 				await AuthService.check()
-				return instance.request(originalRequest)
+				return $api.request(originalRequest)
 			} catch (e) {
 				if (errorCatch(e) === 'jwt expired') removeTokensFromStorage()
 			}
@@ -48,5 +49,3 @@ instance.interceptors.request.use(
 		throw error
 	}
 )
-
-export default instance
