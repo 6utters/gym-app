@@ -2,9 +2,10 @@ import { FC, PropsWithChildren } from 'react'
 import { ISeo } from '@/shared/lib/utils/meta/meta.interface'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
-import { appName, titleMerge } from '../../../config/seo.config'
 import { filterText } from '@/shared/lib/utils/string/filterText'
 import logoSvg from '@/shared/assets/svgs/logos/app-logo.svg'
+import { mergeSeoTitle } from '@/shared/lib/seo'
+import { APP_NAME } from '@/shared/consts'
 
 //TODO: fix image problem
 
@@ -19,7 +20,7 @@ const Meta: FC<PropsWithChildren<ISeo>> = ({
 	return (
 		<>
 			<Head>
-				<title itemProp="headline">{titleMerge(title)}</title>
+				<title itemProp="headline">{mergeSeoTitle(title)}</title>
 				{description ? (
 					<>
 						<meta
@@ -29,10 +30,10 @@ const Meta: FC<PropsWithChildren<ISeo>> = ({
 						/>
 						<link rel="canonical" href={currentUrl} />
 						<meta property={'og:locale'} content={'en'} />
-						<meta property={'og:title'} content={titleMerge(title)} />
+						<meta property={'og:title'} content={mergeSeoTitle(title)} />
 						<meta property={'og:url'} content={currentUrl} />
 						<meta property={'og:image'} content={image || logoSvg} />
-						<meta property={'og:site_name'} content={appName} />
+						<meta property={'og:site_name'} content={APP_NAME} />
 						<meta
 							property={'og:description'}
 							content={filterText(description, 197)}

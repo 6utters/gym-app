@@ -1,14 +1,14 @@
-import { FC } from 'react'
 import styles from './Home.module.scss'
-import Logo from '@/shared/ui/logo/Logo'
 import AppPeculiarities from '@/pages/home/appPeculiarities/AppPeculiarities'
 import AuthHomeButtons from '@/pages/home/authHomeButtons/AuthHomeButtons'
+import Logo, { LogoSize } from '@/shared/ui/logo/Logo'
+import { FC } from 'react'
 
 const Home: FC = () => {
 	return (
 		<div className={styles.container}>
 			<div className={styles.content}>
-				<Logo length={100} />
+				<Logo size={LogoSize.L} />
 				<AppPeculiarities />
 				<AuthHomeButtons />
 			</div>

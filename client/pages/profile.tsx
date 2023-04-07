@@ -1,8 +1,8 @@
-import { NextPageAuth } from '../src/types/auth.types'
-import Layout from '@/shared/ui/layout/Layout'
+import { NextPageWithRoles } from '@/app/providers/authProvider'
 import Profile from '@/pages/profile/Profile'
+import Layout from '@/shared/ui/layout/Layout'
 
-const ProfilePage: NextPageAuth = () => {
+const ProfilePage: NextPageWithRoles = () => {
 	return (
 		<Layout title={'Profile'}>
 			<Profile />
@@ -10,6 +10,6 @@ const ProfilePage: NextPageAuth = () => {
 	)
 }
 
-ProfilePage.isOnlyUser = true
+ProfilePage.isOnlyForUser = true
 
 export default ProfilePage

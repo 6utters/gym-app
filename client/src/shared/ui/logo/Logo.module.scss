@@ -1,7 +1,7 @@
 .logo {
-	@apply relative max-w-4xl flex justify-center;
+	@apply relative flex justify-center mx-auto;
 
-	&__svg {
+	img {
 		@apply w-full h-full;
 	}
 
@@ -10,4 +10,20 @@
 		bottom: 17%;
 		font-size: 80%;
 	}
+}
+
+.size_s {
+	@apply w-[4rem] h-[4rem];
+}
+
+.size_m {
+	@apply w-[6rem] h-[6rem];
+}
+
+.size_l {
+	@apply w-[8rem] h-[8rem];
+}
+
+.size_xl {
+	@apply w-[10rem] h-[10rem];
 }

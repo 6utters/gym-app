@@ -1,7 +1,22 @@
 .button {
-	@apply h-[3.25em] w-full max-w-[24em] bg-white rounded-xl font-medium shadow m-1;
+	@apply w-full max-w-[24em] rounded-xl font-medium shadow m-1 text-white;
+	background-color: #2e4594 !important;
 
 	&:hover {
 		@apply animate-lift;
 	}
 }
+
+.size_m {
+	@apply h-[3.25em];
+}
+
+.size_l {
+	@apply h-[4.25em];
+}
+
+.size_xl {
+	@apply h-[5.25em];
+}
+
+

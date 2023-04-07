@@ -1,11 +1,10 @@
 import type { AppProps } from 'next/app'
+import { AuthProvider, ComponentAuthFields } from '@/app/providers/authProvider'
+import { StoreProvider } from '@/app/providers/storeProvider'
 
 import '../src/app/styles/globals.scss'
-import AuthProvider from '@/app/providers/auth/Auth.provider'
-import { TypeComponentAuthFields } from '@/types/auth.types'
-import { StoreProvider } from '@/app/providers/storeProvider/ui/StoreProvider'
 
-type TypeAuthProps = AppProps & TypeComponentAuthFields
+type TypeAuthProps = AppProps & ComponentAuthFields
 
 function MyApp({ Component, pageProps }: TypeAuthProps) {
 	return (

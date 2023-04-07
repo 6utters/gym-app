@@ -1,0 +1,34 @@
+.form {
+  @apply p-4 flex flex-col justify-between;
+  height: 93%;
+
+  .input_container {
+    @apply h-full;
+    > .title {
+      @apply mt-8;
+
+      h1 {
+        @apply mb-8 text-center text-2xl font-semibold;
+        color: #223476;
+      }
+    }
+
+    > .inputs {
+      @apply w-full h-[30%];
+
+      .input {
+        @apply mb-[2rem];
+      }
+    }
+  }
+
+  .submit_container {
+    @apply flex flex-col items-center text-gray-500;
+    .policies {
+      @apply text-sm text-center p-4 text-gray-500 font-light;
+      span {
+        @apply text-gray-800 underline cursor-pointer;
+      }
+    }
+  }
+}

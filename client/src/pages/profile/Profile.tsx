@@ -1,31 +1,31 @@
-import { FC } from 'react'
-import { useAuth } from '@/shared/lib/hooks/useAuth'
 import styles from './Profile.module.scss'
-import { IoLogOutOutline, IoPerson } from 'react-icons/io5'
-import { useLogout } from '@/shared/lib/hooks/useLogout'
-import SkeletonLoader from '@/shared/ui/skeletonLoader/skeletonLoader'
-import { api } from '@/app/store/api/api'
+import { getUserAuthData } from '@/entities/User'
+import { FC } from 'react'
+import { IoPerson } from 'react-icons/io5'
+import { useSelector } from 'react-redux'
 
 const Profile: FC = () => {
-	const { user } = useAuth()
-	const { data: userData, isLoading } = api.useGetUserQuery(null, {
-		skip: !user
-	})
-	const { clickHandler } = useLogout()
+	const user = useSelector(getUserAuthData)
+	// const { data: userData, isLoading } = $rtkApi.useGetUserQuery(null, {
+	// 	skip: !user
+	// })
+	// const { clickHandler } = useLogout()
+
+	console.log('user:', user)
 
 	return (
 		<div className={styles.wrapper}>
-			{isLoading ? (
-				<SkeletonLoader count={1} width={165} height={50} />
-			) : (
-				<div className={styles.profile}>
-					<div className={styles.user}>
-						<IoPerson className={styles.user__icon} />
-						<p>{userData?.email}</p>
-					</div>
-					<IoLogOutOutline className={styles.exit} onClick={clickHandler} />
+			{/*{isLoading ? (*/}
+			{/*	<SkeletonLoader count={1} width={165} height={50} />*/}
+			{/*) : (*/}
+			<div className={styles.profile}>
+				<div className={styles.user}>
+					<IoPerson className={styles.user__icon} />
+					{/*<p>{user?.email}</p>*/}
 				</div>
-			)}
+				{/*<IoLogOutOutline className={styles.exit} onClick={clickHandler} />*/}
+			</div>
+			{/*)}*/}
 		</div>
 	)
 }

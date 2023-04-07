@@ -1,9 +1,9 @@
-import { NextPageAuth } from '../src/types/auth.types'
-import Layout from '@/shared/ui/layout/Layout'
+import { NextPageWithRoles } from '@/app/providers/authProvider'
 import Workouts from '@/pages/workouts/Workouts'
 import Meta from '@/shared/lib/utils/meta/Meta'
+import Layout from '@/shared/ui/layout/Layout'
 
-const WorkoutsPage: NextPageAuth = () => {
+const WorkoutsPage: NextPageWithRoles = () => {
 	return (
 		<Meta
 			title={'Workouts Page'}
@@ -16,6 +16,6 @@ const WorkoutsPage: NextPageAuth = () => {
 	)
 }
 
-WorkoutsPage.isOnlyUser = true
+WorkoutsPage.isOnlyForUser = true
 
 export default WorkoutsPage

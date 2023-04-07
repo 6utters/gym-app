@@ -1,8 +1,8 @@
+import { button } from '@/shared'
 import { FC } from 'react'
-import button from '@/shared/ui/button/Button'
 
 const LearnMore: FC = () => {
-	return <button></button>
+	return <button>asdas</button>
 }
 
 export default LearnMore

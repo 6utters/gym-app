@@ -1,8 +1,7 @@
-import axios from 'axios'
+import { logOut, refresh } from '@/features/authByEmail'
 import { errorCatch, getContentType } from '@/shared/lib/utils/api.utils'
+import axios from 'axios'
 import Cookies from 'js-cookie'
-import { AuthService } from '@/features/services/auth/auth.service'
-import { removeTokensFromStorage } from '@/features/services/auth/auth.helper'
 
 export const API_URL = `${process.env.APP_SERVER_URL}/api`
 
@@ -39,10 +38,10 @@ $api.interceptors.request.use(
 		) {
 			originalRequest._isRetry = true
 			try {
-				await AuthService.check()
+				await refresh()
 				return $api.request(originalRequest)
 			} catch (e) {
-				if (errorCatch(e) === 'jwt expired') removeTokensFromStorage()
+				if (errorCatch(e) === 'jwt expired') logOut()
 			}
 		}
 

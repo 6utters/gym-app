@@ -13,15 +13,11 @@ const Navbar: FC = () => {
 			<div className={styles.navbar__panel}>
 				<ul>
 					{navbarLinks.map(link => (
-						<Link href={link.href} key={link.id}>
-							<a
-								className={cn({
-									[styles.active]: asPath === link.href
-								})}
-							>
+						<Link href={link.href} key={link.id}className={cn({
+							[styles.active]: asPath === link.href
+						})}>
 								<link.icon />
 								<p>{link.title}</p>
-							</a>
 						</Link>
 					))}
 				</ul>

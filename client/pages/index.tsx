@@ -1,7 +1,7 @@
+import { NextPageWithRoles } from '@/app/providers/authProvider'
 import Home from '@/pages/home/Home'
-import { NextPageAuth } from '../src/types/auth.types'
 
-const HomePage: NextPageAuth = () => {
+const HomePage: NextPageWithRoles = () => {
 	return <Home />
 }
 

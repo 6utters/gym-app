@@ -1,16 +1,25 @@
-import { forwardRef } from 'react'
-import { IInput } from '@/shared/ui/input/input.interface'
-import cn from 'classnames'
 import styles from './Input.module.scss'
+import cn from 'classnames'
+import { forwardRef, InputHTMLAttributes } from 'react'
+import { FieldError } from 'react-hook-form'
 
-const Input = forwardRef<HTMLInputElement, IInput>(
-	({ placeholder, error, type = 'text', style, ...rest }, ref) => {
+export interface InputProps {
+	error: FieldError | undefined
+	className?: string
+}
+
+type InputPropsField = InputHTMLAttributes<HTMLInputElement> & InputProps
+
+export const Input = forwardRef<HTMLInputElement, InputPropsField>(
+	({ className, error, type = 'text', style, ...rest }, ref) => {
 		return (
-			<div className={cn(styles.common, styles.input)} style={style}>
-				<label>
-					<span>{placeholder}</span>
-					<input ref={ref} type={type} {...rest} />
-				</label>
+			<div
+				className={cn(styles.container, className, {
+					[styles.errorInput]: error
+				})}
+				style={style}
+			>
+				<input ref={ref} type={type} {...rest} />
 				{error && <div className={styles.error}>{error.message}</div>}
 			</div>
 		)
@@ -18,5 +27,3 @@ const Input = forwardRef<HTMLInputElement, IInput>(
 )
 
 Input.displayName = 'Input'
-
-export default Input

@@ -1,10 +1,14 @@
 import { StateSchema, ThunkExtraArg } from './StateSchema'
 import { configureStore, ReducersMapObject } from '@reduxjs/toolkit'
 import { $api, $rtkApi } from '@/shared/api'
+import { userReducer } from '@/entities/User'
+import { authByEmailReducer } from '@/features/authByEmail'
 
 function createReduxStore(initialState?: StateSchema) {
 	const rootReducer: ReducersMapObject<StateSchema> = {
 		[$rtkApi.reducerPath]: $rtkApi.reducer,
+		user: userReducer,
+		authByEmail: authByEmailReducer
 	}
 
 	const extraArgument: ThunkExtraArg = {

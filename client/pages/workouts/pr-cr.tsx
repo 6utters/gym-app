@@ -1,13 +1,15 @@
-import Layout from '@/shared/ui/layout/Layout'
-import { NextPageAuth } from '../../src/types/auth.types'
+import { NextPageWithRoles } from '@/app/providers/authProvider'
 import ProgramCreation from '@/pages/programCreation/ProgramCreation'
+import Layout from '@/shared/ui/layout/Layout'
 
-const ProgramCreationPage: NextPageAuth = () => {
+const ProgramCreationPage: NextPageWithRoles = () => {
 	return (
 		<Layout title={'Create Workout'}>
 			<ProgramCreation />
 		</Layout>
 	)
 }
+
+ProgramCreationPage.isOnlyForUser = true
 
 export default ProgramCreationPage
