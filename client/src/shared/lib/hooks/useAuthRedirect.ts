@@ -1,4 +1,3 @@
-import { useAuth } from './useAuth'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
@@ -8,8 +7,8 @@ export const useAuthRedirect = () => {
 	const user = useSelector(getUserAuthData)
 	const { push } = useRouter()
 
-	// const redirect = String(query.redirect) || '/workouts'
-	const redirect = '/workouts'
+	// const redirect = String(query.redirect) || '/workoutsPage'
+	const redirect = '/workoutsPage'
 
 	useEffect(() => {
 		if (user) push(redirect)

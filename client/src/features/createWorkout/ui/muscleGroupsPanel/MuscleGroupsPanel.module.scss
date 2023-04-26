@@ -1,42 +1,29 @@
-.modal {
-  .modal_header {
-    @apply w-full h-[3rem] flex flex-center-between;
-    z-index: 300!important;
+.muscle_groups_panel {
+  z-index: 30;
 
-    &_btn {
-      @apply w-[1.5rem] h-[1.5rem] text-stone-500 text-lg;
-      svg {
-        @apply w-full h-full;
+    .searchBar {
+      @apply w-full h-[2.5rem] bg-gray-100 rounded-2xl my-5;
+    }
+
+    .buttons {
+      @apply absolute bottom-0 left-0 w-full h-[10%] bg-white flex items-center justify-between p-3;
+      z-index: 32;
+
+      .clear_btn {
+        @apply w-full h-full bg-blue-950;
+
+        &:disabled {
+        @apply opacity-30;
+        }
+      }
+
+      .add_btn {
+        @apply w-full h-full bg-blue-700;
+
+        &:disabled {
+         @apply opacity-30;
+        }
       }
     }
-
-    > .title {
-      @apply text-2xl text-black font-semibold;
-    }
   }
 
-  .searchBar {
-    @apply w-full h-[2.5rem] bg-gray-100 rounded-2xl my-2;
-  }
-}
-
-.exercises_enter {
-  transform: translateX(100%);
-}
-
-.exercises_enter_active {
-  transform: translateX(0);
-  display: block;
-  transition: transform 250ms;
-}
-
-.exercises_exit {
-  transform: translateX(0);
-  display: block;
-}
-
-.exercises_exit_active {
-  transform: translateX(100%);
-  display: block;
-  transition: transform 250ms;
-}

@@ -1,9 +1,9 @@
 import React, { FC, useState } from 'react'
 import styles from './MuscleGroupsModal.module.scss'
-import { muscleGroupsApi } from '@/app/store/api/muscleGroups.api'
-import ExercisesModal from '@/pages/programCreation/muscleGroupsModal/exercisesModal/ExercisesModal'
+import ExercisesModal from '@/pages/programCreationPage/muscleGroupsModal/exercisesModal/ExercisesModal'
 import { CSSTransition } from 'react-transition-group'
 import WorkoutModal from '@/shared/ui/modals/workoutModal/WorkoutModal'
+import { useGetMuscleGroups } from '@/entities/MuscleGroup'
 
 interface IMuscleGroupsModalProps {
 	setShowMuscleGroups: (type: boolean) => void
@@ -15,7 +15,7 @@ const MuscleGroupsModal: FC<IMuscleGroupsModalProps> = ({
 	const [showExercises, setShowExercises] = useState(false)
 	const [selectedMuscleGroupId, setSelectedMuscleGroupId] = useState(0)
 	const [selectedMuscleGroupName, setSelectedMuscleGroupName] = useState('')
-	const { data: muscleGroups } = muscleGroupsApi.useGetMuscleGroupsQuery(null)
+	const { data: muscleGroups } = useGetMuscleGroups()
 
 	const clickHandler = (groupId: number, groupName: string) => {
 		setSelectedMuscleGroupId(groupId)
@@ -45,9 +45,7 @@ const MuscleGroupsModal: FC<IMuscleGroupsModalProps> = ({
 			<WorkoutModal
 				title={'Muscle groups'}
 				type={'muscle_group'}
-				itemsList={muscleGroups}
 				setModal={setShowMuscleGroups}
-				clickHandler={clickHandler}
 			/>
 		</div>
 	)

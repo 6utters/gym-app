@@ -2,6 +2,11 @@ import styles from './Button.module.scss'
 import cn from 'classnames'
 import { ButtonHTMLAttributes, memo, ReactNode } from 'react'
 
+export enum ButtonTheme {
+	CLEAR = 'clear',
+	CLEAR_INVERTED = 'clear_inverted'
+}
+
 export enum ButtonSize {
 	'M' = 'size_m',
 	'L' = 'size_l',
@@ -13,10 +18,12 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	children: ReactNode
 	size?: ButtonSize
 	disabled?: boolean
+	theme?: ButtonTheme
 }
 
 export const Button = memo((props: ButtonProps) => {
 	const {
+		theme = ButtonTheme.CLEAR,
 		className,
 		disabled,
 		children,
@@ -27,7 +34,8 @@ export const Button = memo((props: ButtonProps) => {
 		<button
 			type='button'
 			className={cn(styles.button, className, {
-				[styles[size]]: true
+				[styles[size]]: true,
+				[styles[theme]]: true
 			})}
 			disabled={disabled}
 			{...otherProps}

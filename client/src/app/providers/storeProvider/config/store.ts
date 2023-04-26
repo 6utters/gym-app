@@ -3,12 +3,14 @@ import { configureStore, ReducersMapObject } from '@reduxjs/toolkit'
 import { $api, $rtkApi } from '@/shared/api'
 import { userReducer } from '@/entities/User'
 import { authByEmailReducer } from '@/features/authByEmail'
+import { createWorkoutReducer } from '@/features/createWorkout'
 
 function createReduxStore(initialState?: StateSchema) {
 	const rootReducer: ReducersMapObject<StateSchema> = {
 		[$rtkApi.reducerPath]: $rtkApi.reducer,
 		user: userReducer,
-		authByEmail: authByEmailReducer
+		authByEmail: authByEmailReducer,
+		createWorkout: createWorkoutReducer
 	}
 
 	const extraArgument: ThunkExtraArg = {
@@ -18,10 +20,11 @@ function createReduxStore(initialState?: StateSchema) {
 	return configureStore({
 		reducer: rootReducer,
 		preloadedState: initialState,
-		middleware: getDefaultMiddleware => getDefaultMiddleware({
-			serializableCheck: false,
-			thunk: {extraArgument}
-		}).concat($rtkApi.middleware)
+		middleware: getDefaultMiddleware =>
+			getDefaultMiddleware({
+				serializableCheck: false,
+				thunk: { extraArgument }
+			}).concat($rtkApi.middleware)
 	})
 }
 

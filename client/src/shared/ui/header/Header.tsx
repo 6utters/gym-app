@@ -2,6 +2,7 @@ import styles from './Header.module.scss'
 import { useRouter } from 'next/router'
 import { FC, ReactNode } from 'react'
 import { IoIosArrowBack } from 'react-icons/io'
+import { Button, ButtonTheme } from '@/shared/ui'
 
 interface HeaderProps {
 	title: string
@@ -17,9 +18,13 @@ const Header: FC<HeaderProps> = props => {
 		<header className={styles.header}>
 			{backArrow && (
 				<div className={styles.back_arrow}>
-					<button className={styles.arrow_btn} onClick={router.back}>
+					<Button
+						theme={ButtonTheme.CLEAR}
+						className={styles.arrow_btn}
+						onClick={router.back}
+					>
 						<IoIosArrowBack />
-					</button>
+					</Button>
 				</div>
 			)}
 			<h1 className={styles.title}>{title}</h1>

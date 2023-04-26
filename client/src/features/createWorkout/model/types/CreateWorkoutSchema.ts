@@ -1,5 +1,3 @@
-export interface CreateWorkoutProps {
-	name: string
+export interface CreateWorkoutSchema {
 	exerciseIds: number[]
-	image: string
 }

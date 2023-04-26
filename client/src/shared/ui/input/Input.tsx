@@ -8,7 +8,7 @@ export interface InputProps {
 	className?: string
 }
 
-type InputPropsField = InputHTMLAttributes<HTMLInputElement> & InputProps
+export type InputPropsField = InputHTMLAttributes<HTMLInputElement> & InputProps
 
 export const Input = forwardRef<HTMLInputElement, InputPropsField>(
 	({ className, error, type = 'text', style, ...rest }, ref) => {
@@ -25,5 +25,3 @@ export const Input = forwardRef<HTMLInputElement, InputPropsField>(
 		)
 	}
 )
-
-Input.displayName = 'Input'

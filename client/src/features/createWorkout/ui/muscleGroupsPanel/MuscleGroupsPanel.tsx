@@ -1,98 +1,75 @@
-import React, { FC, useState } from 'react'
-import { Button, ButtonTheme, Modal, ModalDirection } from '@/shared/ui'
-import { IoArrowBackOutline, IoFunnelOutline } from 'react-icons/io5'
+import React, { FC, useCallback } from 'react'
+import { IoFunnelOutline } from 'react-icons/io5'
 import { useGetMuscleGroups } from '@/entities/MuscleGroup'
-import { MuscleGroupList } from '../muscleGroupList/MuscleGroupList'
-import styles from './MuscleGroupsModal.module.scss'
-import { CSSTransition } from 'react-transition-group'
-import { ExerciseList } from '@/entities/Exercise/ui/exerciseList/ExerciseList'
-import { useGetExercisesByMG } from '@/entities/Exercise'
+import { MuscleGroupList } from '../../../../entities/MuscleGroup/ui/muscleGroupList/MuscleGroupList'
+import { Panel } from '@/widgets/panel'
+
+import styles from './MuscleGroupsPanel.module.scss'
+import { Button, ButtonTheme } from '@/shared/ui'
+import { useDispatch, useSelector } from 'react-redux'
+import { getExerciseIds } from '@/features/createWorkout/model/selectors/getExerciseIds/getExerciseIds'
+import { createWorkoutActions } from '@/features/createWorkout'
 
 //todo: searchBar
 
 interface MuscleGroupsModalProps {
-	isOpen: boolean
+	setGroup: (id: number) => void
 	onClose: () => void
-	direction: ModalDirection
-	setMuscleGroup: (value: number) => void
-	muscleGroupId: number
 }
 
-export const MuscleGroupsModal: FC<MuscleGroupsModalProps> = props => {
-	const { onClose, isOpen, direction, setMuscleGroup, muscleGroupId } = props
-
+export const MuscleGroupsPanel: FC<MuscleGroupsModalProps> = props => {
+	const { setGroup, onClose } = props
+	const dispatch = useDispatch()
 	const { data: muscleGroups, error, isLoading } = useGetMuscleGroups()
-	const { data: exercises } = useGetExercisesByMG(muscleGroupId)
-	const [showExercises, setShowExercises] = useState(false)
-	const [showMuscleGroups, setShowMuscleGroups] = useState(true)
+	const exerciseIds = useSelector(getExerciseIds)
 
-	if (isLoading) {
-		//todo: skeletons
-		return <h3>Loading</h3>
-	}
+	const clearHandler = useCallback(() => {
+		dispatch(createWorkoutActions.clearAll())
+		onClose()
+	}, [dispatch])
 
-	if (error) {
-		return <h3>Something went wrong</h3>
-	}
-
-	const onMuscleGroupCLick = (id: number) => {
-		setShowExercises(true)
-		setShowMuscleGroups(false)
-		setMuscleGroup(id)
-	}
+	// if (isLoading) {
+	// 	//todo: skeletons
+	// 	return (
+	// 		<div className={styles.muscle_groups_panel}>
+	// 			<h3>Loading</h3>
+	// 		</div>
+	// 	)
+	// }
+	//
+	// if (error) {
+	// 	return <h3>Something went wrong</h3>
+	// }
 
 	return (
-		<Modal
-			isOpen={isOpen}
+		<Panel
+			className={styles.muscle_groups_panel}
+			title={'Muscle Groups'}
 			onClose={onClose}
-			direction={direction}
-			className={styles.modal}
+			Icon={<IoFunnelOutline />}
 		>
-			<div className={styles.modal_header}>
+			<div className={styles.searchBar}></div>
+			<MuscleGroupList muscleGroups={muscleGroups} onClick={setGroup} />
+			<div className={styles.buttons}>
 				<Button
+					className={styles.clear_btn}
+					type={'button'}
 					theme={ButtonTheme.CLEAR}
-					className={styles.modal_header_btn}
-					onClick={onClose}
+					onClick={clearHandler}
+					disabled={exerciseIds.length === 0}
 				>
-					<IoArrowBackOutline />
+					Clear
 				</Button>
-				<div className={styles.title}>
-					<h2>Muscle Groups</h2>
-				</div>
-				<Button theme={ButtonTheme.CLEAR} className={styles.modal_header_btn}>
-					<IoFunnelOutline />
+				<Button
+					className={styles.add_btn}
+					type={'button'}
+					theme={ButtonTheme.CLEAR}
+					onClick={onClose}
+					disabled={exerciseIds.length === 0}
+				>
+					Add
 				</Button>
 			</div>
-			<div className={styles.searchBar}></div>
-			<CSSTransition
-				in={showMuscleGroups}
-				timeout={300}
-				classNames={{
-					enter: styles.exercises_enter,
-					enterActive: styles.exercises_enter_active,
-					exit: styles.exercises_exit,
-					exitActive: styles.exercises_exit_active
-				}}
-				unmountOnExit
-			>
-				<MuscleGroupList
-					muscleGroups={muscleGroups}
-					onClick={onMuscleGroupCLick}
-				/>
-			</CSSTransition>
-			<CSSTransition
-				in={showExercises}
-				timeout={300}
-				classNames={{
-					enter: styles.exercises_enter,
-					enterActive: styles.exercises_enter_active,
-					exit: styles.exercises_exit,
-					exitActive: styles.exercises_exit_active
-				}}
-				unmountOnExit
-			>
-				<ExerciseList exercises={exercises} />
-			</CSSTransition>
-		</Modal>
+		</Panel>
 	)
 }

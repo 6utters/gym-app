@@ -1,16 +1,10 @@
 import { FC } from 'react'
 import styles from './ExerciseInfo.module.scss'
-import {
-	IoAddCircleOutline,
-	IoArrowForwardOutline,
-	IoWarning
-} from 'react-icons/io5'
-import { exercisesApi } from '@/app/store/api/exercises.api'
+import { IoArrowForwardOutline, IoWarning } from 'react-icons/io5'
 import { filterText } from '@/shared/lib/utils/string/filterText'
 import { programSlice } from '@/app/store/program/program.slice'
 import { useDispatch } from 'react-redux'
-import { useTypedSelector } from '@/shared/lib/hooks/useTypedSelector'
-import cn from 'classnames'
+import { useGetExerciseById } from '@/entities/Exercise'
 
 //TODO: video design
 
@@ -23,18 +17,17 @@ const ExerciseInfo: FC<IExerciseInfoProps> = ({
 	setShowExerciseInfo,
 	exerciseId
 }) => {
-	const { exerciseIds } = useTypedSelector(state => state.program)
+	// const { exerciseIds } = useSelector(get)
 	const dispatch = useDispatch()
 	const { addExercise } = programSlice.actions
-	const { data: exerciseInfo } =
-		exercisesApi.useGetExerciseByIdQuery(exerciseId)
+	const { data: exerciseInfo } = useGetExerciseById(exerciseId)
 
 	const addExerciseToProgram = (id: number) => {
 		dispatch(addExercise(id))
 		setShowExerciseInfo(false)
 	}
 
-	const disabled = exerciseIds.some(id => id === exerciseId)
+	// const disabled = exerciseIds.some(id => id === exerciseId)
 
 	return (
 		<div className={styles.content}>
@@ -49,16 +42,16 @@ const ExerciseInfo: FC<IExerciseInfoProps> = ({
 								? filterText(exerciseInfo.name, 24)
 								: exerciseInfo.name}
 						</h1>
-						<button
-							disabled={disabled}
-							type={'button'}
-							onClick={() => addExerciseToProgram(exerciseInfo.id)}
-							className={cn({
-								[styles.disabled]: disabled
-							})}
-						>
-							<IoAddCircleOutline className={styles.add} />
-						</button>
+						{/*<button*/}
+						{/*	disabled={disabled}*/}
+						{/*	type={'button'}*/}
+						{/*	onClick={() => addExerciseToProgram(exerciseInfo.id)}*/}
+						{/*	className={cn({*/}
+						{/*		[styles.disabled]: disabled*/}
+						{/*	})}*/}
+						{/*>*/}
+						{/*	<IoAddCircleOutline className={styles.add} />*/}
+						{/*</button>*/}
 					</div>
 					<div className={styles.main}>
 						{/*<div className={styles.video}>*/}

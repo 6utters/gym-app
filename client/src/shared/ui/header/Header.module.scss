@@ -2,7 +2,7 @@
 	@apply relative flex items-center justify-center;
 
 	> .back_arrow {
-		@apply absolute top-[50%] left-[0.6rem] w-[2rem] h-[2rem];
+		@apply absolute top-[45%] left-[0.6rem] w-[2rem] h-[2rem];
 		transform: translateY(-50%);
 
 		> .arrow_btn {

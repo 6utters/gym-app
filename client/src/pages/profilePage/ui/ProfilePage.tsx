@@ -7,14 +7,14 @@ import { IoPerson } from 'react-icons/io5'
 import { useSelector } from 'react-redux'
 import { LogOutButton } from '@/features/authByEmail'
 
-import styles from './Profile.module.scss'
+import styles from './ProfilePage.module.scss'
 
-const Profile: FC = () => {
+export const ProfilePage: FC = () => {
 	const user = useSelector(getUserAuthData)
 	const isLoading = useSelector(getAuthByEmailIsLoading)
 
 	return (
-		<Layout title={`Profile`} extraButton={<LogOutButton />}>
+		<Layout title={`ProfilePage`} extraButton={<LogOutButton />}>
 			<div className={styles.wrapper}>
 				{isLoading ? (
 					<SkeletonLoader count={1} width={165} height={50} />
@@ -30,5 +30,3 @@ const Profile: FC = () => {
 		</Layout>
 	)
 }
-
-export default Profile

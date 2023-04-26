@@ -1,15 +1,18 @@
 import { NextPageWithRoles } from '@/app/providers/authProvider'
-import Profile from '@/pages/profile/Profile'
-import Layout from '@/shared/ui/layout/Layout'
+import { Meta } from '@/shared/lib/utils/meta/Meta'
+import { ProfilePage } from '@/pages/profilePage'
 
-const ProfilePage: NextPageWithRoles = () => {
+const Profile: NextPageWithRoles = () => {
 	return (
-		<Layout title={'Profile'}>
-			<Profile />
-		</Layout>
+		<Meta
+			title={'ProfilePage Page'}
+			description={'Your personal Gym App ProfilePage.'}
+		>
+			<ProfilePage />
+		</Meta>
 	)
 }
 
-ProfilePage.isOnlyForUser = true
+Profile.isOnlyForUser = true
 
-export default ProfilePage
+export default Profile

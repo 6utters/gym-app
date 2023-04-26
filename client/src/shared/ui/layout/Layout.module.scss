@@ -1,9 +1,10 @@
-$nav-height: 4.25em;
+$nav-height: 5em;
 $header-height: 3.5em;
 
 .layout {
-	@apply relative;
+	@apply relative h-full overflow-x-hidden overflow-y-hidden;
 	min-height: 100vh;
+	max-height: 100vh;
 
 	> header,
 	> nav {
@@ -14,16 +15,16 @@ $header-height: 3.5em;
 		height: $header-height;
 	}
 	> nav {
-		@apply bottom-0;
+		@apply bottom-0 px-[1rem];
 		height: $nav-height;
-		padding: 0 1em 1em 1em;
 		background: #f0f0f1;
 	}
 
 	&__main {
-		@apply px-[1em];
-		min-height: 90vh;
+		@apply px-[1em] h-full;
+		min-height: 100vh;
 		padding-top: $header-height;
+		padding-bottom: $nav-height;
 		background: #f0f0f1;
 	}
 }

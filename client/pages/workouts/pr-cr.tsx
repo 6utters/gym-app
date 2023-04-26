@@ -1,15 +1,18 @@
 import { NextPageWithRoles } from '@/app/providers/authProvider'
-import ProgramCreation from '@/pages/programCreation/ProgramCreation'
-import Layout from '@/shared/ui/layout/Layout'
+import { Meta } from '@/shared/lib/utils/meta/Meta'
+import { ProgramCreationPage } from '@/pages/programCreationPage'
 
-const ProgramCreationPage: NextPageWithRoles = () => {
+const ProgramCreation: NextPageWithRoles = () => {
 	return (
-		<Layout title={'Create Workout'}>
-			<ProgramCreation />
-		</Layout>
+		<Meta
+			title={'Create Workouts Page'}
+			description={'Creation of a workout program'}
+		>
+			<ProgramCreationPage />
+		</Meta>
 	)
 }
 
-ProgramCreationPage.isOnlyForUser = true
+ProgramCreation.isOnlyForUser = true
 
-export default ProgramCreationPage
+export default ProgramCreation

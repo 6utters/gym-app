@@ -1,25 +1,34 @@
 import { FC } from 'react'
-import { Exercise } from '../../model/types/Exercise'
-import styles from './ExerciseList.module.scss'
-import { ExerciseCard } from '../exerciseCard/ExerciseCard'
+import { MuscleGroupCard } from '../muscleGroupCard/MuscleGroupCard'
+import { MuscleGroup } from '@/entities/MuscleGroup'
+import styles from './MuscleGroupList.module.scss'
 
-interface ExerciseListProps {
-	exercises?: Exercise[]
+interface MuscleGroupListProps {
+	muscleGroups?: MuscleGroup[]
+	onClick: (id: number) => void
 }
 
-export const ExerciseList: FC<ExerciseListProps> = ({ exercises }) => {
-	console.log('exercises:', exercises)
-	if (!exercises || exercises.length === 0)
+export const MuscleGroupList: FC<MuscleGroupListProps> = ({
+	muscleGroups,
+	onClick
+}) => {
+	if (!muscleGroups || muscleGroups.length === 0)
 		return (
 			<div className={styles.no_exercises}>
-				<h3 className={styles.warning}>Please add a new exercise.</h3>
+				<h3 className={styles.warning}>
+					No muscle groups have been added yet.
+				</h3>
 			</div>
 		)
 
 	return (
 		<ul className={styles.exercise_list}>
-			{exercises.map(exercise => (
-				<ExerciseCard key={exercise.id} exercise={exercise} />
+			{muscleGroups.map(muscleGroup => (
+				<MuscleGroupCard
+					key={muscleGroup.id}
+					muscleGroup={muscleGroup}
+					onClick={onClick}
+				/>
 			))}
 		</ul>
 	)

@@ -1,10 +1,18 @@
 import { NextPageWithRoles } from '@/app/providers/authProvider'
-import Home from '@/pages/home/Home'
+import { HomePage } from '@/pages/homePage'
+import { Meta } from '@/shared/lib/utils/meta/Meta'
 
-const HomePage: NextPageWithRoles = () => {
-	return <Home />
+const Home: NextPageWithRoles = () => {
+	return (
+		<Meta
+			title={'Initial Page'}
+			description={'Initial page og the application'}
+		>
+			<HomePage />
+		</Meta>
+	)
 }
 
-HomePage.isNotForUser = true
+Home.isNotForUser = true
 
-export default HomePage
+export default Home

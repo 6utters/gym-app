@@ -11,12 +11,12 @@ const baseQuery = fetchBaseQuery({
 			headers.set('authorization', `Bearer ${accessToken}`)
 		}
 		return headers
-	},
+	}
 })
 
 export const $rtkApi = createApi({
 	reducerPath: 'api',
 	baseQuery,
-	tagTypes: ['Exercise', 'ProgramExercises', 'MuscleGroup', 'Program', ''],
-	endpoints: builder => ({}),
+	tagTypes: ['Exercise', 'ProgramExercises', 'MuscleGroup', 'Program'],
+	endpoints: builder => ({})
 })

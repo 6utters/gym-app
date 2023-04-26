@@ -1,11 +1,11 @@
 import { FC } from 'react'
 import styles from './Navbar.module.scss'
-import { navbarLinks } from '@/shared/ui/layout/navbar/navbar.helper'
+import { navbarLinks } from '@/widgets/navbar/model/consts/navbarLinks'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import cn from 'classnames'
 
-const Navbar: FC = () => {
+export const Navbar: FC = () => {
 	const { asPath } = useRouter()
 
 	return (
@@ -29,5 +29,3 @@ const Navbar: FC = () => {
 		</nav>
 	)
 }
-
-export default Navbar

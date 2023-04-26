@@ -40,7 +40,7 @@ export class ExercisesController {
 		)
 	}
 
-	@Get(':id')
+	@Get('gr/:id')
 	findByMuscleGroup(@Param('id') id: number) {
 		return this.exercisesService.findByGroup(id)
 	}
@@ -55,7 +55,7 @@ export class ExercisesController {
 	// 	return this.exercisesService.findAll()
 	// }
 
-	@Get('ex/:id')
+	@Get(':id')
 	findOne(@Param('id') id: number) {
 		return this.exercisesService.findOne(id)
 	}

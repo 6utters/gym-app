@@ -1,9 +1,9 @@
 import { FC, useState } from 'react'
 import styles from './ExercisesModal.module.scss'
-import { exercisesApi } from '@/app/store/api/exercises.api'
-import ExerciseInfo from '@/pages/programCreation/muscleGroupsModal/exercisesModal/exerciseInfo/ExerciseInfo'
+import ExerciseInfo from '@/pages/programCreationPage/muscleGroupsModal/exercisesModal/exerciseInfo/ExerciseInfo'
 import { CSSTransition } from 'react-transition-group'
 import WorkoutModal from '@/shared/ui/modals/workoutModal/WorkoutModal'
+import { useGetExercisesByMG } from '@/entities/Exercise'
 
 interface IExercisesModalProps {
 	setShow: (show: boolean) => void
@@ -15,8 +15,7 @@ const ExercisesModal: FC<IExercisesModalProps> = ({
 	setShow,
 	muscleGroupId
 }) => {
-	const { data: exercises } =
-		exercisesApi.useGetExercisesByMuscleGroupQuery(muscleGroupId)
+	const { data: exercises } = useGetExercisesByMG(muscleGroupId)
 	const [showExerciseInfo, setShowExerciseInfo] = useState(false)
 	const [selectedExerciseId, setSelectedExerciseId] = useState(0)
 
@@ -43,13 +42,7 @@ const ExercisesModal: FC<IExercisesModalProps> = ({
 					exerciseId={selectedExerciseId}
 				/>
 			</CSSTransition>
-			<WorkoutModal
-				title={'Exercises'}
-				type={'exercises'}
-				itemsList={exercises}
-				setModal={setShow}
-				clickHandler={clickHandler}
-			/>
+			<WorkoutModal title={'Exercises'} type={'exercises'} setModal={setShow} />
 		</div>
 	)
 }

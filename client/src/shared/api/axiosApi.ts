@@ -1,7 +1,6 @@
 import { logOut, refresh } from '@/features/authByEmail'
 import { errorCatch, getContentType } from '@/shared/lib/utils/api.utils'
 import axios from 'axios'
-import Cookies from 'js-cookie'
 
 export const API_URL = `${process.env.APP_SERVER_URL}/api`
 
@@ -17,7 +16,7 @@ export const $api = axios.create({
 })
 
 $api.interceptors.request.use(config => {
-	const accessToken = Cookies.get('accessToken')
+	const accessToken = localStorage.getItem('accessToken')
 	if (config.headers && accessToken) {
 		config.headers.Authorization = `Bearer ${accessToken}`
 	}

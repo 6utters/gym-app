@@ -1,6 +1,7 @@
 .navbar {
+	@apply w-full flex items-center justify-center;
 	&__panel {
-		@apply h-full bg-white rounded-xl shadow flex justify-center;
+		@apply h-[70%] w-full bg-white rounded-xl shadow flex justify-center;
 		ul {
 			@apply h-full flex-center-between mx-auto;
 			width: 60%;

@@ -10,14 +10,14 @@ import {
 	WORKOUTS_ROUTE
 } from '@/shared/consts'
 
-interface INavbarLink {
+interface NavbarLink {
 	id: number
 	title: string
 	href: string
 	icon: IconType
 }
 
-export const navbarLinks: INavbarLink[] = [
+export const navbarLinks: NavbarLink[] = [
 	{ id: 1, title: 'Workouts', href: WORKOUTS_ROUTE, icon: IoBarbellSharp },
 	{
 		id: 2,

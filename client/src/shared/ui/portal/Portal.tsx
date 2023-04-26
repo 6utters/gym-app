@@ -9,7 +9,7 @@ interface PortalProps
 
 const Portal: FC<PortalProps> = ({
 	element = document.body.querySelector('#mainApp')!,
-	children,
+	children
 }) => {
 	return createPortal(children, element)
 }

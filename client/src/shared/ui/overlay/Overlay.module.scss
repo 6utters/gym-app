@@ -1,3 +1,42 @@
-.overlay {
-  @apply fixed w-full h-full bg-overlay flex items-center justify-center cursor-pointer;
+//.overlay {
+//  @apply fixed w-full h-full flex items-center justify-center cursor-pointer;
+//
+//  background: rgba(0, 0, 0, 0.5);
+//}
+
+.overlay_enter {
+  z-index: 20;
+  opacity: 0;
+  @apply absolute bottom-0 left-0 w-full h-screen;
+  background: rgb(0, 0, 0, 0.4);
+}
+
+.overlay_enter_active {
+  z-index: 20;
+  opacity: 1;
+  transition: opacity 175ms;
+}
+
+.overlay_enter_done {
+  z-index: 20;
+  opacity: 1;
+  @apply absolute bottom-0 left-0 w-full h-screen;
+  background: rgb(0, 0, 0, 0.4);
+}
+.overlay_exit {
+  z-index: 20;
+  opacity: 1;
+  @apply absolute bottom-0 left-0 w-full h-screen;
+  background: rgb(0, 0, 0, 0.4);
+}
+
+.overlay_exit_active {
+  opacity: 0;
+  transition: opacity 150ms;
+}
+
+.overlay_exit_done {
+  display: none;
+  @apply absolute bottom-0 left-0 w-full h-screen z-2;
+  background: rgb(0, 0, 0, 0.4);
 }

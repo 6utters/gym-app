@@ -3,7 +3,6 @@ import { getUserAuthData } from '@/entities/User'
 import { logOut, refresh } from '@/features/authByEmail'
 import { ACCESS_TOKEN_LOCAL_STORAGE_KEY } from '@/shared/consts'
 import { useAppDispatch } from '@/shared/lib/hooks'
-import Cookies from 'js-cookie'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { FC, useEffect } from 'react'
@@ -22,12 +21,12 @@ export const AuthProvider: FC<ComponentAuthFields> = ({
 	const { pathname } = useRouter()
 
 	useEffect(() => {
-		const accessToken = Cookies.get(ACCESS_TOKEN_LOCAL_STORAGE_KEY)
+		const accessToken = localStorage.getItem(ACCESS_TOKEN_LOCAL_STORAGE_KEY)
 		if (accessToken) dispatch(refresh())
 	}, [])
 
 	useEffect(() => {
-		const accessToken = Cookies.get(ACCESS_TOKEN_LOCAL_STORAGE_KEY)
+		const accessToken = localStorage.getItem(ACCESS_TOKEN_LOCAL_STORAGE_KEY)
 		if (!accessToken && user) dispatch(logOut())
 	}, [pathname])
 

@@ -10,7 +10,9 @@ function MyApp({ Component, pageProps }: TypeAuthProps) {
 	return (
 		<StoreProvider>
 			<AuthProvider Component={Component}>
-				<Component {...pageProps} />
+				<main id={'mainApp'}>
+					<Component {...pageProps} />
+				</main>
 			</AuthProvider>
 		</StoreProvider>
 	)

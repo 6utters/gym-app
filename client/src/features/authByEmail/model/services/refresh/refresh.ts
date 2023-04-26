@@ -3,7 +3,6 @@ import { ThunkConfig } from '@/app/providers/storeProvider'
 import { userActions } from '@/entities/User'
 import { ACCESS_TOKEN_LOCAL_STORAGE_KEY } from '@/shared/consts'
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import Cookies from 'js-cookie'
 
 export const refresh = createAsyncThunk<
 	AuthByEmailResponse,
@@ -19,7 +18,10 @@ export const refresh = createAsyncThunk<
 			throw new Error()
 		}
 
-		Cookies.set(ACCESS_TOKEN_LOCAL_STORAGE_KEY, response.data.accessToken)
+		localStorage.setItem(
+			ACCESS_TOKEN_LOCAL_STORAGE_KEY,
+			response.data.accessToken
+		)
 		dispatch(userActions.setAuthData(response.data.user))
 
 		return response.data

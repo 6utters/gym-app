@@ -9,9 +9,8 @@ import {
 	SignUpFields
 } from '../../model/services'
 import styles from './AuthForm.module.scss'
-import { WORKOUTS_ROUTE } from '@/shared/consts'
+import { emailPattern, WORKOUTS_ROUTE } from '@/shared/consts'
 import { useAppDispatch } from '@/shared/lib/hooks'
-import { validEmail } from '@/shared/lib/utils/regex.utils'
 import { Button, Input } from '@/shared/ui'
 import Logo from '@/shared/ui/logo/Logo'
 import { useRouter } from 'next/router'
@@ -87,10 +86,11 @@ export const AuthForm: FC<AuthFormProps> = ({ page }) => {
 						{...register('email', {
 							required: 'Email is required',
 							pattern: {
-								value: validEmail,
+								value: emailPattern,
 								message: 'Email should be valid'
 							}
 						})}
+						type={'email'}
 						placeholder={'E-mail'}
 						error={errors.email}
 						className={styles.input}

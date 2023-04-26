@@ -17,10 +17,6 @@ interface LogoProps {
 }
 
 const Logo: FC<LogoProps> = memo(({ size = LogoSize.M, className }) => {
-	console.log('styles.logo', styles.logo)
-	console.log('size:', size)
-	console.log('styles.size_s', styles[size])
-
 	return (
 		<div
 			className={cn(styles.logo, className, {

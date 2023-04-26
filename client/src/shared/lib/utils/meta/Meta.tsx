@@ -9,7 +9,7 @@ import { APP_NAME } from '@/shared/consts'
 
 //TODO: fix image problem
 
-const Meta: FC<PropsWithChildren<ISeo>> = ({
+export const Meta: FC<PropsWithChildren<ISeo>> = ({
 	children,
 	title,
 	description,
@@ -20,7 +20,7 @@ const Meta: FC<PropsWithChildren<ISeo>> = ({
 	return (
 		<>
 			<Head>
-				<title itemProp="headline">{mergeSeoTitle(title)}</title>
+				<title itemProp='headline'>{mergeSeoTitle(title)}</title>
 				{description ? (
 					<>
 						<meta
@@ -28,7 +28,7 @@ const Meta: FC<PropsWithChildren<ISeo>> = ({
 							name={'description'}
 							content={filterText(description, 152)}
 						/>
-						<link rel="canonical" href={currentUrl} />
+						<link rel='canonical' href={currentUrl} />
 						<meta property={'og:locale'} content={'en'} />
 						<meta property={'og:title'} content={mergeSeoTitle(title)} />
 						<meta property={'og:url'} content={currentUrl} />
@@ -40,12 +40,10 @@ const Meta: FC<PropsWithChildren<ISeo>> = ({
 						/>
 					</>
 				) : (
-					<meta name="robots" content="noindex, nofollow" />
+					<meta name='robots' content='noindex, nofollow' />
 				)}
 			</Head>
 			{children}
 		</>
 	)
 }
-
-export default Meta
