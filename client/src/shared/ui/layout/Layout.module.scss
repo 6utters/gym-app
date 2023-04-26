@@ -1,0 +1,30 @@
+$nav-height: 5em;
+$header-height: 3.5em;
+
+.layout {
+	@apply relative h-full overflow-x-hidden overflow-y-hidden;
+	min-height: 100vh;
+	max-height: 100vh;
+
+	> header,
+	> nav {
+		@apply fixed left-0 right-0 z-1;
+	}
+	> header {
+		@apply top-0 bg-white shadow;
+		height: $header-height;
+	}
+	> nav {
+		@apply bottom-0 px-[1rem];
+		height: $nav-height;
+		background: #f0f0f1;
+	}
+
+	&__main {
+		@apply px-[1em] h-full;
+		min-height: 100vh;
+		padding-top: $header-height;
+		padding-bottom: $nav-height;
+		background: #f0f0f1;
+	}
+}

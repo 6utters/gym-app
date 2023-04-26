@@ -1,20 +1,20 @@
 import type { AppProps } from 'next/app'
+import { AuthProvider, ComponentAuthFields } from '@/app/providers/authProvider'
+import { StoreProvider } from '@/app/providers/storeProvider'
 
-import '../styles/globals.scss'
-import { Provider } from 'react-redux'
-import { store } from '@/store/store'
-import AuthProvider from '@/providers/auth/Auth.provider'
-import { TypeComponentAuthFields } from '../app/types/auth.types'
+import '../src/app/styles/globals.scss'
 
-type TypeAuthProps = AppProps & TypeComponentAuthFields
+type TypeAuthProps = AppProps & ComponentAuthFields
 
 function MyApp({ Component, pageProps }: TypeAuthProps) {
 	return (
-		<Provider store={store}>
+		<StoreProvider>
 			<AuthProvider Component={Component}>
-				<Component {...pageProps} />
+				<main id={'mainApp'}>
+					<Component {...pageProps} />
+				</main>
 			</AuthProvider>
-		</Provider>
+		</StoreProvider>
 	)
 }
 

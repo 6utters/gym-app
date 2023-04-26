@@ -1,0 +1,7 @@
+.log_out_btn {
+    @apply w-full h-full flex items-center justify-center;
+
+    > svg {
+      @apply w-[80%] h-[80%] text-gray-500;
+    }
+}

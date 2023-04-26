@@ -1,21 +1,18 @@
-import { NextPageAuth } from '../app/types/auth.types'
-import Layout from '@/components/layout/Layout'
-import Workouts from '@/pages/workouts/Workouts'
-import Meta from '@/utils/meta/Meta'
+import { NextPageWithRoles } from '@/app/providers/authProvider'
+import { Meta } from '@/shared/lib/utils/meta/Meta'
+import { WorkoutsPage } from '@/pages/workoutsPage'
 
-const WorkoutsPage: NextPageAuth = () => {
+const Workouts: NextPageWithRoles = () => {
 	return (
 		<Meta
 			title={'Workouts Page'}
-			description={'All your custom workout programs are gathered here.'}
+			description={'All of your custom workout programs are gathered here.'}
 		>
-			<Layout title={'Workouts'}>
-				<Workouts />
-			</Layout>
+			<WorkoutsPage />
 		</Meta>
 	)
 }
 
-WorkoutsPage.isOnlyUser = true
+Workouts.isOnlyForUser = true
 
-export default WorkoutsPage
+export default Workouts

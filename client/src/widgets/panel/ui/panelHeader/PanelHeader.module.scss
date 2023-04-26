@@ -1,0 +1,14 @@
+.header {
+  @apply w-full h-[2rem] flex flex-center-between mb-2;
+
+  &_btn {
+    @apply w-[1.5rem] h-[1.5rem] text-stone-500 text-lg;
+    svg {
+      @apply w-full h-full;
+    }
+  }
+
+  > .title {
+    @apply text-2xl text-black font-semibold;
+  }
+}

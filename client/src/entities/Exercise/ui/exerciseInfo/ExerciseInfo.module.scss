@@ -1,0 +1,57 @@
+.exercise_info {
+  @apply h-full px-3 py-4 overflow-y-scroll pb-16;
+
+  .video {
+    @apply relative w-full h-auto;
+
+    > img {
+      width: 100%;
+    }
+  }
+
+  .main_info {
+    > h1 {
+      @apply text-xl font-semibold text-black my-2;
+    }
+
+    > p {
+      @apply text-gray-500 mb-3;
+    }
+  }
+
+  .instructions {
+    @apply flex flex-col;
+    > h3 {
+      @apply text-gray-600  text-lg font-semibold;
+    }
+
+    &__card {
+      @apply flex w-full bg-gray-200 rounded-xl my-2 p-2;
+      h4 {
+        @apply m-2 font-semibold;
+        width: 15%;
+      }
+
+      > p {
+        @apply text-sm text-gray-700;
+      }
+    }
+  }
+
+  .warnings {
+    > h3 {
+      @apply flex items-center text-red-600 text-lg font-semibold uppercase my-2;
+    }
+
+    ul {
+      li {
+        @apply mb-2 bg-red-100 rounded-xl p-2 shadow;
+
+        p {
+          @apply text-gray-600 text-sm;
+        }
+      }
+    }
+  }
+}
+

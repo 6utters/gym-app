@@ -1,0 +1,62 @@
+.modal {
+  @apply fixed top-0 left-0 right-0 bottom-0 opacity-100 text-gray-400 flex items-end justify-center;
+  transition: translate 0.3s ease;
+  pointer-events: none;
+  z-index: -1;
+
+  > .content {
+    @apply relative w-full h-[95vh] bg-white overflow-y-scroll p-[1rem];
+    transition: transform 0.3s ease;
+
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-stone-600 rounded;
+  }
+}
+
+.opened {
+  @apply opacity-100;
+  pointer-events: all;
+  z-index: 10;
+
+  .content {
+    transform: translateY(0);
+  }
+}
+
+.isClosing {
+  .up {
+    transform: translateY(100%);
+  }
+
+  .down {
+    transform: translateY(-100%);
+  }
+
+  .right {
+    transform: translateX(-100%);
+  }
+
+  .left {
+    transform: translateX(100%);
+  }
+}
+
+.up {
+  transform: translateY(100%);
+}
+
+.down {
+  transform: translateY(-100%);
+}
+
+.right {
+  transform: translateX(-100%);
+}
+
+.left {
+  transform: translateX(100%);
+}

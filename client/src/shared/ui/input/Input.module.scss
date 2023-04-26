@@ -1,0 +1,23 @@
+.container {
+	@apply relative h-[3rem] transition-colors focus-within:border-gray-700 flex justify-end;
+
+	label {
+		@apply block transition-all;
+
+		span {
+			@apply text-sm uppercase text-gray-500;
+			transform: translateY(1.5em);
+		}
+	}
+
+	input {
+		@apply border-b-[1.5px] focus:ring-0 bg-transparent w-full m-0 px-0;
+		border-color: #223476;
+	}
+}
+
+//TODO: change red color
+
+.error {
+	@apply absolute -bottom-6 left-0 text-sm w-full text-red-900;
+}

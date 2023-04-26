@@ -1,0 +1,29 @@
+.card {
+  @apply relative h-[6em] w-full rounded-xl my-1 shadow border border-white overflow-hidden;
+  z-index: 1;
+
+  .cover {
+    @apply w-full h-full;
+    object-fit: cover;
+  }
+
+  .dark_overlay {
+    @apply absolute w-full h-full top-0 left-0 rounded-xl opacity-30 bg-black;
+    z-index: 2;
+  }
+
+  > .program_name {
+    @apply absolute left-0 bottom-0 text-white text-shadow m-2;
+    z-index: 3;
+  }
+
+  > .delete_icon {
+    @apply absolute top-1 right-1 text-xl text-white cursor-pointer z-2;
+    transition: color 300ms;
+    z-index: 3;
+
+    &:hover {
+      @apply text-blue-600;
+    }
+  }
+}

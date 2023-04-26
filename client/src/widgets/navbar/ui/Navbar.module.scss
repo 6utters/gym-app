@@ -1,0 +1,29 @@
+.navbar {
+	@apply w-full flex items-center justify-center;
+	&__panel {
+		@apply h-[70%] w-full bg-white rounded-xl shadow flex justify-center;
+		ul {
+			@apply h-full flex-center-between mx-auto;
+			width: 60%;
+
+			a {
+				@apply flex flex-col items-center transition;
+				width: 20%;
+				color: #757575;
+				font-size: 1.7em;
+				> p {
+					@apply font-medium;
+					font-size: 0.43em;
+				}
+
+				&:hover {
+					color: #2962ff;
+				}
+			}
+
+			.active {
+				color: #2962ff;
+			}
+		}
+	}
+}

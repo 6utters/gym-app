@@ -1,0 +1,23 @@
+.container {
+	@apply relative pt-2;
+
+	h1 {
+		@apply text-[1em] uppercase font-medium text-gray-600 block;
+	}
+
+	.wrapper {
+		@apply w-full flex items-center justify-center px-[4em];
+		height: 80vh;
+
+		.content {
+			@apply text-white text-center flex-col rounded-xl items-center p-2 shadow;
+			background: #b2bbc0;
+			h3 {
+				@apply text-lg mb-3;
+			}
+			p {
+				@apply text-sm font-light;
+			}
+		}
+	}
+}

@@ -1,0 +1,36 @@
+.wrapper {
+	@apply py-2 h-auto;
+
+	.darken_enter {
+		opacity: 0;
+		@apply absolute bottom-0 left-0 w-full h-screen z-2;
+		background: rgb(0, 0, 0, 0.4);
+	}
+
+	.darken_enter_active {
+		opacity: 1;
+		transition: opacity 175ms;
+	}
+
+	.darken_enter_done {
+		opacity: 1;
+		@apply absolute bottom-0 left-0 w-full h-screen z-2;
+		background: rgb(0, 0, 0, 0.4);
+	}
+	.darken_exit {
+		opacity: 1;
+		@apply absolute bottom-0 left-0 w-full h-screen z-2;
+		background: rgb(0, 0, 0, 0.4);
+	}
+
+	.darken_exit_active {
+		opacity: 0;
+		transition: opacity 150ms;
+	}
+
+	.darken_exit_done {
+		display: none;
+		@apply absolute bottom-0 left-0 w-full h-screen z-2;
+		background: rgb(0, 0, 0, 0.4);
+	}
+}

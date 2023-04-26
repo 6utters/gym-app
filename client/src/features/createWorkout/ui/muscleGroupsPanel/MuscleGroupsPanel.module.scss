@@ -1,0 +1,29 @@
+.muscle_groups_panel {
+  z-index: 30;
+
+    .searchBar {
+      @apply w-full h-[2.5rem] bg-gray-100 rounded-2xl my-5;
+    }
+
+    .buttons {
+      @apply absolute bottom-0 left-0 w-full h-[10%] bg-white flex items-center justify-between p-3;
+      z-index: 32;
+
+      .clear_btn {
+        @apply w-full h-full bg-blue-950;
+
+        &:disabled {
+        @apply opacity-30;
+        }
+      }
+
+      .add_btn {
+        @apply w-full h-full bg-blue-700;
+
+        &:disabled {
+         @apply opacity-30;
+        }
+      }
+    }
+  }
+

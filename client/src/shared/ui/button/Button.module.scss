@@ -1,0 +1,32 @@
+.button {
+	@apply w-full h-full max-w-[24em] rounded-xl font-medium shadow m-1 text-white;
+	background-color: #2e4594;
+
+	&:hover {
+		@apply animate-lift;
+	}
+}
+
+.size_m {
+	@apply h-[3.25em];
+}
+
+.size_l {
+	@apply h-[4.25em];
+}
+
+.size_xl {
+	@apply h-[5.25em];
+}
+
+.clear,
+.clearInverted {
+	background: none;
+	outline: none;
+	padding: 0;
+	border: none;
+	box-shadow: none;
+	animation: none !important;
+}
+
+
