@@ -1,0 +1,42 @@
+.modal {
+  .modal_header {
+    @apply w-full h-[3rem] flex flex-center-between;
+    z-index: 300!important;
+
+    &_btn {
+      @apply w-[1.5rem] h-[1.5rem] text-stone-500 text-lg;
+      svg {
+        @apply w-full h-full;
+      }
+    }
+
+    > .title {
+      @apply text-2xl text-black font-semibold;
+    }
+  }
+
+  .searchBar {
+    @apply w-full h-[2.5rem] bg-gray-100 rounded-2xl my-2;
+  }
+}
+
+.exercises_enter {
+  transform: translateX(100%);
+}
+
+.exercises_enter_active {
+  transform: translateX(0);
+  display: block;
+  transition: transform 250ms;
+}
+
+.exercises_exit {
+  transform: translateX(0);
+  display: block;
+}
+
+.exercises_exit_active {
+  transform: translateX(100%);
+  display: block;
+  transition: transform 250ms;
+}

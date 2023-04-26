@@ -1,0 +1,12 @@
+.container {
+	@apply h-screen overflow-hidden flex flex-col justify-end;
+	background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)),
+	url('../../shared/assets/images/HomePage.jpg');
+	background-position: 82%;
+	background-repeat: no-repeat;
+	background-size: cover;
+	.content {
+		@apply flex flex-col items-center justify-between px-4 pb-4;
+		height: 80%;
+	}
+}

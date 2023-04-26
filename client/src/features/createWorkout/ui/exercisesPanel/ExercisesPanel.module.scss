@@ -1,0 +1,24 @@
+.modal {
+  @apply relative;
+  .modal_header {
+    @apply w-full h-[3rem] flex flex-center-between;
+    z-index: 400!important;
+
+    &_btn {
+      @apply w-[1.5rem] h-[1.5rem] text-stone-500 text-lg;
+      svg {
+        @apply w-full h-full;
+      }
+    }
+
+    > .title {
+      @apply text-2xl text-black font-semibold;
+    }
+  }
+
+  .searchBar {
+    @apply w-full h-[2.5rem] bg-gray-100 rounded-2xl my-2;
+  }
+}
+
+

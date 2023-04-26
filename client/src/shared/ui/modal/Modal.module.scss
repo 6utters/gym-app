@@ -1,0 +1,32 @@
+.modal {
+  @apply fixed top-0 left-0 right-0 bottom-0 opacity-0 text-gray-400 flex items-center justify-center;
+  pointer-events: none;
+  z-index: -1;
+
+  > .content {
+    @apply max-w-[90%] max-h-[90vh] bg-basic-gray overflow-y-scroll py-[1rem] px-[2.5rem];
+    transition: transform 0.3s ease;
+    transform: scale(0.5);
+    border-radius: 12px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-stone-600 rounded;
+  }
+}
+
+.opened {
+  @apply opacity-100;
+  pointer-events: all;
+  z-index: 10;
+
+  .content {
+    transform: scale(1);
+  }
+}
+
+.isClosing {
+  .content {
+    transform: scale(0);
+  }
+}

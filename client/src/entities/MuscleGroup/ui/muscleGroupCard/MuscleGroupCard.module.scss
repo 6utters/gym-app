@@ -1,0 +1,15 @@
+.card {
+  @apply w-full h-[6rem] flex items-center mb-[1rem];
+
+  > .image {
+    @apply relative h-full w-auto mr-[1rem];
+
+    img {
+      object-fit: fill;
+    }
+  }
+
+  > .title {
+    @apply font-semibold text-black;
+  }
+}
