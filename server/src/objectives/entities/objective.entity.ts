@@ -23,7 +23,9 @@ export class Objective extends Base {
 	@JoinColumn({ name: 'exercise_id' })
 	exercise: Exercise
 
-	@ManyToOne(() => Program, program => program.objectives)
+	@ManyToOne(() => Program, program => program.objectives, {
+		onDelete: 'CASCADE',
+	})
 	@JoinColumn({ name: 'program_id', referencedColumnName: 'id' })
 	program: Program
 }

@@ -5,6 +5,7 @@ import {
 	JoinTable,
 	ManyToMany,
 	ManyToOne,
+	OneToMany,
 } from 'typeorm'
 import { Base } from '../../utils/db/base'
 import { Exercise } from '../../exercises/entities/exercise.entity'
@@ -30,12 +31,12 @@ export class Program extends Base {
 	@JoinTable({ name: 'programs_exercises' })
 	exercises: Exercise[]
 
-	@ManyToOne(() => Statistics, statistics => statistics.program, {
+	@OneToMany(() => Statistics, statistics => statistics.program, {
 		onDelete: 'CASCADE',
 	})
 	statistics: Statistics[]
 
-	@ManyToOne(() => Objective, objective => objective.program, {
+	@OneToMany(() => Objective, objective => objective.program, {
 		onDelete: 'CASCADE',
 	})
 	objectives: Objective[]

@@ -8,6 +8,7 @@ import { AuthModule } from '../auth/auth.module'
 
 @Module({
 	imports: [TypeOrmModule.forFeature([User, Objective]), AuthModule],
+	exports: [ObjectivesService],
 	controllers: [ObjectivesController],
 	providers: [ObjectivesService],
 })

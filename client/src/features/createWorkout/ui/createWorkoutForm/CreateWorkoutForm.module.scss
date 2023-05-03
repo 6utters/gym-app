@@ -80,34 +80,6 @@
 
     .list {
       @apply min-h-[5rem] bg-white rounded-2xl shadow w-full overflow-y-scroll;
-
-      &__card {
-        @apply relative flex justify-start rounded items-end mb-2 h-[4rem];
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-
-        h2 {
-          @apply text-white text-lg font-semibold text-shadow my-2 mx-4;
-        }
-
-        .icon {
-          @apply absolute top-1 right-1 text-white text-2lg z-2;
-        }
-
-        &:hover {
-          -webkit-filter: brightness(0.8);
-          filter: brightness(0.8);
-          cursor: pointer;
-        }
-      }
     }
-  }
-}
-
-.icon {
-  @apply mr-4 w-[5%];
-  svg {
-    @apply w-full h-full;
   }
 }

@@ -1,0 +1,30 @@
+.main {
+    @apply w-full h-full flex items-center justify-between;
+
+    .image {
+      @apply relative h-[95%] flex items-center justify-center px-2;
+
+      img {
+        object-fit: fill;
+      }
+    }
+
+    > .title {
+      @apply w-full w-[60%] font-semibold text-black text-lg;
+    }
+  }
+
+  > .icon {
+    @apply h-full w-[1.5rem] flex items-center justify-end mr-4;
+    > svg {
+      @apply text-lg h-full w-full;
+    }
+  }
+
+.active {
+  opacity: 1;
+}
+
+.not_active {
+  opacity: 0.3;
+}

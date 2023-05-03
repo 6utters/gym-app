@@ -5,6 +5,8 @@ import { In, Repository } from 'typeorm'
 import { Program } from './entities/program.entity'
 import { Exercise } from '../exercises/entities/exercise.entity'
 import { FilesService } from '../files/files.service'
+import { ObjectivesService } from '../objectives/objectives.service'
+import { CreateObjectiveDto } from '../objectives/dto/create-objective.dto'
 
 @Injectable()
 export class ProgramsService {
@@ -14,6 +16,7 @@ export class ProgramsService {
 		@InjectRepository(Exercise)
 		private readonly exercisesRepository: Repository<Exercise>,
 		private readonly filesService: FilesService,
+		private readonly objectivesService: ObjectivesService,
 	) {}
 	async create(
 		dto: CreateProgramDto,
@@ -30,19 +33,72 @@ export class ProgramsService {
 		program.exercises = await this.exercisesRepository.find({
 			where: { id: In(exerciseArray) },
 		})
+		await this.programsRepository.save(program)
+		const objectives: CreateObjectiveDto[] = JSON.parse(dto.objectives)
+		if (exerciseArray.length !== objectives.length) {
+			const objectiveExIds = objectives.map(obj => obj.exerciseId)
+			const difference: number[] = exerciseArray.filter(
+				x => !objectiveExIds.includes(x),
+			)
+			const defaultObjectives = difference.map(id => {
+				return {
+					programId: program.id,
+					exerciseId: id,
+					targetReps: 12,
+					targetSets: 3,
+					timeout: 120,
+				} as CreateObjectiveDto
+			})
+			program.objectives = await Promise.all(
+				[...objectives, ...defaultObjectives].map(async objective => {
+					return await this.objectivesService.create(
+						{
+							programId: program.id,
+							exerciseId: objective.exerciseId,
+							timeout: objective.timeout,
+							targetReps: objective.targetReps,
+							targetSets: objective.targetSets,
+						},
+						userId,
+					)
+				}),
+			)
+			return await this.programsRepository.save(program)
+		}
+		program.objectives = await Promise.all(
+			objectives.map(async objective => {
+				return await this.objectivesService.create(
+					{
+						programId: program.id,
+						exerciseId: objective.exerciseId,
+						timeout: objective.timeout,
+						targetReps: objective.targetReps,
+						targetSets: objective.targetSets,
+					},
+					userId,
+				)
+			}),
+		)
 		return await this.programsRepository.save(program)
 	}
 
 	findAll() {
 		return this.programsRepository.find({
-			relations: { userId: true, exercises: true, objectives: true },
+			relations: {
+				userId: true,
+				exercises: true,
+				objectives: { exercise: true },
+			},
 		})
 	}
 
 	findAllFromUser(id: number) {
 		return this.programsRepository.find({
 			where: { userId: id },
-			relations: { exercises: true },
+			relations: {
+				exercises: true,
+				objectives: { exercise: true },
+			},
 		})
 	}
 

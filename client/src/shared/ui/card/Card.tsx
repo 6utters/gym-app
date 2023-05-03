@@ -1,25 +1,28 @@
-import { DetailedHTMLProps, FC, HTMLAttributes } from 'react'
+import { FC, ReactNode } from 'react'
 import styles from './Card.module.scss'
+import cn from 'classnames'
 
-interface ICardProps {
-	name: string
-	thumbnailPath: string
+interface CardProps {
+	children: ReactNode
+	size: CardSize
+	className?: string
 }
 
-interface ICardProps
-	extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {}
+export enum CardSize {
+	S = 'small',
+	M = 'medium',
+	L = 'large',
+	XL = 'extra_large'
+}
 
-const Card: FC<ICardProps> = ({ name, thumbnailPath }) => {
+export const Card: FC<CardProps> = ({ children, className, size }) => {
 	return (
 		<div
-			className={styles.card}
-			style={{
-				backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.4)), url(${process.env.APP_SERVER_URL}${thumbnailPath})`
-			}}
+			className={cn(styles.card, className, {
+				[styles[size]]: size
+			})}
 		>
-			<h2>{name}</h2>
+			{children}
 		</div>
 	)
 }
-
-export default Card

@@ -1,18 +1,17 @@
 import { FC } from 'react'
 import { Exercise } from '../../model/types/Exercise'
-import { ExerciseCard, ExerciseCardType } from '../exerciseCard/ExerciseCard'
+import { ExerciseListItem } from '../exerciseListItem/ExerciseListItem'
 import styles from './ExerciseList.module.scss'
 
 interface ExerciseListProps {
 	exercises?: Exercise[]
 	onClick: (id: number) => void
-	type: ExerciseCardType
 	className: string
 	selectedId?: number
 }
 
 export const ExerciseList: FC<ExerciseListProps> = props => {
-	const { exercises, className, onClick, type, selectedId } = props
+	const { exercises, className, onClick } = props
 	if (!exercises || exercises.length === 0)
 		return (
 			<div className={styles.no_exercises}>
@@ -23,12 +22,11 @@ export const ExerciseList: FC<ExerciseListProps> = props => {
 	return (
 		<ul className={styles.exercise_list}>
 			{exercises.map(exercise => (
-				<ExerciseCard
+				<ExerciseListItem
 					className={className}
 					key={exercise.id}
 					exercise={exercise}
 					onClick={onClick}
-					type={type}
 				/>
 			))}
 		</ul>

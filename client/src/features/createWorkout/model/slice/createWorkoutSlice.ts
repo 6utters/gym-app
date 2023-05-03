@@ -1,10 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { getFromLocalStorage } from '@/shared/lib/localStorage'
+import { Objective } from '@/entities/Objective'
 import { CreateWorkoutSchema } from '@/features/createWorkout/model/types/CreateWorkoutSchema'
-import { EXERCISE_IDS } from '@/shared/consts/localStorage'
+import { EX_OBJECTIVES, EXERCISE_IDS } from '@/shared/consts/localStorage'
+import { getFromLocalStorage } from '@/shared/lib/localStorage'
 
 const initialState: CreateWorkoutSchema = {
-	exerciseIds: getFromLocalStorage(EXERCISE_IDS)
+	exerciseIds: getFromLocalStorage(EXERCISE_IDS) || [],
+	objectives: getFromLocalStorage(EX_OBJECTIVES) || []
 }
 
 export const createWorkoutSlice = createSlice({
@@ -34,7 +36,27 @@ export const createWorkoutSlice = createSlice({
 		},
 		clearAll: state => {
 			localStorage.removeItem(EXERCISE_IDS)
+			localStorage.removeItem(EX_OBJECTIVES)
 			state.exerciseIds = []
+		},
+		addObjective: (state, action: PayloadAction<Objective>) => {
+			localStorage.removeItem(EX_OBJECTIVES)
+			state.objectives.push(action.payload)
+			localStorage.setItem(EX_OBJECTIVES, JSON.stringify(state.objectives))
+		},
+		changeObjective: (state, action: PayloadAction<Objective>) => {
+			localStorage.removeItem(EX_OBJECTIVES)
+			state.objectives = state.objectives.map(obj =>
+				obj.exerciseId === action.payload.exerciseId ? action.payload : obj
+			)
+			localStorage.setItem(EX_OBJECTIVES, JSON.stringify(state.objectives))
+		},
+		clearObjective: (state, action: PayloadAction<number>) => {
+			localStorage.removeItem(EX_OBJECTIVES)
+			state.objectives = state.objectives.filter(
+				obj => obj.exerciseId !== action.payload
+			)
+			localStorage.setItem(EX_OBJECTIVES, JSON.stringify(state.objectives))
 		}
 	}
 })
