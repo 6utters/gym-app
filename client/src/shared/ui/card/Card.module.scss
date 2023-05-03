@@ -1,16 +1,19 @@
 .card {
-	@apply flex justify-start rounded items-end mb-2 h-[6.5rem];
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: cover;
+	@apply relative w-full flex items-center justify-between mb-[1rem];
+}
 
-	h2 {
-		@apply text-white text-lg font-semibold text-shadow my-2 mx-4;
-	}
+.small {
+	@apply h-[3rem];
+}
 
-	&:hover {
-		-webkit-filter: brightness(0.8);
-		filter: brightness(0.8);
-		cursor: pointer;
-	}
+.medium {
+	@apply h-[6rem];
+}
+
+.large {
+	@apply h-[8rem];
+}
+
+.extra_large {
+	@apply h-[10rem];
 }

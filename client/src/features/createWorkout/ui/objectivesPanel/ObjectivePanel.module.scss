@@ -1,0 +1,56 @@
+.objective_panel {
+  z-index: 31;
+
+  .content {
+    @apply h-full flex flex-col items-center justify-between;
+
+    > .objectives {
+      @apply w-full;
+
+      > .sets_reps {
+        @apply flex justify-between;
+
+        > .sets {
+          @apply w-[45%];
+          input {
+            @apply h-[2.2rem] w-full;
+          }
+        }
+
+        > .reps {
+          @apply w-[45%];
+          input {
+            @apply h-[2.2rem] m-0 w-full;
+          }
+        }
+      }
+
+      > .timeout {
+        input {
+          @apply h-[2.2rem] w-full;
+        }
+      }
+    }
+
+    .buttons {
+      @apply absolute bottom-0 left-0 w-full h-[10%] bg-white flex items-center justify-between p-3;
+      z-index: 32;
+
+      .clear_btn {
+        @apply w-full h-full bg-blue-950;
+
+        &:disabled {
+          @apply opacity-30;
+        }
+      }
+
+      .add_btn {
+        @apply w-full h-full bg-blue-700;
+
+        &:disabled {
+          @apply opacity-30;
+        }
+      }
+    }
+  }
+}

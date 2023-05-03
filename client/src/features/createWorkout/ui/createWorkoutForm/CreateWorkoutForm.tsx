@@ -9,25 +9,29 @@ import { getExerciseIds } from '@/features/createWorkout/model/selectors/getExer
 import { createWorkoutFormData } from '@/features/createWorkout/model/lib/createWorkoutFormData/createWorkoutFormData'
 import {
 	createWorkoutActions,
+	getObjectives,
 	useCreateWorkout
 } from '@/features/createWorkout'
 import styles from './CreateWorkoutForm.module.scss'
-import { ExerciseList, useGetExercises } from '@/entities/Exercise'
+import { ExerciseCard, useGetExercises } from '@/entities/Exercise'
 import { IoAddCircle } from 'react-icons/io5'
 import { WORKOUTS_ROUTE } from '@/shared/consts'
+import { Objective } from '@/types/objective.interface'
 
 interface CreateWorkoutFormProps {
 	showMuscleGroups: (open: boolean) => void
+	showObjectives: (exerciseId: number) => void
 }
 
 export interface FormProps {
 	name: string
 	image: string
 	exerciseIds: number[]
+	objectives: Objective[]
 }
 
 export const CreateWorkoutForm: FC<CreateWorkoutFormProps> = props => {
-	const { showMuscleGroups } = props
+	const { showMuscleGroups, showObjectives } = props
 	const router = useRouter()
 	const dispatch = useDispatch()
 
@@ -37,6 +41,7 @@ export const CreateWorkoutForm: FC<CreateWorkoutFormProps> = props => {
 
 	const exerciseIds = useSelector(getExerciseIds)
 	const { data: exercises } = useGetExercises(exerciseIds)
+	const objectives = useSelector(getObjectives)
 
 	const clearAll = useCallback(() => {
 		dispatch(createWorkoutActions.clearAll())
@@ -53,7 +58,8 @@ export const CreateWorkoutForm: FC<CreateWorkoutFormProps> = props => {
 		const formData = createWorkoutFormData({
 			name: data.name,
 			currentFile,
-			exerciseIds
+			exerciseIds,
+			objectives
 		})
 		await createWorkout(formData)
 		dispatch(createWorkoutActions.clearAll())
@@ -87,12 +93,9 @@ export const CreateWorkoutForm: FC<CreateWorkoutFormProps> = props => {
 					</Button>
 				</div>
 				<div className={styles.list}>
-					<ExerciseList
-						onClick={() => {}}
-						exercises={exercises}
-						type={'Program_exercise'}
-						className={styles.icon}
-					/>
+					{exercises?.map(ex => (
+						<ExerciseCard key={ex.id} exercise={ex} onClick={showObjectives} />
+					))}
 				</div>
 			</div>
 			<div className={styles.form_buttons}>

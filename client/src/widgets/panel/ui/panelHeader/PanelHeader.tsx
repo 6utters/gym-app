@@ -2,9 +2,10 @@ import { FC, ReactNode } from 'react'
 import { Button, ButtonTheme } from '@/shared/ui'
 import { IoArrowBackOutline } from 'react-icons/io5'
 import styles from './PanelHeader.module.scss'
+import { filterText } from '@/shared/lib'
 
 interface PanelHeaderProps {
-	title: string
+	title?: string
 	onClose: () => void
 	Icon: ReactNode
 	onIconClick?: () => void
@@ -23,7 +24,7 @@ export const PanelHeader: FC<PanelHeaderProps> = props => {
 				<IoArrowBackOutline />
 			</Button>
 			<div className={styles.title}>
-				<h2>{title}</h2>
+				<h2>{title ? filterText(title, 24) : title}</h2>
 			</div>
 			<Button
 				theme={ButtonTheme.CLEAR}

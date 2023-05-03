@@ -7,7 +7,7 @@ import styles from './Panel.module.scss'
 interface PanelProps {
 	className?: string
 	onClose: () => void
-	title: string
+	title?: string
 	Icon: ReactNode
 	onIconClick?: () => void
 	children: ReactNode

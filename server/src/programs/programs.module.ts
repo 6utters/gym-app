@@ -6,12 +6,14 @@ import { Exercise } from '../exercises/entities/exercise.entity'
 import { Program } from './entities/program.entity'
 import { AuthModule } from '../auth/auth.module'
 import { FilesModule } from '../files/files.module'
+import { ObjectivesModule } from '../objectives/objectives.module'
 
 @Module({
 	imports: [
 		TypeOrmModule.forFeature([Program, Exercise]),
 		AuthModule,
 		FilesModule,
+		ObjectivesModule,
 	],
 	controllers: [ProgramsController],
 	providers: [ProgramsService],

@@ -13,9 +13,8 @@ export class ObjectivesService {
 	async create(dto: CreateObjectiveDto, userId: number) {
 		const objective = await this.findOne(userId, dto.programId, dto.exerciseId)
 		if (!objective) {
-			//Todo: to find more appropriate way to handle this
 			return await this.objectivesRepository.save({
-				targetReps: dto.targetSets,
+				targetReps: dto.targetReps,
 				targetSets: dto.targetSets,
 				program: { id: dto.programId },
 				user: { id: userId },
@@ -36,7 +35,7 @@ export class ObjectivesService {
 	}
 
 	async findOne(userId, programId, exerciseId) {
-		return await this.objectivesRepository.findOneOrFail({
+		return await this.objectivesRepository.findOne({
 			where: {
 				user: { id: userId },
 				program: { id: programId },

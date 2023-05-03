@@ -1,73 +1,29 @@
 import { FC } from 'react'
-import { Exercise } from '@/entities/Exercise'
-import styles from './ExerciseCard.module.scss'
 import Image from 'next/image'
+import { Card, CardSize } from '@/shared/ui'
 import { SERVER_URL } from '@/shared/consts'
-import { IoCheckmarkCircle, IoMenuOutline } from 'react-icons/io5'
-import cn from 'classnames'
-import { useSelector } from 'react-redux'
-import { getExerciseIds } from '@/features/createWorkout/model/selectors/getExerciseIds/getExerciseIds'
-import { useAppDispatch } from '@/shared/lib/hooks'
-import { createWorkoutActions } from '@/features/createWorkout'
 
-//todo: card UI
+import { Exercise } from '@/entities/Exercise'
+import { IoMenuOutline } from 'react-icons/io5'
 
-export type ExerciseCardType = 'Exercise' | 'Program_exercise'
+import styles from './ExerciseCard.module.scss'
 
 interface ExerciseCardProps {
 	exercise: Exercise
 	onClick: (id: number) => void
-	type: ExerciseCardType
-	className: string
+	className?: string
 }
 
 export const ExerciseCard: FC<ExerciseCardProps> = props => {
-	const { type, onClick, exercise, className } = props
-	const exerciseIds = useSelector(getExerciseIds)
-	const dispatch = useAppDispatch()
+	const { exercise, className, onClick } = props
 
-	const isSelected =
-		type === 'Exercise' && Boolean(exerciseIds.find(id => exercise.id === id))
-
-	const handleClick = (id: number) => {
-		if (isSelected) {
-			dispatch(createWorkoutActions.removeExercise(id))
-		} else {
-			dispatch(createWorkoutActions.addExercise(id))
-		}
-	}
-
-	const renderIcon = (cardType: ExerciseCardType) => {
-		switch (cardType) {
-			case 'Exercise':
-				return (
-					<div
-						className={cn(className, {
-							[styles.active]: isSelected,
-							[styles.not_active]: !isSelected
-						})}
-						onClick={() => handleClick(exercise.id)}
-					>
-						<IoCheckmarkCircle />
-					</div>
-				)
-			case 'Program_exercise':
-				return (
-					<div
-						className={cn(className, {
-							[styles.active]: isSelected
-						})}
-					>
-						{' '}
-						<IoMenuOutline />
-					</div>
-				)
-		}
+	const clickHandler = (id: number) => {
+		onClick(id)
 	}
 
 	return (
-		<div className={styles.card}>
-			<div className={styles.main} onClick={() => onClick(exercise.id)}>
+		<Card size={CardSize.M} className={className}>
+			<div className={styles.main} onClick={() => clickHandler(exercise.id)}>
 				<div className={styles.image}>
 					<Image
 						src={SERVER_URL + exercise.thumbnailPath}
@@ -81,7 +37,9 @@ export const ExerciseCard: FC<ExerciseCardProps> = props => {
 					<h2>{exercise.name}</h2>
 				</div>
 			</div>
-			{renderIcon(type)}
-		</div>
+			<div className={styles.icon}>
+				<IoMenuOutline />
+			</div>
+		</Card>
 	)
 }
