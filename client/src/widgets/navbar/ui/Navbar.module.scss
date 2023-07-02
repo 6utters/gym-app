@@ -1,5 +1,5 @@
 .navbar {
-	@apply w-full flex items-center justify-center;
+	@apply flex items-center justify-center;
 	&__panel {
 		@apply h-[70%] w-full bg-white rounded-xl shadow flex justify-center;
 		ul {
@@ -7,9 +7,8 @@
 			width: 60%;
 
 			a {
-				@apply flex flex-col items-center transition;
+				@apply flex flex-col items-center transition text-dust_gray;
 				width: 20%;
-				color: #757575;
 				font-size: 1.7em;
 				> p {
 					@apply font-medium;
@@ -17,12 +16,12 @@
 				}
 
 				&:hover {
-					color: #2962ff;
+					@apply text-bright_blue;
 				}
 			}
 
 			.active {
-				color: #2962ff;
+				@apply text-bright_blue;
 			}
 		}
 	}

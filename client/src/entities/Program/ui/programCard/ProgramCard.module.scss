@@ -1,5 +1,5 @@
 .card {
-  @apply relative h-[6em] w-full rounded-xl my-1 shadow border border-white overflow-hidden;
+  @apply relative block h-[6em] w-full rounded-xl my-1 shadow border border-white overflow-hidden;
   z-index: 1;
 
   .cover {
@@ -18,9 +18,13 @@
   }
 
   > .delete_icon {
-    @apply absolute top-1 right-1 text-xl text-white cursor-pointer z-2;
+    @apply absolute top-1 right-1 text-xl text-white cursor-pointer w-[1.5rem] h-[1.5rem];
+    z-index: 25;
     transition: color 300ms;
-    z-index: 3;
+
+    svg {
+      @apply w-full h-full;
+    }
 
     &:hover {
       @apply text-blue-600;

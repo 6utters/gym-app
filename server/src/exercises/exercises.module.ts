@@ -10,6 +10,8 @@ import { FilesModule } from '../files/files.module'
 import { GroupsModule } from '../groups/groups.module'
 import { Objective } from '../objectives/entities/objective.entity'
 import { Program } from '../programs/entities/program.entity'
+import { ProgramsModule } from '../programs/programs.module'
+import { AuthModule } from '../auth/auth.module'
 
 @Module({
 	imports: [
@@ -23,6 +25,8 @@ import { Program } from '../programs/entities/program.entity'
 		]),
 		FilesModule,
 		GroupsModule,
+		AuthModule,
+		ProgramsModule,
 	],
 	controllers: [ExercisesController],
 	providers: [ExercisesService],

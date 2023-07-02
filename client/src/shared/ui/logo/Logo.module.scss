@@ -1,4 +1,4 @@
-.logo {
+.logo_wrapper {
 	@apply relative flex justify-center mx-auto;
 
 	img {
@@ -12,18 +12,18 @@
 	}
 }
 
-.size_s {
+.s {
 	@apply w-[4rem] h-[4rem];
 }
 
-.size_m {
+.m {
 	@apply w-[6rem] h-[6rem];
 }
 
-.size_l {
+.l {
 	@apply w-[8rem] h-[8rem];
 }
 
-.size_xl {
+.xl {
 	@apply w-[10rem] h-[10rem];
 }

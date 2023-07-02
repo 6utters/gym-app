@@ -1,5 +1,5 @@
-.wrapper {
-	@apply py-2 h-auto;
+//.wrapper {
+//	@apply py-2;
 
 	.darken_enter {
 		opacity: 0;
@@ -33,4 +33,4 @@
 		@apply absolute bottom-0 left-0 w-full h-screen z-2;
 		background: rgb(0, 0, 0, 0.4);
 	}
-}
+//}

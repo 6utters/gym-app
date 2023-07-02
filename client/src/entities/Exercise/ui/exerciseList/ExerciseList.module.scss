@@ -1,5 +1,9 @@
+.exercise_list {
+  @apply relative w-full min-h-[5rem];
+}
+
 .no_exercises {
-  @apply w-full h-[5rem] flex items-center justify-center;
+  @apply w-full h-[5rem] flex items-center justify-center ;
 
   .warning {
     @apply font-semibold text-blue-950 opacity-70 uppercase;

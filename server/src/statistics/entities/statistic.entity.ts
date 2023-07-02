@@ -13,7 +13,9 @@ export class Statistics extends Base {
 	@JoinColumn({ name: 'user_id' })
 	user: User
 
-	@ManyToOne(() => Program, program => program.statistics)
+	@ManyToOne(() => Program, program => program.statistics, {
+		onDelete: 'CASCADE',
+	})
 	@JoinColumn({ name: 'program_id' })
 	program: Program
 

@@ -34,6 +34,16 @@ export class ProgramsController {
 		return this.programsService.create(createProgramDto, +id, image)
 	}
 
+	@Post('/complete/:programId')
+	@UseGuards(AuthGuard)
+	@HttpCode(200)
+	async complete(
+		@CurrentUser('id') id: string,
+		@Param('programId') programId: number,
+	) {
+		return this.programsService.complete(id, programId)
+	}
+
 	@Get()
 	findAll() {
 		return this.programsService.findAll()

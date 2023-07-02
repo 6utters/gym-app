@@ -1,4 +1,4 @@
-import { Objective } from '@/types/objective.interface'
+import { Objective } from '@/entities/Objective'
 
 interface createWorkoutFormDataParams {
 	currentFile: File | null

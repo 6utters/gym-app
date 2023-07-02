@@ -1,32 +1,69 @@
-.button {
-	@apply w-full h-full max-w-[24em] rounded-xl font-medium shadow m-1 text-white;
-	background-color: #2e4594;
-
-	&:hover {
-		@apply animate-lift;
-	}
+.button, .neutral {
+	@apply flex items-center justify-center font-medium shadow text-center text-white cursor-pointer;
+	padding: 6px 16px;
 }
 
-.size_m {
-	@apply h-[3.25em];
+// additional:
+.full_width {
+	@apply w-full;
 }
 
-.size_l {
-	@apply h-[4.25em];
+.disabled {
+	opacity: 0.7;
 }
 
-.size_xl {
-	@apply h-[5.25em];
+// sizes:
+.s {
+	@apply rounded-md;
+	font: var(--font-s);
 }
 
-.clear,
-.clearInverted {
-	background: none;
-	outline: none;
+.m {
+	@apply rounded-lg;
+	font: var(--font-m);
+}
+
+.l {
+	@apply rounded-xl;
+	font: var(--font-l);
+}
+
+// colors:
+.success {
+	@apply bg-light_green;
+}
+
+.invalid {
+	@apply bg-indian_red;
+}
+
+.primary {
+	@apply bg-light_blue;
+}
+
+.secondary {
+	@apply bg-dark_blue;
+}
+
+.outlined {
+	@apply border-2 border-light_blue text-light_blue;
+	background: transparent;
+	font-weight: 700;
+}
+
+.clear {
 	padding: 0;
+	outline: none;
 	border: none;
 	box-shadow: none;
-	animation: none !important;
+	background: none;
+	animation: none;
 }
+
+.circle {
+	padding: 10px;
+	border-radius: 50%;
+}
+
 
 

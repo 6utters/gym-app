@@ -22,7 +22,11 @@
 		}
 
 		.buttons {
-			@apply w-full flex-center-between;
+			@apply w-full h-[3rem] flex-center-between gap-2;
+
+			button {
+				@apply h-full;
+			}
 		}
 	}
 }

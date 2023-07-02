@@ -1,0 +1,27 @@
+.statistics_day {
+  @apply mb-4;
+
+  .date {
+    @apply rounded-t-xl bg-gray-200 pl-4 py-1 font-medium;
+  }
+
+  .progress {
+    @apply w-full bg-white rounded-b-xl shadow;
+
+    .progress_block {
+      @apply py-1 flex justify-between items-center;
+      border-bottom: solid 1px #f0f0f1;
+
+      .left_side {
+        @apply w-full flex items-center;
+        .index {
+          @apply mx-4 text-gray-400;
+        }
+      }
+
+      .time_progress {
+        @apply mr-4;
+      }
+    }
+  }
+}

@@ -1,7 +1,6 @@
-import { FC, useCallback, useState } from 'react'
+import React, { FC, memo, useCallback, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { Button, ButtonTheme, Input } from '@/shared/ui'
-import UploadField from '@/shared/ui/uploadField/UploadField'
+import { Button, Input, UploadField } from '@/shared/ui'
 import { selectFile } from '@/shared/lib/utils/file/file.utils'
 import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'
@@ -12,16 +11,13 @@ import {
 	getObjectives,
 	useCreateWorkout
 } from '@/features/createWorkout'
-import styles from './CreateWorkoutForm.module.scss'
-import { ExerciseCard, useGetExercises } from '@/entities/Exercise'
-import { IoAddCircle } from 'react-icons/io5'
+import { ExerciseList, useGetExercises } from '@/entities/Exercise'
+import { IoAdd, IoMenuOutline } from 'react-icons/io5'
 import { WORKOUTS_ROUTE } from '@/shared/consts'
-import { Objective } from '@/types/objective.interface'
-
-interface CreateWorkoutFormProps {
-	showMuscleGroups: (open: boolean) => void
-	showObjectives: (exerciseId: number) => void
-}
+import { Objective } from '@/entities/Objective'
+import { programCreationActions } from '@/pages/programCreationPage'
+import styles from './CreateWorkoutForm.module.scss'
+import cn from 'classnames'
 
 export interface FormProps {
 	name: string
@@ -30,18 +26,36 @@ export interface FormProps {
 	objectives: Objective[]
 }
 
-export const CreateWorkoutForm: FC<CreateWorkoutFormProps> = props => {
-	const { showMuscleGroups, showObjectives } = props
+const Addon = memo(() => (
+	<div className={cn(styles.drag_icon)}>
+		<IoMenuOutline />
+	</div>
+))
+
+export const CreateWorkoutForm: FC = memo(() => {
 	const router = useRouter()
 	const dispatch = useDispatch()
 
-	const [createWorkout] = useCreateWorkout()
+	const showMuscleGroups = useCallback(() => {
+		dispatch(programCreationActions.toggleMuscleGroupsPanel())
+	}, [dispatch])
 
+	const setObjective = useCallback(
+		(id: number) => {
+			dispatch(programCreationActions.setObjectivesExercise(id))
+		},
+		[dispatch]
+	)
+
+	const [createWorkout, { isLoading, error }] = useCreateWorkout()
+
+	const [workoutName, setWorkoutName] = useState('')
 	const [currentFile, setCurrentFile] = useState<File | null>(null)
 
 	const exerciseIds = useSelector(getExerciseIds)
-	const { data: exercises } = useGetExercises(exerciseIds)
 	const objectives = useSelector(getObjectives)
+
+	const { data: exercises } = useGetExercises(exerciseIds)
 
 	const clearAll = useCallback(() => {
 		dispatch(createWorkoutActions.clearAll())
@@ -69,39 +83,50 @@ export const CreateWorkoutForm: FC<CreateWorkoutFormProps> = props => {
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-			<Input
-				{...register('name', {
-					required: 'The name of the workout is required'
-				})}
-				error={errors.name}
-				placeholder={'Program Name'}
-			/>
-			<UploadField
-				onChange={e => selectFile(e, setCurrentFile)}
-				placeholder={'Program image'}
-			/>
-			<div className={styles.list_block}>
-				<div className={styles.header}>
-					<h3>Workout Exercises</h3>
-					<Button
-						className={styles.add_btn}
-						type={'button'}
-						theme={ButtonTheme.CLEAR}
-						onClick={() => showMuscleGroups(true)}
-					>
-						<IoAddCircle />
-					</Button>
-				</div>
-				<div className={styles.list}>
-					{exercises?.map(ex => (
-						<ExerciseCard key={ex.id} exercise={ex} onClick={showObjectives} />
-					))}
+			<div className={styles.content}>
+				<Input
+					{...register('name', {
+						required: 'The name of the workout is required'
+					})}
+					value={workoutName}
+					onChange={e => setWorkoutName(e.target.value)}
+					error={errors.name}
+					placeholder={'Program Name'}
+				/>
+				<UploadField
+					onChange={e => selectFile(e, setCurrentFile)}
+					placeholder={'Program image'}
+				/>
+				<div className={styles.list_block}>
+					<div className={styles.header}>
+						<h3>Workout Exercises</h3>
+						<Button
+							className={styles.add_btn}
+							theme='circle'
+							type={'button'}
+							color={'secondary'}
+							size='m'
+							onClick={showMuscleGroups}
+						>
+							<IoAdd />
+						</Button>
+					</div>
+					<ExerciseList
+						className={styles.exercise_list}
+						onItemClick={setObjective}
+						onClick={showMuscleGroups}
+						exercises={exercises}
+						addon={<Addon />}
+						isDraggable={true}
+					/>
 				</div>
 			</div>
 			<div className={styles.form_buttons}>
 				<Button
 					className={styles.clear_btn}
-					type={'button'}
+					color='secondary'
+					size='m'
+					fullWidth
 					onClick={clearAll}
 					disabled={exerciseIds.length == 0}
 				>
@@ -109,12 +134,16 @@ export const CreateWorkoutForm: FC<CreateWorkoutFormProps> = props => {
 				</Button>
 				<Button
 					className={styles.create_program_btn}
+					theme='outlined'
+					color='secondary'
+					size='m'
+					fullWidth
 					type={'submit'}
-					disabled={exerciseIds.length == 0 || !currentFile}
+					disabled={exerciseIds.length == 0 || !currentFile || !workoutName}
 				>
 					Create Workout
 				</Button>
 			</div>
 		</form>
 	)
-}
+})

@@ -17,7 +17,7 @@ import { Transition } from '@/shared/ui'
 import styles from './Overlay.module.scss'
 
 interface OverlayProps {
-	isOpen: boolean
+	isOpen?: boolean
 	onClose: () => void
 }
 
@@ -34,7 +34,7 @@ export const Overlay: FC<OverlayProps> = props => {
 	}
 
 	return (
-		<Transition isOpen={isOpen} classNameObject={classNameObject}>
+		<Transition isOpen={isOpen || false} classNameObject={classNameObject}>
 			<div className={styles.overlay} onClick={onClose} />
 		</Transition>
 	)

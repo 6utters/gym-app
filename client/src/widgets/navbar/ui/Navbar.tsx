@@ -1,9 +1,9 @@
 import { FC } from 'react'
-import styles from './Navbar.module.scss'
 import { navbarLinks } from '@/widgets/navbar/model/consts/navbarLinks'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import cn from 'classnames'
+import styles from './Navbar.module.scss'
 
 export const Navbar: FC = () => {
 	const { asPath } = useRouter()
@@ -17,7 +17,7 @@ export const Navbar: FC = () => {
 							href={link.href}
 							key={link.id}
 							className={cn({
-								[styles.active]: asPath === link.href
+								[styles.active]: asPath.startsWith(link.href)
 							})}
 						>
 							<link.icon />

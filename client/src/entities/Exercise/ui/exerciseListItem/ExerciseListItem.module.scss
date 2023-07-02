@@ -1,4 +1,7 @@
-.main {
+.exercise_list_item {
+  @apply flex-center-between p-[0.5rem] z-1;
+
+  .main {
     @apply w-full h-full flex items-center justify-between;
 
     .image {
@@ -10,21 +13,16 @@
     }
 
     > .title {
-      @apply w-full w-[60%] font-semibold text-black text-lg;
+      @apply w-full w-[60%] font-semibold text-dark_blue text-lg;
     }
   }
 
-  > .icon {
-    @apply h-full w-[1.5rem] flex items-center justify-end mr-4;
-    > svg {
-      @apply text-lg h-full w-full;
-    }
+  .addon {
+    @apply w-[3rem] h-full;
   }
+}
 
 .active {
-  opacity: 1;
+  color: var(--bright_blue);
 }
 
-.not_active {
-  opacity: 0.3;
-}

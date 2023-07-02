@@ -9,12 +9,15 @@ import {
 	Post,
 	Query,
 	UploadedFiles,
+	UseGuards,
 	UseInterceptors,
 } from '@nestjs/common'
 import { ExercisesService } from './exercises.service'
 import { CreateExerciseDto } from './dto/create-exercise.dto'
 import { UpdateExerciseDto } from './dto/update-exercise.dto'
 import { FileFieldsInterceptor } from '@nestjs/platform-express'
+import { AuthGuard } from '../auth/auth.guard'
+import { CurrentUser } from '../users/users.decorator'
 
 @Controller('exercises')
 export class ExercisesController {
@@ -58,6 +61,15 @@ export class ExercisesController {
 	@Get(':id')
 	findOne(@Param('id') id: number) {
 		return this.exercisesService.findOne(id)
+	}
+
+	@Get('/by-program/:progId')
+	@UseGuards(AuthGuard)
+	findByProgram(
+		@CurrentUser('id') id: number,
+		@Param('progId') progId: number,
+	) {
+		return this.exercisesService.getExercisesByProgram(id, progId)
 	}
 
 	@Patch('update')

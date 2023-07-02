@@ -1,8 +1,8 @@
-import { Layout } from '@/shared/ui'
+import { Layout } from '@/shared/layouts'
 import { FC } from 'react'
-import { useDeleteProgram, useGetPrograms } from '../model/api/programApi'
-import styles from './WorkoutsPage.module.scss'
+import { useDeleteProgram, useGetPrograms } from '../api/programApi'
 import { ProgramList } from '@/entities/Program'
+import styles from './WorkoutsPage.module.scss'
 
 export const WorkoutsPage: FC = () => {
 	const { data: programs, isLoading, error } = useGetPrograms()

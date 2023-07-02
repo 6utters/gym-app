@@ -5,7 +5,7 @@ import { MuscleGroupList } from '../../../../entities/MuscleGroup/ui/muscleGroup
 import { Panel } from '@/widgets/panel'
 
 import styles from './MuscleGroupsPanel.module.scss'
-import { Button, ButtonTheme } from '@/shared/ui'
+import { Button } from '@/shared/ui'
 import { useDispatch, useSelector } from 'react-redux'
 import { getExerciseIds } from '@/features/createWorkout/model/selectors/getExerciseIds/getExerciseIds'
 import { createWorkoutActions } from '@/features/createWorkout'
@@ -26,7 +26,7 @@ export const MuscleGroupsPanel: FC<MuscleGroupsModalProps> = props => {
 	const clearHandler = useCallback(() => {
 		dispatch(createWorkoutActions.clearAll())
 		onClose()
-	}, [dispatch])
+	}, [dispatch, onClose])
 
 	// if (isLoading) {
 	// 	//todo: skeletons
@@ -52,18 +52,17 @@ export const MuscleGroupsPanel: FC<MuscleGroupsModalProps> = props => {
 			<MuscleGroupList muscleGroups={muscleGroups} onClick={setGroup} />
 			<div className={styles.buttons}>
 				<Button
+					theme='outlined'
+					fullWidth
 					className={styles.clear_btn}
-					type={'button'}
-					theme={ButtonTheme.CLEAR}
 					onClick={clearHandler}
 					disabled={exerciseIds.length === 0}
 				>
 					Clear
 				</Button>
 				<Button
+					fullWidth
 					className={styles.add_btn}
-					type={'button'}
-					theme={ButtonTheme.CLEAR}
 					onClick={onClose}
 					disabled={exerciseIds.length === 0}
 				>

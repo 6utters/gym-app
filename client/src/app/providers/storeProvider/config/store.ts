@@ -4,13 +4,19 @@ import { $api, $rtkApi } from '@/shared/api'
 import { userReducer } from '@/entities/User'
 import { authByEmailReducer } from '@/features/authByEmail'
 import { createWorkoutReducer } from '@/features/createWorkout'
+import { statisticsReducer } from '@/entities/Statisctics'
+import { programCreationReducer } from '@/pages/programCreationPage'
+import { programDetailsReducer } from '@/pages/programDetailsPage'
 
 function createReduxStore(initialState?: StateSchema) {
 	const rootReducer: ReducersMapObject<StateSchema> = {
 		[$rtkApi.reducerPath]: $rtkApi.reducer,
 		user: userReducer,
+		statistics: statisticsReducer,
 		authByEmail: authByEmailReducer,
-		createWorkout: createWorkoutReducer
+		createWorkout: createWorkoutReducer,
+		programCreationPage: programCreationReducer,
+		programDetailsPage: programDetailsReducer
 	}
 
 	const extraArgument: ThunkExtraArg = {

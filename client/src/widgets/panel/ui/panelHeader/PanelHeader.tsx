@@ -1,5 +1,5 @@
 import { FC, ReactNode } from 'react'
-import { Button, ButtonTheme } from '@/shared/ui'
+import { Button } from '@/shared/ui'
 import { IoArrowBackOutline } from 'react-icons/io5'
 import styles from './PanelHeader.module.scss'
 import { filterText } from '@/shared/lib'
@@ -16,21 +16,13 @@ export const PanelHeader: FC<PanelHeaderProps> = props => {
 
 	return (
 		<div className={styles.header}>
-			<Button
-				theme={ButtonTheme.CLEAR}
-				className={styles.header_btn}
-				onClick={onClose}
-			>
+			<Button theme='clear' className={styles.header_btn} onClick={onClose}>
 				<IoArrowBackOutline />
 			</Button>
 			<div className={styles.title}>
 				<h2>{title ? filterText(title, 24) : title}</h2>
 			</div>
-			<Button
-				theme={ButtonTheme.CLEAR}
-				className={styles.header_btn}
-				onClick={onIconClick}
-			>
+			<Button theme='clear' className={styles.header_btn} onClick={onIconClick}>
 				{Icon}
 			</Button>
 		</div>

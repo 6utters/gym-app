@@ -1,0 +1,16 @@
+.light {
+  --dark_blue: #1B264F;
+  --bright_blue: #2962ff;
+  --inert_blue: #274690;
+  --light_blue: #576CA8;
+  --light_gray: #F5F3F5;
+  --dust_black: #302B27;
+  --dust_gray: #757575;
+  --indian_red: #CC444B;
+  --light_red: #DF7373;
+  --light_green: #84A07C;
+
+  --font-size-l: 24px;
+  --font-line-l: 32px;
+  --font-l: var(--font-size-l) / var(--font-line-l) var(--font-family-main);
+}

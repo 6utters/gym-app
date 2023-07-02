@@ -1,6 +1,8 @@
+import { Exercise } from '@/entities/Exercise'
+
 export interface Objective {
 	targetSets: number
 	targetReps: number
 	timeout: number
-	exerciseId: number
+	exercise: Partial<Exercise>
 }

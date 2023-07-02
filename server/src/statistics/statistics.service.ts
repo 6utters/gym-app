@@ -25,8 +25,8 @@ export class StatisticsService {
 		})
 	}
 
-	async findOne(userId, programId, exerciseId) {
-		return await this.statisticsRepository.findOneOrFail({
+	async findAllFromUser(userId, programId, exerciseId) {
+		return await this.statisticsRepository.find({
 			where: {
 				user: { id: userId },
 				program: { id: programId },

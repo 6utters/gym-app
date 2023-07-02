@@ -46,7 +46,7 @@ export class ProgramsService {
 					exerciseId: id,
 					targetReps: 12,
 					targetSets: 3,
-					timeout: 120,
+					timeout: 90000,
 				} as CreateObjectiveDto
 			})
 			program.objectives = await Promise.all(
@@ -82,6 +82,25 @@ export class ProgramsService {
 		return await this.programsRepository.save(program)
 	}
 
+	async complete(userId: string, programId: number) {
+		try {
+			const program = await this.findOneFromUser(+userId, programId)
+
+			if (!program) {
+				throw new Error()
+			}
+			const todayDate = new Date()
+
+			program.completedDate = todayDate
+			await this.programsRepository.save(program)
+		} catch (e) {
+			throw new HttpException(
+				'No such program has been found',
+				HttpStatus.NOT_FOUND,
+			)
+		}
+	}
+
 	findAll() {
 		return this.programsRepository.find({
 			relations: {
@@ -102,11 +121,26 @@ export class ProgramsService {
 		})
 	}
 
+	async findOneFromUser(userId: number, programId: number) {
+		return await this.programsRepository.findOne({
+			where: { userId, id: programId },
+			relations: {
+				exercises: true,
+				objectives: { exercise: true },
+			},
+		})
+	}
+
 	async findOne(id: number) {
 		try {
 			return await this.programsRepository.findOneOrFail({
 				where: { id },
-				relations: { userId: true, exercises: true },
+				relations: {
+					userId: true,
+					exercises: true,
+					statistics: { exercise: true },
+					objectives: { exercise: true },
+				},
 			})
 		} catch (e) {
 			throw new HttpException(
@@ -116,7 +150,24 @@ export class ProgramsService {
 		}
 	}
 
-	//TODO: update program
+	async getExerciseIdsByProgram(userId: number, programId: number) {
+		try {
+			const program = await this.programsRepository.findOneOrFail({
+				where: {
+					id: programId,
+				},
+				relations: {
+					exercises: true,
+				},
+			})
+			return program.exercises
+		} catch (e) {
+			throw new HttpException(
+				'No such exercise in this program.',
+				HttpStatus.NOT_FOUND,
+			)
+		}
+	}
 
 	async update(programId, dto) {
 		const program = await this.findOne(programId)

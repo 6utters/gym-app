@@ -1,26 +1,26 @@
 const plugin = require('tailwindcss/plugin')
 
 module.exports = {
-	content: [
-		'./pages/**/*.{js,ts,jsx,tsx}',
-		'./src/components/**/*.{js,ts,jsx,tsx}'
-	],
+	content: ['./pages/**/*.{js,ts,jsx,tsx}', './src/**/*.{js,ts,jsx,tsx}'],
 	theme: {
 		extend: {
+			colors: {
+				dark_blue: 'var(--dark_blue)',
+				inert_blue: 'var(--inert_blue)',
+				light_blue: 'var(--light_blue)',
+				bright_blue: 'var(--bright_blue)',
+				light_gray: 'var(--light_gray)',
+				dust_black: 'var(--dust_black)',
+				dust_gray: 'var(--dust_gray)',
+				indian_red: 'var(--indian_red)',
+				light_red: 'var(--light_red)',
+				light_green: 'var(--light_green)'
+			},
 			spacing: {
 				0.5: '0.12rem'
 			},
-			fontSize: {
-				'2lg': '1.38rem'
-			},
 			borderRadius: {
 				image: '0.5rem'
-			},
-			transitionTimingFunction: {
-				DEFAULT: 'ease-in-out'
-			},
-			transitionDuration: {
-				DEFAULT: '200ms'
 			},
 			zIndex: {
 				1: '1',
@@ -67,9 +67,6 @@ module.exports = {
 	},
 	plugins: [
 		plugin(({ addComponents, addUtilities }) => {
-			addComponents({
-				'.btn-primary': {}
-			})
 			addUtilities({
 				'.text-shadow': {
 					textShadow: '1px 1px rgba(0, 0, 0, 0.4)'
