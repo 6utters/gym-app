@@ -3,22 +3,19 @@
   height: 93%;
 
   .input_container {
-    @apply h-full;
     > .title {
       @apply mt-8;
 
       h1 {
-        @apply mb-8 text-center text-2xl font-semibold;
-        color: #223476;
+        @apply mb-8 text-center text-2xl font-semibold text-dark_blue;
       }
     }
-
-    > .inputs {
-      @apply w-full h-[30%];
-
       .input {
         @apply mb-[2rem];
       }
+
+    > .error {
+      @apply text-end font-medium text-light_red;
     }
   }
 
@@ -29,6 +26,10 @@
       span {
         @apply text-gray-800 underline cursor-pointer;
       }
+    }
+
+    button {
+      @apply h-[3rem];
     }
   }
 }

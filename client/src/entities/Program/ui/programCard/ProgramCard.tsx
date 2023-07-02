@@ -1,9 +1,10 @@
-import { FC } from 'react'
+import { FC, MouseEvent } from 'react'
 import Image from 'next/image'
 import { IoClose } from 'react-icons/io5'
 import { Program } from '../../model/types/Program'
 import styles from './ProgramCard.module.scss'
-import { SERVER_URL } from '@/shared/consts'
+import { SERVER_URL, WORKOUTS_ROUTE } from '@/shared/consts'
+import Link from 'next/link'
 
 interface ProgramCardProps {
 	program: Program
@@ -13,8 +14,13 @@ interface ProgramCardProps {
 export const ProgramCard: FC<ProgramCardProps> = props => {
 	const { program, onDelete } = props
 
+	const onDeleteClick = (e: MouseEvent<HTMLElement>) => {
+		e.preventDefault()
+		onDelete(program.id)
+	}
+
 	return (
-		<div className={styles.card}>
+		<Link href={`${WORKOUTS_ROUTE}/${program.id}`} className={styles.card}>
 			<Image
 				className={styles.cover}
 				src={SERVER_URL + program.image_path}
@@ -25,10 +31,9 @@ export const ProgramCard: FC<ProgramCardProps> = props => {
 			/>
 			<div className={styles.dark_overlay} />
 			<h2 className={styles.program_name}>{program.name}</h2>
-			<IoClose
-				className={styles.delete_icon}
-				onClick={() => onDelete(program.id)}
-			/>
-		</div>
+			<div className={styles.delete_icon} onClick={onDeleteClick}>
+				<IoClose />
+			</div>
+		</Link>
 	)
 }

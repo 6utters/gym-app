@@ -21,6 +21,9 @@ export class Program extends Base {
 	@Column({ name: 'image_path' })
 	image_path: string
 
+	@Column({ name: 'completed_date', nullable: true })
+	completedDate: Date
+
 	@ManyToOne(() => User, user => user.programs)
 	@JoinColumn({ name: 'user_id' })
 	userId: number

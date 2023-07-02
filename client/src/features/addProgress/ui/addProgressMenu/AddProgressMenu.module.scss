@@ -1,0 +1,24 @@
+.add_progress_menu {
+  @apply w-full h-[3rem] flex items-center justify-between gap-2;
+
+  .progress_input {
+    @apply w-full bg-white rounded-lg shadow;
+
+    input {
+      @apply text-center text-xl border-none;
+
+      &::placeholder {
+        @apply text-center text-xl;
+      }
+    }
+  }
+
+  > .progress_btn {
+    @apply h-full shadow;
+
+    svg {
+      @apply w-full h-full;
+    }
+  }
+}
+

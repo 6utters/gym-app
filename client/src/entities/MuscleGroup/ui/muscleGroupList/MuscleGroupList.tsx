@@ -14,11 +14,11 @@ export const MuscleGroupList: FC<MuscleGroupListProps> = ({
 }) => {
 	if (!muscleGroups || muscleGroups.length === 0)
 		return (
-			<div className={styles.no_exercises}>
-				<h3 className={styles.warning}>
+			<ul className={styles.exercise_list}>
+				<li className={styles.warning}>
 					No muscle groups have been added yet.
-				</h3>
-			</div>
+				</li>
+			</ul>
 		)
 
 	return (

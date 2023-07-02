@@ -23,12 +23,12 @@ export const AuthProvider: FC<ComponentAuthFields> = ({
 	useEffect(() => {
 		const accessToken = localStorage.getItem(ACCESS_TOKEN_LOCAL_STORAGE_KEY)
 		if (accessToken) dispatch(refresh())
-	}, [])
+	}, [dispatch])
 
 	useEffect(() => {
 		const accessToken = localStorage.getItem(ACCESS_TOKEN_LOCAL_STORAGE_KEY)
 		if (!accessToken && user) dispatch(logOut())
-	}, [pathname])
+	}, [dispatch, pathname, user])
 
 	return !isOnlyForAdmin && !isOnlyForUser && !isNotForUser ? (
 		<>{children}</>

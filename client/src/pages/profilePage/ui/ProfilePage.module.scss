@@ -1,25 +1,16 @@
 .wrapper {
 	@apply relative;
 	.profile {
-		@apply flex-center-between h-[3.25em] text-gray-700;
+		@apply flex flex-col items-center justify-center text-dark_blue mt-[2rem];
 
-		.user {
-			@apply flex items-center;
-
-			&__icon {
-				@apply text-[1.5em];
-			}
-
-			p {
-				@apply mx-2;
-			}
+		strong {
+			@apply text-bright_blue;
 		}
-		.exit {
-			@apply text-[1.5em] cursor-pointer;
 
-			&:hover {
-				@apply text-black;
-			}
+		> .info {
+			@apply mt-[3rem] text-center;
 		}
 	}
 }
+
+

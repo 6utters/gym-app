@@ -1,0 +1,15 @@
+.progress_bar {
+    @apply relative h-[4rem] justify-center mt-4 bg-white rounded-xl shadow;
+
+    h2 {
+      @apply text-dark_blue;
+    }
+
+    .circle_bar {
+      @apply absolute top-0 left-0 h-full w-[4rem];
+    }
+
+    .completed {
+      @apply uppercase font-semibold text-lg text-bright_blue;
+    }
+}

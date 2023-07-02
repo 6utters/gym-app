@@ -5,31 +5,19 @@
     }
 
   .buttons {
-    @apply absolute bottom-0 left-0 w-full h-[10%] bg-white flex items-center justify-between p-3;
+    @apply absolute bottom-0 left-0 w-full h-[10%] bg-white flex items-center justify-between p-3 gap-2;
     z-index: 32;
 
-    .clear_btn {
-      @apply w-full h-full bg-blue-950;
-
-      &:disabled {
-        @apply opacity-30;
-      }
-    }
-
-    .add_btn {
-      @apply w-full h-full bg-blue-700;
-
-      &:disabled {
-        @apply opacity-30;
-      }
+    > button {
+      @apply h-full;
     }
   }
 }
 
 .complete_icon {
-  @apply w-[8%] text-blue-600 ml-[1rem];
+  @apply w-full h-full flex items-center justify-end;
   svg {
-    @apply h-full w-full;
+    @apply h-[50%] w-[50%];
   }
 }
 

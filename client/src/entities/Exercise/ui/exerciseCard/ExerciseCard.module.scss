@@ -1,23 +1,23 @@
-.main {
-  @apply w-full h-full flex items-center justify-between;
+.content {
+  @apply max-w-[80%] h-full grid px-2 gap-2 items-center;
+  grid-template-columns: 1fr 2fr;
 
   .image {
-    @apply relative h-[95%] flex items-center justify-center px-2;
-
+    @apply w-full h-full;
     img {
-      object-fit: fill;
+      object-fit: contain;
     }
   }
 
   > .title {
-    @apply w-full w-[60%] font-semibold text-black text-lg;
+    @apply font-semibold text-dark_blue text-lg;
   }
 
 }
 
-.icon {
-  @apply h-full w-[1.5rem] w-[10%] flex items-center justify-center;
+.drag {
+  @apply w-[15%] flex items-center justify-center;
   > svg {
-    @apply text-lg h-1/2 w-1/2;
+    @apply h-1/2 w-1/2 text-dark_blue;
   }
 }

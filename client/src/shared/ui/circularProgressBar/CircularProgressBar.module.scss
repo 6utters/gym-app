@@ -1,0 +1,20 @@
+.circular_progress_bar {
+  svg {
+    @apply w-full h-full;
+    .circle_background {
+      fill: none;
+      stroke: #b6c6f2;
+    }
+
+    .circle_progress {
+      fill: none;
+      stroke: var(--light_blue);
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .circle_text {
+      @apply text-sm text-stone-500 font-medium;
+    }
+  }
+}

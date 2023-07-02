@@ -1,16 +1,11 @@
-import styles from './AuthPage.module.scss'
+import { FC, memo } from 'react'
 import { AuthForm } from '@/features/authByEmail'
-import { SIGN_UP_ROUTE } from '@/shared/consts'
-import { useRouter } from 'next/router'
-import { FC } from 'react'
+import styles from './AuthPage.module.scss'
 
-export const AuthPage: FC = () => {
-	const router = useRouter()
-	const page = router.pathname === SIGN_UP_ROUTE ? 'sign_up' : 'sign_in'
-
+export const AuthPage: FC = memo(() => {
 	return (
-		<div className={styles.container}>
-			<AuthForm page={page} />
-		</div>
+		<main className={styles.container}>
+			<AuthForm />
+		</main>
 	)
-}
+})

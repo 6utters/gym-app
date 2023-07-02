@@ -33,12 +33,12 @@ export class StatisticsController {
 
 	@Get('search')
 	@UseGuards(AuthGuard)
-	findOne(
+	findAllFromUser(
 		@CurrentUser('id') id: string,
 		@Query('progId') progId: string,
 		@Query('exerId') exerId: string,
 	) {
-		return this.statisticsService.findOne(+id, +progId, +exerId)
+		return this.statisticsService.findAllFromUser(+id, +progId, +exerId)
 	}
 
 	@Delete(':id')

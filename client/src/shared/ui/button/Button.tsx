@@ -1,42 +1,45 @@
-import styles from './Button.module.scss'
-import cn from 'classnames'
 import { ButtonHTMLAttributes, memo, ReactNode } from 'react'
+import cn from 'classnames'
+import styles from './Button.module.scss'
 
-export enum ButtonTheme {
-	CLEAR = 'clear',
-	CLEAR_INVERTED = 'clear_inverted'
-}
-
-export enum ButtonSize {
-	'M' = 'size_m',
-	'L' = 'size_l',
-	'XL' = 'size_xl'
-}
+export type ButtonTheme = 'neutral' | 'clear' | 'outlined' | 'circle'
+export type ButtonSize = 's' | 'm' | 'l'
+export type ButtonColor = 'success' | 'invalid' | 'primary' | 'secondary'
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	className?: string
-	children: ReactNode
 	size?: ButtonSize
+	color?: ButtonColor
 	disabled?: boolean
+	fullWidth?: boolean
 	theme?: ButtonTheme
+	children: ReactNode
 }
 
 export const Button = memo((props: ButtonProps) => {
 	const {
-		theme = ButtonTheme.CLEAR,
+		theme = 'neutral',
+		size = 'm',
+		color = 'primary',
 		className,
 		disabled,
+		fullWidth,
 		children,
-		size = ButtonSize.M,
 		...otherProps
 	} = props
 	return (
 		<button
-			type='button'
-			className={cn(styles.button, className, {
-				[styles[size]]: true,
-				[styles[theme]]: true
-			})}
+			className={cn(
+				styles.button,
+				className,
+				styles[theme],
+				styles[size],
+				styles[color],
+				{
+					[styles.disabled]: disabled,
+					[styles.full_width]: fullWidth
+				}
+			)}
 			disabled={disabled}
 			{...otherProps}
 		>

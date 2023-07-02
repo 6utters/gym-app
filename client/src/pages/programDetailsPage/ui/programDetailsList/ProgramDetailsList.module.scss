@@ -1,0 +1,10 @@
+.program_details_list {
+  @apply bg-white rounded-2xl shadow mt-4 mb-4;
+}
+
+.forward_icon {
+  @apply w-full h-full flex items-center justify-end;
+  svg {
+    @apply h-[50%] w-[50%] stroke-dark_blue;
+  }
+}

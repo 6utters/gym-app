@@ -11,7 +11,7 @@ import {
 	getObjectives
 } from '@/features/createWorkout'
 
-import { Button, ButtonTheme, Input } from '@/shared/ui'
+import { Button, Input } from '@/shared/ui'
 import { convertTime } from '@/shared/lib'
 
 import styles from './ObjectivePanel.module.scss'
@@ -26,14 +26,18 @@ export const ObjectivePanel: FC<ObjectivePanelProps> = props => {
 	const dispatch = useDispatch()
 
 	const defaultObjective: Objective = {
-		exerciseId,
+		exercise: {
+			id: exerciseId
+		},
 		targetSets: 3,
 		targetReps: 12,
 		timeout: 90000
 	}
 
 	const objectives = useSelector(getObjectives)
-	const { data: exercise } = useGetExerciseById(exerciseId)
+	const { data: exercise } = useGetExerciseById(exerciseId, {
+		skip: !exerciseId || exerciseId == 0
+	})
 
 	const currentObjective = getObjectiveById(objectives, exerciseId)
 
@@ -55,20 +59,6 @@ export const ObjectivePanel: FC<ObjectivePanelProps> = props => {
 		onClose()
 	}
 
-	//
-	// if (isLoading) {
-	// 	//todo: skeletons
-	// 	return (
-	// 		<div className={styles.exercises_panel}>
-	// 			<h3>Loading</h3>
-	// 		</div>
-	// 	)
-	// }
-	//
-	// if (error) {
-	// 	return <h3>Something went wrong</h3>
-	// }
-
 	return (
 		<Panel
 			className={styles.objective_panel}
@@ -84,7 +74,7 @@ export const ObjectivePanel: FC<ObjectivePanelProps> = props => {
 							<Input
 								className={styles.sets}
 								type={'number'}
-								value={objective.targetSets}
+								value={objective.targetSets === 0 ? '' : objective.targetSets}
 								onChange={e =>
 									setObjective(prevState => ({
 										...prevState,
@@ -98,7 +88,7 @@ export const ObjectivePanel: FC<ObjectivePanelProps> = props => {
 							<Input
 								className={styles.reps}
 								type={'number'}
-								value={objective.targetReps}
+								value={objective.targetReps === 0 ? '' : objective.targetReps}
 								onChange={e =>
 									setObjective(prevState => ({
 										...prevState,
@@ -129,8 +119,7 @@ export const ObjectivePanel: FC<ObjectivePanelProps> = props => {
 				<div className={styles.buttons}>
 					<Button
 						className={styles.clear_btn}
-						type={'button'}
-						theme={ButtonTheme.CLEAR}
+						theme='clear'
 						onClick={() => onClearClick(exerciseId)}
 					>
 						Clear
@@ -138,7 +127,6 @@ export const ObjectivePanel: FC<ObjectivePanelProps> = props => {
 					<Button
 						className={styles.add_btn}
 						type={'button'}
-						theme={ButtonTheme.CLEAR}
 						onClick={() => onSaveClick(objective)}
 					>
 						Save

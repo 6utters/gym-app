@@ -1,0 +1,19 @@
+.timeout {
+  @apply bg-white w-[15rem];
+
+  > h2 {
+    @apply text-center font-semibold text-blue-950 text-lg;
+  }
+
+  .timeout_bar {
+    svg {
+      stroke: #223476;
+    }
+  }
+
+  .skip_btn {
+    margin-left: auto;
+    border: 2px solid #223476;
+    color: #223476;
+  }
+}

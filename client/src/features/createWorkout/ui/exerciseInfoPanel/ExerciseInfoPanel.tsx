@@ -22,7 +22,7 @@ export const ExercisesInfoPanel: FC<ExercisesInfoPanelProps> = props => {
 	const addExercise = useCallback(() => {
 		dispatch(createWorkoutActions.addExercise(exerciseId))
 		onClose()
-	}, [dispatch])
+	}, [dispatch, exerciseId, onClose])
 
 	return (
 		<Panel

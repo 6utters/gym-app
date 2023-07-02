@@ -23,7 +23,7 @@ export const ExerciseCard: FC<ExerciseCardProps> = props => {
 
 	return (
 		<Card size={CardSize.M} className={className}>
-			<div className={styles.main} onClick={() => clickHandler(exercise.id)}>
+			<div className={styles.content} onClick={() => clickHandler(exercise.id)}>
 				<div className={styles.image}>
 					<Image
 						src={SERVER_URL + exercise.thumbnailPath}
@@ -37,7 +37,7 @@ export const ExerciseCard: FC<ExerciseCardProps> = props => {
 					<h2>{exercise.name}</h2>
 				</div>
 			</div>
-			<div className={styles.icon}>
+			<div className={styles.drag}>
 				<IoMenuOutline />
 			</div>
 		</Card>

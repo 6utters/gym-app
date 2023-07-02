@@ -17,5 +17,6 @@ import { ObjectivesModule } from '../objectives/objectives.module'
 	],
 	controllers: [ProgramsController],
 	providers: [ProgramsService],
+	exports: [ProgramsService],
 })
 export class ProgramsModule {}

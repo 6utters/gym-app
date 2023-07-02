@@ -1,100 +1,43 @@
-import { FC, useState } from 'react'
-import { Layout, Overlay, Transition, TransitionDirection } from '@/shared/ui'
-import {
-	CreateWorkoutForm,
-	ExercisesInfoPanel,
-	ExercisesPanel,
-	MuscleGroupsPanel,
-	ObjectivePanel
-} from '@/features/createWorkout'
+import { FC, memo, useCallback, useEffect } from 'react'
+import { Layout } from '@/shared/layouts'
+import { CreateWorkoutForm } from '@/features/createWorkout'
+import { useAppDispatch } from '@/shared/lib/hooks'
+import { programCreationActions } from '@/pages/programCreationPage'
+import { ProgramCreationObjectives } from '../programCreationObjectives/ProgramCreationObjectives'
+import { ProgramCreationExercises } from '../programCreationExercises/ProgramCreationExercises'
+import { ProgramCreationExInfoPanel } from '../programCreationExInfoPanel/ProgramCreationExInfoPanel'
+import { ProgramCreationMuscleGroups } from '../programCreationMuscleGroups/ProgramCreationMuscleGroups'
+import { Overlay } from '@/shared/ui'
+import { useSelector } from 'react-redux'
+import { getIsMGPanelOpen } from '../../model/selectors/getIsMGPanelOpen/getIsMGPanelOpen'
+import { getIsObjectivesExerciseOpen } from '../../model/selectors/getIsObjectivesExerciseOpen/getIsObjectivesExerciseOpen'
 
-import styles from './ProgramCreationPage.module.scss'
+export const ProgramCreationPage: FC = memo(() => {
+	const dispatch = useAppDispatch()
+	const isMGPanelOpen = useSelector(getIsMGPanelOpen)
+	const isObjectivesExerciseOpen = useSelector(getIsObjectivesExerciseOpen)
 
-export const ProgramCreationPage: FC = () => {
-	const [showMuscleGroups, setShowMuscleGroups] = useState(false)
-	const [showExercises, setShowExercises] = useState(false)
-	const [showExerciseInfo, setShowExerciseInfo] = useState(false)
-	const [showObjectives, setShowObjectives] = useState(false)
+	useEffect(() => {
+		return () => {
+			dispatch(programCreationActions.reset())
+		}
+	}, [dispatch])
 
-	const [currentMuscleGroup, setCurrentMuscleGroup] = useState(0)
-	const [currentExercise, setCurrentExercise] = useState(0)
-	const [exerciseObjectives, setExerciseObjectives] = useState(0)
-
-	const setMuscleGroup = (id: number) => {
-		setCurrentMuscleGroup(id)
-		setShowExercises(true)
-	}
-
-	const setExercise = (id: number) => {
-		setCurrentExercise(id)
-		setShowExerciseInfo(true)
-	}
-
-	const setObjectives = (id: number) => {
-		setExerciseObjectives(id)
-		setShowObjectives(true)
-	}
-
-	const closeMGModal = () => {
-		setShowMuscleGroups(false)
-	}
-
-	const closeExerciseModal = () => {
-		setShowExercises(false)
-	}
-
-	const closeExerciseInfoModal = () => {
-		setShowExerciseInfo(false)
-	}
-
-	const closeExerciseObjModal = () => {
-		setShowObjectives(false)
-	}
-
-	const closeAllModals = () => {
-		setShowExercises(false)
-		setShowMuscleGroups(false)
-		setShowExerciseInfo(false)
-		setShowObjectives(false)
-	}
+	const closeAllModals = useCallback(() => {
+		dispatch(programCreationActions.closeAllPanels())
+	}, [dispatch])
 
 	return (
 		<Layout title={'Create Program'}>
-			<Transition isOpen={showObjectives} direction={TransitionDirection.UP}>
-				<ObjectivePanel
-					exerciseId={exerciseObjectives}
-					onClose={closeExerciseObjModal}
-				/>
-			</Transition>
-			<Transition
-				isOpen={showExerciseInfo}
-				direction={TransitionDirection.LEFT}
-			>
-				<ExercisesInfoPanel
-					onClose={closeExerciseInfoModal}
-					exerciseId={currentExercise}
-				/>
-			</Transition>
-			<Transition isOpen={showExercises} direction={TransitionDirection.LEFT}>
-				<ExercisesPanel
-					onClose={closeExerciseModal}
-					setExercise={setExercise}
-					groupId={currentMuscleGroup}
-				/>
-			</Transition>
-			<Transition isOpen={showMuscleGroups}>
-				<MuscleGroupsPanel onClose={closeMGModal} setGroup={setMuscleGroup} />
-			</Transition>
-			<div className={styles.wrapper}>
-				<Overlay
-					isOpen={showMuscleGroups || showObjectives}
-					onClose={closeAllModals}
-				/>
-				<CreateWorkoutForm
-					showMuscleGroups={setShowMuscleGroups}
-					showObjectives={setObjectives}
-				/>
-			</div>
+			<ProgramCreationObjectives />
+			<ProgramCreationExInfoPanel />
+			<ProgramCreationExercises />
+			<ProgramCreationMuscleGroups />
+			<Overlay
+				isOpen={isMGPanelOpen || isObjectivesExerciseOpen}
+				onClose={closeAllModals}
+			/>
+			<CreateWorkoutForm />
 		</Layout>
 	)
-}
+})

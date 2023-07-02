@@ -1,4 +1,4 @@
-import { Objective } from '@/types/objective.interface'
+import { Objective } from '@/entities/Objective'
 
 export const getObjectiveById = (objectives: Objective[], id: number) =>
-	objectives.find(obj => obj.exerciseId === id) || null
+	objectives.find(obj => obj.exercise.id === id) || null

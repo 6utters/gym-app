@@ -1,0 +1,28 @@
+.objectives_block {
+  @apply w-full h-[7rem] bg-white rounded-xl shadow flex items-center justify-between px-[2rem] mb-[1rem];
+
+  p {
+    @apply text-sm text-stone-500 font-medium;
+  }
+
+  > .reps {
+    @apply flex flex-col items-center;
+    > .reps_progress {
+      @apply w-[3.5rem] h-[3.5rem] border-4 border-blue-500 rounded-full flex items-center justify-center font-medium;
+    }
+  }
+
+  > .rest {
+    @apply flex flex-col items-center;
+    >.rest_progress {
+      @apply w-[4rem] h-[4rem] border-4 border-blue-500 rounded-full flex items-center justify-center font-medium;
+    }
+  }
+
+  > .sets {
+    @apply flex flex-col items-center;
+    >.sets_progress {
+      @apply w-[3.5rem] h-[3.5rem] rounded-full flex items-center justify-center font-medium;
+    }
+  }
+}

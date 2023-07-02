@@ -1,44 +1,76 @@
-import { FC } from 'react'
+import { FC, memo, ReactNode } from 'react'
 import Image from 'next/image'
-
-import { useSelector } from 'react-redux'
-import { IoCheckmarkCircle } from 'react-icons/io5'
-import cn from 'classnames'
 import { Exercise } from '@/entities/Exercise'
-import { getExerciseIds } from '@/features/createWorkout/model/selectors/getExerciseIds/getExerciseIds'
-import { createWorkoutActions } from '@/features/createWorkout'
-
-import { useAppDispatch } from '@/shared/lib/hooks'
-import { Card, CardSize } from '@/shared/ui'
 import { SERVER_URL } from '@/shared/consts'
 
 import styles from './ExerciseListItem.module.scss'
+import cn from 'classnames'
+import { useAppDispatch } from '@/shared/lib/hooks'
+import { createWorkoutActions } from '@/features/createWorkout'
 
-export type ExerciseCardType = 'Exercise' | 'Program_exercise'
-
-interface ExerciseCardProps {
+interface ExerciseListItemProps {
 	exercise: Exercise
-	onClick: (id: number) => void
-	className: string
+	onClick: (itemId: number) => void
+	addon?: ReactNode
+	onAddonClick?: (itemId: number) => void
+	isSelected?: boolean
+	draggable?: boolean
+	selectedIndex?: number
+	setIndex: (selectedIndex: number) => void
+	index: number
 }
 
-export const ExerciseListItem: FC<ExerciseCardProps> = props => {
-	const { onClick, exercise, className } = props
-	const exerciseIds = useSelector(getExerciseIds)
+export const ExerciseListItem: FC<ExerciseListItemProps> = memo(props => {
+	const {
+		onClick,
+		exercise,
+		addon,
+		onAddonClick,
+		isSelected,
+		draggable,
+		selectedIndex,
+		setIndex,
+		index
+	} = props
+
 	const dispatch = useAppDispatch()
 
-	const isSelected = Boolean(exerciseIds.find(id => exercise.id === id))
+	const onAddonClickHandler = () => {
+		onAddonClick?.(exercise.id)
+	}
 
-	const handleClick = (id: number) => {
-		if (isSelected) {
-			dispatch(createWorkoutActions.removeExercise(id))
-		} else {
-			dispatch(createWorkoutActions.addExercise(id))
-		}
+	const dragStartHandler = (e: React.DragEvent<HTMLDivElement>) => {
+		setIndex(index)
+	}
+
+	const dragEndHandler = (e: React.DragEvent<HTMLDivElement>) => {}
+
+	const dragLeaveHandler = (e: React.DragEvent<HTMLDivElement>) => {}
+
+	const dragOverHandler = (e: React.DragEvent<HTMLDivElement>) => {
+		e.preventDefault()
+	}
+
+	const dropHandler = (e: React.DragEvent<HTMLDivElement>) => {
+		e.preventDefault()
+		dispatch(
+			createWorkoutActions.changeOrder({
+				firstIndex: selectedIndex ?? 0,
+				secondIndex: index
+			})
+		)
 	}
 
 	return (
-		<Card size={CardSize.M}>
+		<div
+			className={styles.exercise_list_item}
+			draggable={draggable}
+			onDragStart={e => dragStartHandler(e)}
+			onDragEnd={e => dragEndHandler(e)}
+			onDragLeave={e => dragLeaveHandler(e)}
+			onDragOver={e => dragOverHandler(e)}
+			onDrop={e => dropHandler(e)}
+		>
 			<div className={styles.main} onClick={() => onClick(exercise.id)}>
 				<div className={styles.image}>
 					<Image
@@ -54,14 +86,13 @@ export const ExerciseListItem: FC<ExerciseCardProps> = props => {
 				</div>
 			</div>
 			<div
-				className={cn(className, {
-					[styles.active]: isSelected,
-					[styles.not_active]: !isSelected
+				className={cn(styles.addon, {
+					[styles.active]: isSelected
 				})}
-				onClick={() => handleClick(exercise.id)}
+				onClick={onAddonClickHandler}
 			>
-				<IoCheckmarkCircle />
+				{addon}
 			</div>
-		</Card>
+		</div>
 	)
-}
+})

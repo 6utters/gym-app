@@ -1,17 +1,16 @@
-import { FC } from 'react'
+import { FC, memo } from 'react'
 import { IUploadField } from './uploadFile.interface'
 import styles from './UploadField.module.scss'
 
-const UploadField: FC<IUploadField> = ({ onChange, placeholder, error }) => {
+export const UploadField: FC<IUploadField> = memo(props => {
+	const { onChange, placeholder, error } = props
 	return (
 		<div className={styles.file}>
 			<label>
 				<span>{placeholder}</span>
-				<input type="file" onChange={onChange} />
+				<input type='file' onChange={onChange} />
 				{error && <div className={styles.error}>{error.message}</div>}
 			</label>
 		</div>
 	)
-}
-
-export default UploadField
+})

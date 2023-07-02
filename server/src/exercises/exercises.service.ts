@@ -8,6 +8,8 @@ import { Instruction } from './entities/instruction.entity'
 import { FilesService } from '../files/files.service'
 import { GroupsService } from '../groups/groups.service'
 import { UpdateExerciseDto } from './dto/update-exercise.dto'
+import { Program } from '../programs/entities/program.entity'
+import { ProgramsService } from '../programs/programs.service'
 
 @Injectable()
 export class ExercisesService {
@@ -18,7 +20,10 @@ export class ExercisesService {
 		private readonly warningsRepository: Repository<Warning>,
 		@InjectRepository(Instruction)
 		private readonly instructionsRepository: Repository<Instruction>,
+		@InjectRepository(Program)
+		private readonly programsRepository: Repository<Program>,
 		private filesService: FilesService,
+		private programsService: ProgramsService,
 		private groupsService: GroupsService,
 	) {}
 
@@ -62,7 +67,6 @@ export class ExercisesService {
 			return await this.exercisesRepository.find({
 				where: { id: In(ids) },
 				relations: {
-					group: true,
 					warnings: true,
 					instructions: true,
 					objectives: true,
@@ -82,11 +86,26 @@ export class ExercisesService {
 		})
 	}
 
+	async getExercisesByProgram(userId: number, programId: number) {
+		try {
+			const exercises = await this.programsService.getExerciseIdsByProgram(
+				userId,
+				programId,
+			)
+			return exercises.map(exercise => exercise.id)
+		} catch (e) {
+			throw new HttpException(
+				'No such exercise in this program.',
+				HttpStatus.NOT_FOUND,
+			)
+		}
+	}
+
 	async findOne(id: number) {
 		try {
 			return await this.exercisesRepository.findOneOrFail({
 				where: { id },
-				relations: { warnings: true, instructions: true },
+				relations: { warnings: true, instructions: true, group: true },
 			})
 		} catch (e) {
 			throw new HttpException(
