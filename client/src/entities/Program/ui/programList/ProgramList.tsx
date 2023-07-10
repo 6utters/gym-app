@@ -1,10 +1,10 @@
-import { FC } from 'react'
+import { FC, memo } from 'react'
 import { Program } from '../../model/types/Program'
-
-import { ProgramCard } from '@/entities/Program/ui/programCard/ProgramCard'
-import styles from './ProgramList.module.scss'
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query'
+import { Skeleton } from '@/shared/ui'
+import { ProgramCard } from '../programCard/ProgramCard'
 import { SerializedError } from '@reduxjs/toolkit'
+import styles from './ProgramList.module.scss'
 
 interface ProgramListProps {
 	programs: Program[]
@@ -13,12 +13,20 @@ interface ProgramListProps {
 	error?: FetchBaseQueryError | SerializedError
 }
 
-export const ProgramList: FC<ProgramListProps> = props => {
+export const ProgramList: FC<ProgramListProps> = memo(props => {
 	const { programs, isLoading, onDelete, error } = props
 
 	if (isLoading) {
-		//todo: skeletons
-		return null
+		return (
+			<div className={styles.program_list_wrapper}>
+				<div className={styles.content}>
+					<Skeleton width={'100%'} height={'6em'} border={'0.75rem'} />
+					<Skeleton width={'100%'} height={'6em'} border={'0.75rem'} />
+					<Skeleton width={'100%'} height={'6em'} border={'0.75rem'} />
+					<Skeleton width={'100%'} height={'6em'} border={'0.75rem'} />
+				</div>
+			</div>
+		)
 	}
 
 	if (error) {
@@ -51,4 +59,4 @@ export const ProgramList: FC<ProgramListProps> = props => {
 			</div>
 		</div>
 	)
-}
+})

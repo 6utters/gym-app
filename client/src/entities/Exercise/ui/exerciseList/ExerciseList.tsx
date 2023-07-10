@@ -1,4 +1,4 @@
-import { FC, memo, ReactNode, useState } from 'react'
+import { FC, ReactNode, useState } from 'react'
 import { Exercise } from '../../model/types/Exercise'
 import { ExerciseListItem } from '../exerciseListItem/ExerciseListItem'
 import styles from './ExerciseList.module.scss'
@@ -15,7 +15,7 @@ interface ExerciseListProps {
 	isDraggable?: boolean
 }
 
-export const ExerciseList: FC<ExerciseListProps> = memo(props => {
+export const ExerciseList: FC<ExerciseListProps> = props => {
 	const {
 		exercises,
 		className,
@@ -57,4 +57,4 @@ export const ExerciseList: FC<ExerciseListProps> = memo(props => {
 			))}
 		</ul>
 	)
-})
+}

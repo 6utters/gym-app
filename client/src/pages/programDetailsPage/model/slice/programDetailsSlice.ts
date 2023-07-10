@@ -18,11 +18,13 @@ export const programDetailsSlice = createSlice({
 	reducers: {
 		setCompletedWorkouts: state => {
 			const todayDate = new Date().toDateString()
-			const finishesWorkouts = JSON.parse(
-				localStorage.getItem(FINISHED_WORKOUTS) || ''
-			) as ProgramDetails[]
-
-			state.completedPrograms = finishesWorkouts.filter(
+			let finishedWorkouts: ProgramDetails[] = []
+			if (localStorage.getItem(FINISHED_WORKOUTS)) {
+				finishedWorkouts = JSON.parse(
+					localStorage.getItem(FINISHED_WORKOUTS) || ''
+				) as ProgramDetails[]
+			}
+			state.completedPrograms = finishedWorkouts.filter(
 				workout => workout.finishDate == todayDate
 			)
 		}

@@ -18,11 +18,11 @@
   }
 
   .addon {
-    @apply w-[3rem] h-full;
+    @apply w-[3rem] h-full text-dust_gray;
   }
 }
 
 .active {
-  color: var(--bright_blue);
+  color: var(--bright_blue) !important;
 }
 

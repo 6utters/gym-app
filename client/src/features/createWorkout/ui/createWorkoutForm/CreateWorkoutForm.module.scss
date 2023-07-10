@@ -1,7 +1,22 @@
 .form {
-  @apply grid gap-4;
+  @apply grid gap-4 overflow-y-scroll;
   grid-template-rows: 8fr 1fr;
   height: calc(100vh - var(--navbar-height) - var(--header-height));
+
+  .content {
+    .onload_img_wrapper {
+      @apply relative w-full mt-[1rem] h-[6em];
+
+      img {
+        @apply w-full h-full rounded-xl object-cover;
+      }
+
+      .dark_overlay {
+        @apply absolute w-full h-full top-0 left-0 rounded-xl opacity-30 bg-black;
+        z-index: 2;
+      }
+    }
+  }
 
   .list_block {
     @apply overflow-y-hidden my-[1rem];

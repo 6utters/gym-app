@@ -1,10 +1,9 @@
 .card {
-  @apply relative block h-[6em] w-full rounded-xl my-1 shadow border border-white overflow-hidden;
+  @apply relative block h-[6em] w-full rounded-xl shadow border border-white overflow-hidden;
   z-index: 1;
 
   .cover {
-    @apply w-full h-full;
-    object-fit: cover;
+    @apply w-full h-full object-cover;
   }
 
   .dark_overlay {

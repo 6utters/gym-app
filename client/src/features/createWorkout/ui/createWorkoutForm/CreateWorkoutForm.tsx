@@ -1,4 +1,5 @@
 import React, { FC, memo, useCallback, useState } from 'react'
+import Image from 'next/image'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { Button, Input, UploadField } from '@/shared/ui'
 import { selectFile } from '@/shared/lib/utils/file/file.utils'
@@ -16,8 +17,8 @@ import { IoAdd, IoMenuOutline } from 'react-icons/io5'
 import { WORKOUTS_ROUTE } from '@/shared/consts'
 import { Objective } from '@/entities/Objective'
 import { programCreationActions } from '@/pages/programCreationPage'
-import styles from './CreateWorkoutForm.module.scss'
 import cn from 'classnames'
+import styles from './CreateWorkoutForm.module.scss'
 
 export interface FormProps {
 	name: string
@@ -47,7 +48,7 @@ export const CreateWorkoutForm: FC = memo(() => {
 		[dispatch]
 	)
 
-	const [createWorkout, { isLoading, error }] = useCreateWorkout()
+	const [createWorkout] = useCreateWorkout()
 
 	const [workoutName, setWorkoutName] = useState('')
 	const [currentFile, setCurrentFile] = useState<File | null>(null)
@@ -97,6 +98,18 @@ export const CreateWorkoutForm: FC = memo(() => {
 					onChange={e => selectFile(e, setCurrentFile)}
 					placeholder={'Program image'}
 				/>
+				{currentFile && (
+					<div className={styles.onload_img_wrapper}>
+						<Image
+							src={currentFile ? URL.createObjectURL(currentFile) : ''}
+							alt='loaded image'
+							width='100'
+							height='100'
+							sizes={'100vh'}
+						/>
+						<div className={styles.dark_overlay} />
+					</div>
+				)}
 				<div className={styles.list_block}>
 					<div className={styles.header}>
 						<h3>Workout Exercises</h3>
