@@ -8,11 +8,6 @@ export const WorkoutsPage: FC = () => {
 	const { data: programs, isLoading, error } = useGetPrograms()
 	const [deleteProgram] = useDeleteProgram()
 
-	if (error) {
-		//todo: error case
-		return <div>Error</div>
-	}
-
 	return (
 		<Layout title={`Workouts`}>
 			<div className={styles.container}>
@@ -20,6 +15,7 @@ export const WorkoutsPage: FC = () => {
 					programs={programs || []}
 					isLoading={isLoading}
 					onDelete={deleteProgram}
+					error={error}
 				/>
 			</div>
 		</Layout>

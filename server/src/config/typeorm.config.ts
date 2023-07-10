@@ -7,7 +7,6 @@ export const getTypeOrmConfig = async (
 	type: 'postgres',
 	host: 'localhost',
 	port: configService.get('POSTGRES_PORT'),
-	url: process.env.POSTGRES_URL + '?sslmode=require',
 	database: configService.get('POSTGRES_DB'),
 	username: configService.get('POSTGRES_USER'),
 	password: configService.get('POSTGRES_PASSWORD'),

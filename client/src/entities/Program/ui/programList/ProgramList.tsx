@@ -3,24 +3,37 @@ import { Program } from '../../model/types/Program'
 
 import { ProgramCard } from '@/entities/Program/ui/programCard/ProgramCard'
 import styles from './ProgramList.module.scss'
+import { FetchBaseQueryError } from '@reduxjs/toolkit/query'
+import { SerializedError } from '@reduxjs/toolkit'
 
 interface ProgramListProps {
 	programs: Program[]
 	isLoading: boolean
 	onDelete: (id: number) => void
+	error?: FetchBaseQueryError | SerializedError
 }
 
 export const ProgramList: FC<ProgramListProps> = props => {
-	const { programs, isLoading, onDelete } = props
+	const { programs, isLoading, onDelete, error } = props
 
 	if (isLoading) {
 		//todo: skeletons
 		return null
 	}
 
+	if (error) {
+		return (
+			<div className={styles.card}>
+				<div className={styles.content}>
+					<h3>Something went wrong...</h3>
+				</div>
+			</div>
+		)
+	}
+
 	if (!isLoading && !programs?.length) {
 		return (
-			<div className={styles.no_exercises_wrapper}>
+			<div className={styles.card}>
 				<div className={styles.content}>
 					<h3>Your list of workouts is empty.</h3>
 					<p>Start your workout by adding a new work day.</p>
