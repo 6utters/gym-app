@@ -8,7 +8,7 @@ export const completeWorkout = createAsyncThunk<
 	number,
 	ThunkConfig<string>
 >('program/completeWorkout', async (programId, thunkAPI) => {
-	const { dispatch, rejectWithValue, getState } = thunkAPI
+	const { dispatch, rejectWithValue } = thunkAPI
 
 	try {
 		await dispatch(completeProgram(programId)).unwrap()
