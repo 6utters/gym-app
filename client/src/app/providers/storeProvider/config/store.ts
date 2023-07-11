@@ -8,7 +8,7 @@ import { statisticsReducer } from '@/entities/Statisctics'
 import { programCreationReducer } from '@/pages/programCreationPage'
 import { programDetailsReducer } from '@/pages/programDetailsPage'
 
-function createReduxStore(initialState?: StateSchema) {
+export function createReduxStore(initialState?: StateSchema) {
 	const rootReducer: ReducersMapObject<StateSchema> = {
 		[$rtkApi.reducerPath]: $rtkApi.reducer,
 		user: userReducer,

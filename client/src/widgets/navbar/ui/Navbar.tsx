@@ -9,7 +9,7 @@ export const Navbar: FC = () => {
 	const { asPath } = useRouter()
 
 	return (
-		<nav className={styles.navbar}>
+		<nav className={styles.navbar} data-testid={'Navbar'}>
 			<div className={styles.navbar__panel}>
 				<ul>
 					{navbarLinks.map(link => (

@@ -5,6 +5,7 @@ import styles from './ExerciseList.module.scss'
 import cn from 'classnames'
 
 interface ExerciseListProps {
+	dataTestId?: string
 	exercises?: Exercise[]
 	onItemClick: (itemId: number) => void
 	className?: string
@@ -20,6 +21,7 @@ export const ExerciseList: FC<ExerciseListProps> = props => {
 		exercises,
 		className,
 		onItemClick,
+		dataTestId,
 		addon,
 		onAddonClick,
 		selectedIds,
@@ -40,7 +42,10 @@ export const ExerciseList: FC<ExerciseListProps> = props => {
 		)
 
 	return (
-		<ul className={cn(styles.exercise_list, className)}>
+		<ul
+			className={cn(styles.exercise_list, className)}
+			data-testid={dataTestId}
+		>
 			{exercises.map((exercise, index) => (
 				<ExerciseListItem
 					index={index}

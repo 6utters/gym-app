@@ -4,7 +4,7 @@ import { FieldError } from 'react-hook-form'
 import styles from './Input.module.scss'
 
 export interface InputProps {
-	error?: FieldError | undefined
+	error?: FieldError
 	className?: string
 	underlined?: boolean
 	fullWidth?: boolean
@@ -34,8 +34,12 @@ export const Input = forwardRef<HTMLInputElement, InputPropsField>(
 				})}
 				style={style}
 			>
-				<input ref={ref} type={type} {...rest} />
-				{error && <div className={styles.error}>{error.message}</div>}
+				<input ref={ref} type={type} data-testid={'Input.input'} {...rest} />
+				{error && (
+					<div data-testid={'Input.error'} className={styles.error}>
+						{error.message}
+					</div>
+				)}
 			</div>
 		)
 	}

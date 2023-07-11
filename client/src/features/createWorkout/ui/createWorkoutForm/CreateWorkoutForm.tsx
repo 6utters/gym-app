@@ -5,13 +5,11 @@ import { Button, Input, UploadField } from '@/shared/ui'
 import { selectFile } from '@/shared/lib/utils/file/file.utils'
 import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'
-import { getExerciseIds } from '@/features/createWorkout/model/selectors/getExerciseIds/getExerciseIds'
-import { createWorkoutFormData } from '@/features/createWorkout/model/lib/createWorkoutFormData/createWorkoutFormData'
-import {
-	createWorkoutActions,
-	getObjectives,
-	useCreateWorkout
-} from '@/features/createWorkout'
+import { getExerciseIds } from '../../model/selectors/getExerciseIds/getExerciseIds'
+import { createWorkoutFormData } from '../../model/lib/createWorkoutFormData/createWorkoutFormData'
+import { useCreateWorkout } from '../../model/api/createWorkoutApi'
+import { getObjectives } from '../../model/selectors/getObjectives/getObjectives'
+import { createWorkoutActions } from '../../model/slice/createWorkoutSlice'
 import { ExerciseList, useGetExercises } from '@/entities/Exercise'
 import { IoAdd, IoMenuOutline } from 'react-icons/io5'
 import { WORKOUTS_ROUTE } from '@/shared/consts'
@@ -125,6 +123,7 @@ export const CreateWorkoutForm: FC = memo(() => {
 						</Button>
 					</div>
 					<ExerciseList
+						dataTestId={'CreateWorkoutForm.Exercises'}
 						className={styles.exercise_list}
 						onItemClick={setObjective}
 						onClick={showMuscleGroups}

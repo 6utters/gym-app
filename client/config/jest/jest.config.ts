@@ -1,4 +1,5 @@
 import type { Config } from 'jest'
+import path from 'path'
 
 const config: Config = {
 	clearMocks: true,
@@ -17,8 +18,10 @@ const config: Config = {
 	],
 	testMatch: ['<rootDir>src/**/*(*.)@(spec|test).[tj]s?(x)'],
 	rootDir: '../../',
-	preset: 'ts-jest',
+	setupFilesAfterEnv: ['<rootDir>/config/jest/setupTests.ts'],
 	moduleNameMapper: {
+		'\\.s?css$': 'identity-obj-proxy',
+		'\\.svg': path.resolve(__dirname, 'jestEmptyComponent.tsx'),
 		'^@/(.*)$': '<rootDir>/src/$1'
 	}
 

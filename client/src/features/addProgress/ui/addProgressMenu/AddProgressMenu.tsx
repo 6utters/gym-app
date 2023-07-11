@@ -14,7 +14,7 @@ export const AddProgressMenu: FC<AddProgressMenuProps> = props => {
 	const { exerciseId, programId, onAdd } = props
 
 	const [repetitions, setRepetitions] = useState(0)
-	const [addProgress, { error, isLoading }] = useAddProgress()
+	const [addProgress] = useAddProgress()
 
 	const onAddClick = () => {
 		addProgress({ exerciseId, programId, repetitions })
