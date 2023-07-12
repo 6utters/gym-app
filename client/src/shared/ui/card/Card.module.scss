@@ -1,5 +1,13 @@
 .card {
-	@apply relative w-full flex items-center justify-between mb-[1rem];
+	@apply relative w-auto flex items-center justify-between mb-[1rem];
+}
+
+.outlined {
+	@apply border-4;
+}
+
+.full_width {
+	@apply w-full;
 }
 
 .small {
