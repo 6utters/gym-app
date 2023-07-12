@@ -1,22 +1,27 @@
 .container {
 	@apply h-screen overflow-hidden flex flex-col justify-end;
-	background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)),
+
+	background-image: linear-gradient(rgb(0 0 0 / 52.7%), rgb(0 0 0 / 50%)),
 	url('../../../shared/assets/images/HomePage.jpg');
 	background-position: 82%;
 	background-repeat: no-repeat;
 	background-size: cover;
+
 	.content {
 		@apply flex flex-col items-center justify-between px-4 pb-4;
+
 		height: 80%;
 
 		.peculiarities {
 			@apply w-full px-10;
+
 			h1 {
 				@apply uppercase font-bold text-2xl text-center text-white text-shadow;
 			}
 
 			p {
 				@apply mt-[2.5em] text-center text-sm;
+
 				color: #cfd8dc;
 			}
 		}

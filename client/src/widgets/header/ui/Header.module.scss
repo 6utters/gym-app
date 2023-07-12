@@ -3,6 +3,7 @@
 
 	> .back_arrow {
 		@apply absolute top-[50%] left-[0.6rem] w-[2rem] h-[2rem] flex items-center justify-center;
+
 		transform: translateY(-50%);
 
 		> .arrow_btn {
@@ -20,6 +21,7 @@
 
 	> .extra_button {
 		@apply absolute top-[50%] right-[0.6rem] w-[4rem] h-[2rem] flex items-center justify-end;
+
 		transform: translateY(-50%);
 	}
 }

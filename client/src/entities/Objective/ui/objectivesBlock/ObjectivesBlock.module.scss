@@ -7,6 +7,7 @@
 
   > .reps {
     @apply flex flex-col items-center;
+
     > .reps_progress {
       @apply w-[3.5rem] h-[3.5rem] border-4 border-blue-500 rounded-full flex items-center justify-center font-medium;
     }
@@ -14,6 +15,7 @@
 
   > .rest {
     @apply flex flex-col items-center;
+
     >.rest_progress {
       @apply w-[4rem] h-[4rem] border-4 border-blue-500 rounded-full flex items-center justify-center font-medium;
     }
@@ -21,6 +23,7 @@
 
   > .sets {
     @apply flex flex-col items-center;
+
     >.sets_progress {
       @apply w-[3.5rem] h-[3.5rem] rounded-full flex items-center justify-center font-medium;
     }

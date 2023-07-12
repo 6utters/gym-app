@@ -1,7 +1,9 @@
 .file {
 	@apply mt-[1em];
+
 	> label {
 		@apply block;
+
 		> span {
 			@apply text-sm uppercase text-gray-600 block mb-2;
 		}

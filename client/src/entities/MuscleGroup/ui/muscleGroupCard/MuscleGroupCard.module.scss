@@ -3,6 +3,7 @@
 
   > .main {
     @apply w-full h-full flex items-center;
+
     > .image {
       @apply relative h-full w-auto mr-[1rem];
 
@@ -18,6 +19,7 @@
 
   > .arrow_icon {
       @apply h-full w-[1.5rem] flex items-center justify-end;
+
       > svg {
         @apply text-lg h-full w-full;
       }

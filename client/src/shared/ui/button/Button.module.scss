@@ -1,9 +1,9 @@
 .button, .neutral {
 	@apply flex items-center justify-center font-medium shadow text-center text-white cursor-pointer;
+
 	padding: 6px 16px;
 }
 
-// additional:
 .full_width {
 	@apply w-full;
 }
@@ -12,23 +12,24 @@
 	opacity: 0.7;
 }
 
-// sizes:
 .s {
 	@apply rounded-md;
+
 	font: var(--font-s);
 }
 
 .m {
 	@apply rounded-lg;
+
 	font: var(--font-m);
 }
 
 .l {
 	@apply rounded-xl;
+
 	font: var(--font-l);
 }
 
-// colors:
 .success {
 	@apply bg-light_green;
 }
@@ -47,6 +48,7 @@
 
 .outlined {
 	@apply border-2 border-light_blue text-light_blue;
+
 	background: transparent;
 	font-weight: 700;
 }

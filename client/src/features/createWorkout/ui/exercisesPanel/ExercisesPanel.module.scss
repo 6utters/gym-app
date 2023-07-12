@@ -1,11 +1,13 @@
 .exercises_panel {
   z-index: 31;
+
     .searchBar {
       @apply w-full h-[2.5rem] bg-gray-100 rounded-2xl my-5;
     }
 
   .buttons {
     @apply absolute bottom-0 left-0 w-full h-[10%] bg-white flex items-center justify-between p-3 gap-2;
+
     z-index: 32;
 
     > button {
@@ -16,6 +18,7 @@
 
 .complete_icon {
   @apply w-full h-full flex items-center justify-end;
+
   svg {
     @apply h-[50%] w-[50%];
   }

@@ -1,6 +1,7 @@
 .circular_progress_bar {
   svg {
     @apply w-full h-full;
+
     .circle_background {
       fill: none;
       stroke: #b6c6f2;

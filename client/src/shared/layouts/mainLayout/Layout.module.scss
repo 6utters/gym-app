@@ -3,6 +3,7 @@ $header-height: 3.5em;
 
 .layout {
 	@apply relative h-full overflow-x-hidden overflow-y-hidden;
+
 	min-height: 100vh;
 	max-height: 100vh;
 
@@ -10,17 +11,22 @@ $header-height: 3.5em;
 	> nav {
 		@apply fixed left-0 right-0;
 	}
+
 	> header {
 		@apply top-0 bg-white shadow;
+
 		height: $header-height;
 	}
+
 	> nav {
 		@apply bottom-0 px-[1rem] bg-light_gray;
+
 		height: $nav-height;
 	}
 
 	&__main {
 		@apply px-[1em] h-full overflow-y-hidden bg-light_gray;
+
 		min-height: calc(100vh - $header-height - $nav-height);
 		max-height: calc(100vh - $header-height - $nav-height);
 		margin-top: $header-height;

@@ -21,14 +21,17 @@
 
   .instructions {
     @apply flex flex-col;
+
     > h3 {
       @apply text-gray-600  text-lg font-semibold;
     }
 
     &__card {
       @apply flex w-full bg-gray-200 rounded-xl my-2 p-2;
+
       h4 {
         @apply m-2 font-semibold;
+
         width: 15%;
       }
 

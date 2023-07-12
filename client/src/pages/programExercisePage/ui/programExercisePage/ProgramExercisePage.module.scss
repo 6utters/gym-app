@@ -1,9 +1,12 @@
 .program_exercise_page {
   @apply h-[90vh] py-4 overflow-y-scroll pb-16;
+
   > .video {
     @apply relative w-full h-auto rounded-xl shadow;
+
     > img {
       @apply rounded-xl;
+
       width: 100%;
     }
   }

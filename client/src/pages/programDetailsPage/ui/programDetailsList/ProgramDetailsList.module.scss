@@ -4,6 +4,7 @@
 
 .forward_icon {
   @apply w-full h-full flex items-center justify-end;
+
   svg {
     @apply h-[50%] w-[50%] stroke-dark_blue;
   }

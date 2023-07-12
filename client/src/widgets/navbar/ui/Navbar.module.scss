@@ -1,17 +1,23 @@
 .navbar {
 	@apply flex items-center justify-center;
+
 	&__panel {
 		@apply h-[70%] w-full bg-white rounded-xl shadow flex justify-center;
+
 		ul {
 			@apply h-full flex-center-between mx-auto;
+
 			width: 60%;
 
 			a {
 				@apply flex flex-col items-center transition text-dust_gray;
+
 				width: 20%;
 				font-size: 1.7em;
+
 				> p {
 					@apply font-medium;
+
 					font-size: 0.43em;
 				}
 

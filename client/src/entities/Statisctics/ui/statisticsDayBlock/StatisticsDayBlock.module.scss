@@ -10,10 +10,12 @@
 
     .progress_block {
       @apply py-1 flex justify-between items-center;
+
       border-bottom: solid 1px #f0f0f1;
 
       .left_side {
         @apply w-full flex items-center;
+
         .index {
           @apply mx-4 text-gray-400;
         }

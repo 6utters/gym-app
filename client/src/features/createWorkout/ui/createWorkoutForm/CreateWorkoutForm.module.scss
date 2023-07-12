@@ -1,5 +1,6 @@
 .form {
   @apply grid gap-4 overflow-y-scroll;
+
   grid-template-rows: 8fr 1fr;
   height: calc(100vh - var(--navbar-height) - var(--header-height));
 
@@ -13,6 +14,7 @@
 
       .dark_overlay {
         @apply absolute w-full h-full top-0 left-0 rounded-xl opacity-30 bg-black;
+
         z-index: 2;
       }
     }
@@ -30,6 +32,7 @@
 
       .add_btn {
         @apply bg-dark_blue;
+
         svg {
           @apply font-bold transition-colors;
 
